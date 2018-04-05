@@ -496,6 +496,7 @@ GameObject:
   - component: {fileID: 1404649585}
   - component: {fileID: 1404649589}
   - component: {fileID: 1404649590}
+  - component: {fileID: 1404649591}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -591,6 +592,18 @@ MonoBehaviour:
   isPerspective: 1
   target: {x: 0, y: 0, z: 0}
   spawn: {fileID: 1255997455}
+--- !u!114 &1404649591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1404649584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2868b02d33984de48b1fdda96e6c7903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShaderMaterial: {fileID: 2100000, guid: 7eb53b72bd0ae0a48ab3e7be0ae9ed15, type: 2}
 --- !u!1 &1671742325
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,7 +616,7 @@ GameObject:
   - component: {fileID: 1671742327}
   - component: {fileID: 1671742326}
   m_Layer: 0
-  m_Name: Quad
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
