@@ -21,10 +21,14 @@ public class BasicMovement : MonoBehaviour {
 
 	new private Rigidbody rigidbody;
 
+	public Vector3 target;
+	public float delta;
+
 	void Start () {
 		actionTime = Random.Range(laziness / 2f, laziness);
 		actionState = ActionState.IDLE;
 		rigidbody = GetComponent<Rigidbody>();
+		laziness = Random.Range(0f, 4f);
 	}
 	
 	// FixedUpdate is called once per frame in sync with the physics engine
@@ -44,7 +48,7 @@ public class BasicMovement : MonoBehaviour {
 			case ActionState.IDLE:
 				break;
 			case ActionState.MOVING:
-				if (Quaternion.Dot(transform.rotation, direction) < 0.9f)
+				if (transform.rotation != direction)
 					rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, direction, movementSpeed*8));
 				else
 					rigidbody.MovePosition(transform.position + transform.forward * movementSpeed * Time.fixedDeltaTime);
@@ -59,15 +63,21 @@ public class BasicMovement : MonoBehaviour {
 			actionState = ActionState.MOVING;
 			actionTime = Random.Range(0.2f, 2f);
 
-			rigidbody.drag = 0;
+			target = new Vector3(Random.Range(-1f, 1f), transform.position.y, Random.Range(-1f, 1f));
+			delta = Vector3.SignedAngle(transform.forward, target - transform.position, Vector3.up);
+			direction = transform.rotation * Quaternion.Euler(0, delta, 0);
 		}
 		else if (actionState == ActionState.MOVING)
 		{
 			actionState = ActionState.IDLE;
 			actionTime = Random.Range(laziness / 2f, laziness);
-			direction = transform.rotation * Quaternion.Euler(0, Random.Range(-180,180), 0);
-
-			rigidbody.drag = 0;
 		}
+	}
+
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.red;
+		Gizmos.DrawSphere(target, 0.01f);
 	}
 }

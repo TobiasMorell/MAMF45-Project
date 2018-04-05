@@ -8,8 +8,8 @@ public class OrbitCam : MonoBehaviour {
 	private bool isPerspective = true;
 	[SerializeField]
 	private Vector3 target;
-	//[SerializeField]
-	//private GameObject balloon;
+	[SerializeField]
+	private GameObject spawn;
 	private Camera cam;
 	private Vector3 distance;
 	
@@ -30,11 +30,11 @@ public class OrbitCam : MonoBehaviour {
 			cam.orthographic = !isPerspective;
 		}
 
-		//if (Input.GetKeyDown("b"))
-		//{
-		//	var clone = Instantiate(balloon, transform.position, transform.rotation);
-		//	clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * 10f);
-		//}
+		if (Input.GetKeyDown("b"))
+		{
+			var clone = Instantiate(spawn, transform.position, transform.rotation);
+			clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * 10f);
+		}
 
 		distance.z -= Input.GetAxis("Mouse ScrollWheel") * 5f;
 	}
