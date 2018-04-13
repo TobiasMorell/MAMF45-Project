@@ -9,7 +9,11 @@ public class Health : MonoBehaviour
 
 	public bool StartInfected = false;
 
-	public GameObject ParticleEffect;
+	public GameObject SneezeParticleEffect;
+	public GameObject SneezeHitParticleEffect;
+	public GameObject SicknessCloudEffect;
+
+	private GameObject sicknessCloudInstance = null;
 
 	private bool isSick;
 	private float sneezeTimer;
@@ -46,7 +50,7 @@ public class Health : MonoBehaviour
 		var nose = GetComponentInChildren<Nose> ();
 		if (!nose.IsCovered ()) {
 			var nosePosition = GetNosePosition ();
-			Instantiate (ParticleEffect, nosePosition, transform.rotation);
+			Instantiate (SneezeParticleEffect, nosePosition, transform.rotation);
 
 			var colliders = Physics.OverlapSphere (nosePosition + transform.forward * SNEEZE_RADIUS, SNEEZE_RADIUS);
 			foreach (var collider in colliders) {
@@ -79,6 +83,8 @@ public class Health : MonoBehaviour
 
 			var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty> ();
 			sicknessProperty.ToggleSickness (true);
+			sicknessCloudInstance = Instantiate(SicknessCloudEffect, transform);
+			Instantiate(SneezeHitParticleEffect, transform.position, transform.rotation);
 		}
 		isSick = true;
 	}
@@ -90,9 +96,14 @@ public class Health : MonoBehaviour
 
 	public void Cure ()
 	{
-		if (isSick) {
-			var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty> ();
-			sicknessProperty.ToggleSickness (false);
+		if (isSick)
+		{
+			var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty>();
+			sicknessProperty.ToggleSickness(false);
+			if (sicknessCloudInstance != null) { 
+				Destroy(sicknessCloudInstance);
+				sicknessCloudInstance = null;
+			}
 		}
 		isSick = false;
 	}

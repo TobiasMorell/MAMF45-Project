@@ -1341,7 +1341,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartInfected: 0
-  ParticleEffect: {fileID: 1514666183957720, guid: 043e711746286ff458dcb3d55709e352,
+  SneezeParticleEffect: {fileID: 1514666183957720, guid: 043e711746286ff458dcb3d55709e352,
+    type: 2}
+  SneezeHitParticleEffect: {fileID: 1729784061591004, guid: 31c777395b7c06440b8df37260c5a7a5,
+    type: 2}
+  SicknessCloudEffect: {fileID: 1803254812218004, guid: 6f8cebcba0f0b604db10e8218d798631,
     type: 2}
 --- !u!114 &114357219729459274
 MonoBehaviour:
