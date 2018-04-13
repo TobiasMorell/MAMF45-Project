@@ -11,7 +11,8 @@ public class BasicMovement : MonoBehaviour {
 
 
 	[SerializeField]
-	private float movementSpeed = 2;
+	private float movementSpeed = 0.2f;
+	private float rotationSpeed = 5;
 	[SerializeField]
 	private float laziness = 2;
 
@@ -19,10 +20,9 @@ public class BasicMovement : MonoBehaviour {
 	private float actionTime;
 	private Quaternion direction;
 
-	new private Rigidbody rigidbody;
+	private Vector3 target;
 
-	public Vector3 target;
-	public float delta;
+	new private Rigidbody rigidbody;
 
 	void Start () {
 		actionTime = Random.Range(laziness / 2f, laziness);
@@ -49,7 +49,7 @@ public class BasicMovement : MonoBehaviour {
 				break;
 			case ActionState.MOVING:
 				if (transform.rotation != direction)
-					rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, direction, movementSpeed*8));
+				rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, direction, rotationSpeed));
 				else
 					rigidbody.MovePosition(transform.position + transform.forward * movementSpeed * Time.fixedDeltaTime);
 				break;
@@ -61,10 +61,10 @@ public class BasicMovement : MonoBehaviour {
 		if (actionState == ActionState.IDLE)
 		{
 			actionState = ActionState.MOVING;
-			actionTime = Random.Range(0.2f, 2f);
+			actionTime = Random.Range(0.5f, 3.5f);
 
 			target = new Vector3(Random.Range(-1f, 1f), transform.position.y, Random.Range(-1f, 1f));
-			delta = Vector3.SignedAngle(transform.forward, target - transform.position, Vector3.up);
+			var delta = Vector3.SignedAngle(transform.forward, target - transform.position, Vector3.up);
 			direction = transform.rotation * Quaternion.Euler(0, delta, 0);
 		}
 		else if (actionState == ActionState.MOVING)
