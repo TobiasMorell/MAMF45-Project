@@ -663,6 +663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4691725498787716}
   - component: {fileID: 137889065832302722}
+  - component: {fileID: 114769011034810470}
   m_Layer: 0
   m_Name: Bunny
   m_TagString: Untagged
@@ -1355,6 +1356,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 0.2
   laziness: 2
+--- !u!114 &114769011034810470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907875807075216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07bccd7f8f54a0d4aa285b36e87a6ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color1: {r: 0.34117645, g: 0.34117645, b: 0.34117645, a: 1}
+  color2: {r: 0.22518381, g: 0.625, b: 0.34375, a: 0}
+  fade: 0
 --- !u!136 &136896154789325028
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198723646232405696}
   - component: {fileID: 199707773191419570}
   m_Layer: 0
-  m_Name: SicknessCloud
+  m_Name: Sickness Cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
