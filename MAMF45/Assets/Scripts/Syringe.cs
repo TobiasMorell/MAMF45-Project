@@ -5,70 +5,64 @@ using Valve.VR.InteractionSystem;
 
 public class Syringe : MonoBehaviour {
 	private bool _used = false;
+    private bool _pickedUp = false;
 	public float AnimationSpeed;
-	private Joint pistonContainerJoint;
 	public Transform Piston;
     public Material ValidPistonMaterial;
     public Material InvalidPistonMaterial;
 
-	public Health Target {
-		private get;
-		set;
-	}
+    public GameObject container;
 
-    public void OnPistonHover() {
-        if (Target != null)
-            Piston.GetComponent<MeshRenderer>().material = ValidPistonMaterial;
-        else
-            Piston.GetComponent<MeshRenderer>().material = InvalidPistonMaterial;
+    public Health Target {
+        private get;
+        set;
+    }
+
+    private void Update() {
+        if(_pickedUp) {
+            if (Target != null && !_used)
+                Piston.GetComponent<MeshRenderer>().material = ValidPistonMaterial;
+            else
+                Piston.GetComponent<MeshRenderer>().material = InvalidPistonMaterial;
+        }
+    }
+
+    public void OnPickedUp() {
+        _pickedUp = true;
+    }
+    public void OnDropped() {
+        _pickedUp = false;
     }
 
 	public void Apply() {
+        Debug.Log("Apply");
 		if (_used || Target == null)
 			return;
 		_used = true;
+        Debug.Log("Curing bunny");
 
 		LockPositionAndDisableJoint ();
 		StartCoroutine (PressDown ());
 	}
 
 	void LockPositionAndDisableJoint() {
-		Destroy(GetComponentInChildren<Joint> ());
-		var rigidbodies = GetComponentsInChildren<Rigidbody> ();
-		foreach (var rb in rigidbodies) {
-			if (rb.name != "Container")
-				continue;
-			rb.constraints = RigidbodyConstraints.FreezeAll;
-			rb.GetComponent<Collider> ().enabled = false;
-			break;
-		}
+        container.GetComponents<Collider>().ForEach(c => c.enabled = false);
 	}
 
 	void UnlockPositionAndEnableJoint() {
-		var rigidbodies = GetComponentsInChildren<Rigidbody> ();
-		Rigidbody pistonRb = null;
-		Joint joint = null;
-		foreach (var rb in rigidbodies) {
-			if (rb.name == "Container") {
-				joint = rb.gameObject.AddComponent<FixedJoint> ();
-				rb.constraints = RigidbodyConstraints.None;
-				rb.GetComponent<Collider> ().enabled = true;
-			} else
-				pistonRb = rb;
-		}
-		joint.connectedBody = pistonRb;
+        container.GetComponents<Collider>().ForEach(c => c.enabled = false);
 	}
 
 	IEnumerator PressDown() {
-        Debug.Log(Piston.localPosition);
-        while (Mathf.Abs(Piston.localPosition.y) < 1.8) {
-			Piston.localPosition -= new Vector3(0, AnimationSpeed * Time.deltaTime, 0);
-			yield return null;
+        while (Piston.localPosition.y > Mathf.Epsilon) {
+            Piston.localPosition -= new Vector3(0, AnimationSpeed * Time.deltaTime);
+            yield return null;
 		}
-		Piston.localPosition = new Vector3(0, -1.8f, 0);
 		UnlockPositionAndEnableJoint ();
+        Destroy(Piston.GetComponent<InteractableHoverEvents>());
+        Destroy(Piston.GetComponent<InteractableButtonEvents>());
         Destroy(Piston.GetComponent<Interactable>());
 
-		Target.Cure ();
+		//Target.Cure ();
 	}
 }
