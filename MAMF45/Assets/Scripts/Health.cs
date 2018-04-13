@@ -46,6 +46,12 @@ public class Health : MonoBehaviour {
         isSick = true;
     }
 
+	public void Cure() 
+	{
+		isSick = false;
+	}
+		
+
     public bool IsSick()
     {
         return isSick;
