@@ -31,7 +31,7 @@ public class SicknessMaterialBlockProperty : MonoBehaviour {
 		renderer.SetPropertyBlock(propertyBlock);
 	}
 
-	public void toggleSickness(bool isSick) {
+	public void ToggleSickness(bool isSick) {
 		this.isSick = isSick;
 	}
 }

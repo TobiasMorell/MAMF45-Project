@@ -16,6 +16,7 @@ public class BasicMovement : MonoBehaviour {
 	[SerializeField]
 	private float laziness = 2;
 
+	private bool isRunning;
 	private ActionState actionState;
 	private float actionTime;
 	private Quaternion direction;
@@ -26,20 +27,20 @@ public class BasicMovement : MonoBehaviour {
 	new private Rigidbody rigidbody;
 
 	void Start () {
-		actionTime = Random.Range(laziness / 2f, laziness);
-		actionState = ActionState.IDLE;
 		rigidbody = GetComponent<Rigidbody>();
 		laziness = Random.Range(0f, 4f);
 		animator = GetComponent<Animator> ();
+		Restart ();
 	}
 	
 	// FixedUpdate is called once per frame in sync with the physics engine
 	void FixedUpdate () {
-		Act();
-		actionTime -= Time.fixedDeltaTime;
-		if (actionTime <= 0)
-		{
-			UpdateActionState();
+		if (isRunning) {
+			Act ();
+			actionTime -= Time.fixedDeltaTime;
+			if (actionTime <= 0) {
+				UpdateActionState ();
+			}
 		}
 	}
 
@@ -78,6 +79,17 @@ public class BasicMovement : MonoBehaviour {
 
 			animator.SetTrigger ("Idle");
 		}
+	}
+
+
+	public void Stop() {
+		isRunning = false;
+	}
+
+	public void Restart() {
+		actionTime = Random.Range(laziness / 2f, laziness);
+		actionState = ActionState.IDLE;
+		isRunning = true;
 	}
 
 

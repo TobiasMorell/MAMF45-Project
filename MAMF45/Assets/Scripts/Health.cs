@@ -26,22 +26,43 @@ public class Health : MonoBehaviour
 		if (isSick) {
 			sneezeTimer -= Time.deltaTime;
 			if (sneezeTimer < 0) {
-				var nose = GetComponentInChildren<Nose> ();
-				if (!nose.IsCovered ()) {
-					var nosePosition = GetNosePosition();
-					Instantiate (ParticleEffect, nosePosition, transform.rotation);
+//				StartCoroutine ("Sneeze");
 
-					var colliders = Physics.OverlapSphere (nosePosition + transform.forward * SNEEZE_RADIUS, SNEEZE_RADIUS);
-					foreach (var collider in colliders) {
-						var health = collider.GetComponent<Health> ();
-						if (collider.gameObject != gameObject && health != null) {
-							health.Infect ();
-						}
-					}
-				}
-				ResetSneezeTimer ();
+				SneezeStart ();
 			}
 		}
+	}
+
+	public void SneezeStart() {
+		sneezeTimer = 10000;
+		var movement = GetComponent<BasicMovement> ();
+		var animator = GetComponent<Animator> ();
+
+		movement.Stop ();
+		animator.SetTrigger ("Sneeze");
+	}
+
+	public void Sneeze() {
+		var nose = GetComponentInChildren<Nose> ();
+		if (!nose.IsCovered ()) {
+			var nosePosition = GetNosePosition ();
+			Instantiate (ParticleEffect, nosePosition, transform.rotation);
+
+			var colliders = Physics.OverlapSphere (nosePosition + transform.forward * SNEEZE_RADIUS, SNEEZE_RADIUS);
+			foreach (var collider in colliders) {
+				var health = collider.GetComponent<Health> ();
+				if (collider.gameObject != gameObject && health != null) {
+					health.Infect ();
+				}
+			}
+		}
+	}
+
+	public void SneezeEnd() {
+		var movement = GetComponent<BasicMovement> ();
+		movement.Restart ();
+
+		ResetSneezeTimer ();
 	}
 
 	private Vector3 GetNosePosition() {
@@ -55,6 +76,9 @@ public class Health : MonoBehaviour
 		if (!isSick) {
 			ResetSneezeTimer ();
 			print ("New rabbit infected!");
+
+			var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty> ();
+			sicknessProperty.ToggleSickness (true);
 		}
 		isSick = true;
 	}
@@ -66,6 +90,10 @@ public class Health : MonoBehaviour
 
 	public void Cure ()
 	{
+		if (isSick) {
+			var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty> ();
+			sicknessProperty.ToggleSickness (false);
+		}
 		isSick = false;
 	}
 
