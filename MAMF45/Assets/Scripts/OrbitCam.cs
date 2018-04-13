@@ -32,7 +32,7 @@ public class OrbitCam : MonoBehaviour {
 
 		if (Input.GetKeyDown("b"))
 		{
-			var clone = Instantiate(spawn, transform.position, transform.rotation);
+			var clone = Instantiate(spawn, transform.position, Quaternion.Euler(0, transform.rotation.eulerAngles[1], 0));
 			clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * 10f);
 		}
 

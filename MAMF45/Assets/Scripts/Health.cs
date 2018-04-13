@@ -4,47 +4,57 @@ using UnityEngine;
 
 public class Health : MonoBehaviour {
 
-    private int MAXIMUM_SNEEZE_INTERVAL = 5;
+    private int MAXIMUM_SNEEZE_INTERVAL = 20;
     private float SNEEZE_RADIUS = 0.2f;
 
     public bool StartInfected = false;
+
+	public GameObject ParticleEffect;
 
     private bool isSick;
     private float sneezeTimer;
 
 	void Start ()
     {
-        sneezeTimer = Random.Range(0f, MAXIMUM_SNEEZE_INTERVAL);
-        isSick = StartInfected;
+		if (StartInfected) {
+			Infect ();
+		}
 	}
 	
 	void Update ()
     {
-        sneezeTimer -= Time.deltaTime;
-        if (sneezeTimer < 0)
-        {
-            var colliders = Physics.OverlapSphere(transform.position + transform.forward * SNEEZE_RADIUS, SNEEZE_RADIUS);
-            foreach (var collider in colliders)
-            {
-                var health = collider.GetComponent<Health>();
-                if (collider.gameObject != gameObject && health != null)
-                {
-                    health.Infect();
-                }
-            }
-            sneezeTimer = Random.Range(0f, MAXIMUM_SNEEZE_INTERVAL);
-        }
+		if (isSick) {
+			sneezeTimer -= Time.deltaTime;
+			if (sneezeTimer < 0) {
+				Instantiate (ParticleEffect, transform.position + transform.forward * 0.374f * 0.2f, transform.rotation);
+
+				var colliders = Physics.OverlapSphere (transform.position + transform.forward * SNEEZE_RADIUS, SNEEZE_RADIUS);
+				foreach (var collider in colliders) {
+					var health = collider.GetComponent<Health> ();
+					if (collider.gameObject != gameObject && health != null) {
+						health.Infect ();
+					}
+				}
+				ResetSneezeTimer ();
+			}
+		}
 	}
 
 
     public void Infect()
     {
         if (!isSick)
-        {
+		{
+			ResetSneezeTimer ();
             print("New rabbit infected!");
         }
         isSick = true;
     }
+
+	private void ResetSneezeTimer()
+	{
+		sneezeTimer = Random.Range (0f, MAXIMUM_SNEEZE_INTERVAL);
+	}
 
 	public void Cure() 
 	{

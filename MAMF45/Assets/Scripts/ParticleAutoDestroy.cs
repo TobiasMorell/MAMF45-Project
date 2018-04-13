@@ -6,7 +6,11 @@ public class ParticleAutoDestroy : MonoBehaviour {
 
 	void Start ()
 	{
-		var particle = GetComponent<ParticleSystem> ();
-		Destroy (gameObject, particle.main.duration);
+		var particles = GetComponentsInChildren<ParticleSystem> ();
+		var longestDuration = 0.0f;
+		foreach (var particle in particles) {
+			longestDuration = Mathf.Max (longestDuration, particle.main.duration);
+		}
+		Destroy (gameObject, longestDuration);
 	}
 }
