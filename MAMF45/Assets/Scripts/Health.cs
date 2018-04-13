@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-	private int MAXIMUM_SNEEZE_INTERVAL = 2;
+	private int MAXIMUM_SNEEZE_INTERVAL = 20;
 	private float SNEEZE_RADIUS = 0.2f;
 
 	public bool StartInfected = false;
