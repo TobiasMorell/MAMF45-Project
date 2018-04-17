@@ -17,12 +17,14 @@ public class BasicMovement : MonoBehaviour {
 	private float laziness = 2;
 
 	private bool isRunning;
+	private bool doneTurning;
 	private ActionState actionState;
 	private float actionTime;
 	private Quaternion direction;
 	private Animator animator;
 
 	private Vector3 target;
+	private GameObject targetObject;
 
 	new private Rigidbody rigidbody;
 
@@ -35,6 +37,10 @@ public class BasicMovement : MonoBehaviour {
 	
 	// FixedUpdate is called once per frame in sync with the physics engine
 	void FixedUpdate () {
+		if (targetObject)
+		{
+			target = targetObject.transform.position;
+		}
 		if (isRunning) {
 			Act ();
 			actionTime -= Time.fixedDeltaTime;
@@ -52,9 +58,16 @@ public class BasicMovement : MonoBehaviour {
 				break;
 			case ActionState.MOVING:
 				if (transform.rotation != direction)
-				rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, direction, rotationSpeed));
+					rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, direction, rotationSpeed));
 				else
+				{
+					if (!doneTurning)
+					{
+						animator.SetTrigger("Move");
+						doneTurning = true;
+					}
 					rigidbody.MovePosition(transform.position + transform.forward * movementSpeed * Time.fixedDeltaTime);
+				}
 				break;
 		}
 	}
@@ -70,7 +83,8 @@ public class BasicMovement : MonoBehaviour {
 			var delta = Vector3.SignedAngle(transform.forward, target - transform.position, Vector3.up);
 			direction = transform.rotation * Quaternion.Euler(0, delta, 0);
 
-			animator.SetTrigger ("Move");
+			animator.SetTrigger ("Turn");
+			doneTurning = false;
 		}
 		else if (actionState == ActionState.MOVING)
 		{
@@ -92,6 +106,15 @@ public class BasicMovement : MonoBehaviour {
 		isRunning = true;
 	}
 
+	public void SetTarget(GameObject target)
+	{
+		this.targetObject = target;
+	}
+
+	public void ResetTarget()
+	{
+		targetObject = null;
+	}
 
 	private void OnDrawGizmos()
 	{

@@ -464,6 +464,7 @@ GameObject:
   - component: {fileID: 136896154789325028}
   - component: {fileID: 114357219729459274}
   - component: {fileID: 114319572431713412}
+  - component: {fileID: 114795276827725698}
   m_Layer: 0
   m_Name: Bunny
   m_TagString: Bunny
@@ -973,7 +974,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1633040747158784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.16455582, y: -0.0000000621319, z: -0.5212003}
+  m_LocalPosition: {x: 1.6278254, y: 0.000000008177504, z: 0.5685979}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4718295495545512}
@@ -1373,6 +1374,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseColor: {r: 0.34117645, g: 0.34117645, b: 0.34117645, a: 1}
   sicknessColor: {r: 0.15916955, g: 0.4705882, b: 0.16131724, a: 1}
+--- !u!114 &114795276827725698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1633040747158784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3aa8eecc4ff03346af86cca81725388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartEffect: {fileID: 1920788314715890, guid: 9313e5078de24654296b76cceb610498,
+    type: 2}
+  loveEffect: {fileID: 0}
 --- !u!136 &136896154789325028
 CapsuleCollider:
   m_ObjectHideFlags: 1
