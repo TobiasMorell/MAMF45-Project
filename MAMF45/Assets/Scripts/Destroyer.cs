@@ -9,7 +9,7 @@ public class Destroyer : MonoBehaviour {
 		if (!destructible)
 			destructible = collider.GetComponentInParent<Destructible> ();
 		if (destructible && !destructible.IsHeld()) {
-			Destroy (destructible.gameObject);
+			Destroy (destructible.gameObject, 5.0f);
 		}
 	}
 }
