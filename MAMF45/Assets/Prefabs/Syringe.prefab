@@ -377,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ccd3634118b3c4dbf351883fa7df8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AnimationSpeed: 1
+  AnimationSpeed: 2
   Piston: {fileID: 4707442299441598}
   ValidPistonMaterial: {fileID: 2100000, guid: 79d6aa0eef608a54ca6ce7442f6a465c, type: 2}
   InvalidPistonMaterial: {fileID: 2100000, guid: d4772811a11690c4da222e7595d164a1,

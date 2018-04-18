@@ -36,7 +36,7 @@ public class Syringe : MonoBehaviour {
 
 	public void Apply() {
         Debug.Log("Apply");
-		if (_used || Target == null)
+		if (_used /*|| Target == null*/)
 			return;
 		_used = true;
         Debug.Log("Curing bunny");
@@ -54,6 +54,7 @@ public class Syringe : MonoBehaviour {
 	}
 
 	IEnumerator PressDown() {
+		var cachedTarget = Target;
         while (Piston.localPosition.y > Mathf.Epsilon) {
             Piston.localPosition -= new Vector3(0, AnimationSpeed * Time.deltaTime);
             yield return null;
@@ -63,6 +64,6 @@ public class Syringe : MonoBehaviour {
         Destroy(Piston.GetComponent<InteractableButtonEvents>());
         Destroy(Piston.GetComponent<Interactable>());
 
-		Target.Cure ();
+		cachedTarget.Cure ();
 	}
 }
