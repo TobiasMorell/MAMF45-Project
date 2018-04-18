@@ -14,11 +14,14 @@ public class Health : MonoBehaviour
 
 	private GameObject sicknessCloudInstance = null;
 
-	private bool isSick;
+    private bool isSick;
 	private float sneezeTimer;
 
     private Animator animator;
     private BasicMovement movement;
+
+    private bool isProtected;
+    private GameObject contraceptive = null;
 
     private void Awake()
     {
@@ -55,6 +58,9 @@ public class Health : MonoBehaviour
 	public void Sneeze() {
 		var nose = GetComponentInChildren<Nose> ();
 		nose.Sneeze (SneezeParticleEffect);
+        if (contraceptive != null) {
+            contraceptive.GetComponent<Rigidbody>().AddExplosionForce(1000,transform.position,10);
+        }
 	}
 
 	public void SneezeEnd() {
@@ -109,4 +115,23 @@ public class Health : MonoBehaviour
 	{
 		return !isSick;
 	}
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("ContraceptiveTrigger"))
+        {
+            isProtected = true;
+            contraceptive = other.transform.parent.gameObject;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("ContraceptiveTrigger"))
+        {
+            isProtected = false;
+            contraceptive = null;
+        }
+    }
 }
