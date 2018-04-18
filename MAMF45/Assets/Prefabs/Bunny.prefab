@@ -1387,8 +1387,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heartEffect: {fileID: 1920788314715890, guid: 9313e5078de24654296b76cceb610498,
     type: 2}
-  loveEffect: {fileID: 0}
+  loveEffect: {fileID: 186482, guid: 9d2dddaae5c812841accc43e4da1fccd, type: 2}
   drive: 0
+  rangeScale: 0
 --- !u!136 &136896154789325028
 CapsuleCollider:
   m_ObjectHideFlags: 1

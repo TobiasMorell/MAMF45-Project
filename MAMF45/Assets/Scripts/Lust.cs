@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Lust : MonoBehaviour {
-	private static float LOVE_RANGE = 0.1f;
+	private static float LOVE_RANGE = 0.15f;
 
     [SerializeField]
     private GameObject heartEffect;
@@ -12,6 +12,7 @@ public class Lust : MonoBehaviour {
 	private ParticleSystem.EmissionModule heartEmissionModule;
 	public float drive;
     private bool isLoving;
+    public float rangeScale;
 
 	private GameObject target = null;
 
@@ -34,7 +35,7 @@ public class Lust : MonoBehaviour {
         {
             if (target)
             {
-                if (Vector3.Distance(target.transform.position, transform.position) < LOVE_RANGE)
+                if (Vector3.Distance(target.transform.position, transform.position) < LOVE_RANGE * rangeScale)
                 {
                     movement.ResetTarget();
                     target.GetComponent<Lust>().Love();
@@ -57,6 +58,7 @@ public class Lust : MonoBehaviour {
                         target = objects[Random.Range(0, objects.Length)];
                     } while (target == gameObject);
 
+                    rangeScale = (transform.localScale.z + target.transform.localScale.z)/2;
                     movement.SetTarget(target);
                 }
             }
@@ -87,8 +89,8 @@ public class Lust : MonoBehaviour {
     private void OnDrawGizmos()
     {
         if (target != null) {
-            Gizmos.DrawCube(target.transform.position, Vector3.one/20);
-            Gizmos.DrawLine(transform.position, transform.position + Vector3.MoveTowards(transform.position, target.transform.position, 0.1f));
+            Gizmos.DrawCube(target.transform.position, Vector3.one/10);
+            Gizmos.DrawLine(transform.position, Vector3.MoveTowards(transform.position, target.transform.position, LOVE_RANGE * rangeScale));
         }
 
     }
