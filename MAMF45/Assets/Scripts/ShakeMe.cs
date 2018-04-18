@@ -10,6 +10,7 @@ public class ShakeMe : MonoBehaviour {
     private float scale = 10;
     private bool isHeld = false;
     private Vector3 prevPos;
+    private Vector3 prevVel;
 
     // Use this for initialization
     void Awake () {
@@ -17,14 +18,16 @@ public class ShakeMe : MonoBehaviour {
         interacteble.onAttachedToHand += OnAttachedToHandDelegate;
         interacteble.onDetachedFromHand += OnDetachedFromHandDelegate;
         prevPos = transform.position;
+        prevVel = Vector3.zero;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        var vel = (transform.position - prevPos).magnitude;
+        var vel = (transform.position - prevPos);
+        var acc = (vel - prevVel).magnitude;
         prevPos = transform.position;
-        transform.localScale += new Vector3(1,1,1*0.75f) * vel * Time.deltaTime * scale;
-        Debug.Log("Vel: " + vel);
+        prevVel = vel;
+        transform.localScale += new Vector3(1,1,1*0.75f) * acc * Time.deltaTime * scale;
         transform.localScale = new Vector3(Mathf.Min(1, transform.localScale.x), Mathf.Min(1, transform.localScale.y), Mathf.Min(0.75f, transform.localScale.z));
 	}
 

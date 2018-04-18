@@ -23,8 +23,8 @@ public class SicknessMaterialBlockProperty : MonoBehaviour {
 	}
 
 	void Update () {
-		if (isSick && sicknessFade < 1) {
-			sicknessFade = Mathf.Min(sicknessFade + Time.deltaTime, 1.0f);
+		if (isSick && sicknessFade < 0.7) {
+			sicknessFade = Mathf.Min(sicknessFade + Time.deltaTime, 0.7f);
 		}
 		else if (!isSick && sicknessFade > 0) {
 			sicknessFade = Mathf.Min(sicknessFade - Time.deltaTime, 0.0f);
