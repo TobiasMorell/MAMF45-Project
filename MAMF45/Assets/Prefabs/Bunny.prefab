@@ -465,6 +465,7 @@ GameObject:
   - component: {fileID: 114357219729459274}
   - component: {fileID: 114319572431713412}
   - component: {fileID: 114795276827725698}
+  - component: {fileID: 114931475761785482}
   m_Layer: 0
   m_Name: Bunny
   m_TagString: Bunny
@@ -1372,7 +1373,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07bccd7f8f54a0d4aa285b36e87a6ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.34117645, g: 0.34117645, b: 0.34117645, a: 1}
+  baseColor1: {r: 0.22794116, g: 0.22794116, b: 0.22794116, a: 0}
+  baseColor2: {r: 0.35294116, g: 0.23392195, b: 0.10640138, a: 0}
+  baseColor3: {r: 0.7647059, g: 0.7647059, b: 0.7647059, a: 0}
+  baseColor4: {r: 0.5735294, g: 0.4121734, b: 0.2656791, a: 0}
   sicknessColor: {r: 0.15916955, g: 0.4705882, b: 0.16131724, a: 1}
 --- !u!114 &114795276827725698
 MonoBehaviour:
@@ -1390,6 +1394,17 @@ MonoBehaviour:
   loveEffect: {fileID: 186482, guid: 9d2dddaae5c812841accc43e4da1fccd, type: 2}
   drive: 0
   rangeScale: 0
+--- !u!114 &114931475761785482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1633040747158784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6a3ed964b461a43bb551519b6ccbbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136896154789325028
 CapsuleCollider:
   m_ObjectHideFlags: 1

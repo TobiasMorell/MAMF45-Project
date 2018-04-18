@@ -12,7 +12,7 @@ public class BasicMovement : MonoBehaviour {
 
 	[SerializeField]
 	private float movementSpeed = 0.2f;
-	private float rotationSpeed = 5;
+	private float rotationSpeed = 1;
 	[SerializeField]
 	private float laziness = 2;
 
