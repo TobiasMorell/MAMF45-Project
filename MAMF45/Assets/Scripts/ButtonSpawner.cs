@@ -41,10 +41,6 @@ public class ButtonSpawner : MonoBehaviour {
 	}
 
 	public void Spawn() {
-		if (!_hovered)
-			return;
-
-		ResetClickAnimation ();
 		if (_cooldownCounter > 0) {
 			if (OnSpawnRejected != null) {
 				OnSpawnRejected.Invoke ();
@@ -62,34 +58,5 @@ public class ButtonSpawner : MonoBehaviour {
 	private void TriggerCooldown() {
 		SpawnLight.color = Color.red;
 		_cooldownCounter = SpawnCooldown;
-	}
-
-	private void ResetClickAnimation() {
-		if (_clickCoroutine != null)
-			StopCoroutine (_clickCoroutine);
-		transform.localPosition = _defaultButtonPosition;
-		_clickCoroutine = StartCoroutine (PlayClickAnimation());
-	}
-
-	IEnumerator PlayClickAnimation() {
-		while (transform.localPosition.x >= 0.52f) {
-			transform.localPosition -= new Vector3 (Time.deltaTime * AnimationSpeed, 0);
-			yield return null;
-		}
-		while (transform.localPosition.x <= 0.58f) {
-			transform.localPosition += new Vector3 (Time.deltaTime * AnimationSpeed, 0);
-			yield return null;
-		}
-		transform.localPosition = _defaultButtonPosition;
-	}
-
-	public void OnHoverBegin() {
-		_hovered = true;
-		GetComponentInChildren<MeshRenderer> ().material.color = _cooldownCounter > 0 ? Color.red : Color.green;
-	}
-
-	public void OnHoverEnd() {
-		_hovered = false;
-		GetComponentInChildren<MeshRenderer> ().material.color = Color.white;
 	}
 }

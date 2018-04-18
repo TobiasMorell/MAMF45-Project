@@ -36,7 +36,7 @@ public class Syringe : MonoBehaviour {
 
 	public void Apply() {
         Debug.Log("Apply");
-		if (_used /*|| Target == null*/)
+		if (_used || Target == null)
 			return;
 		_used = true;
         Debug.Log("Curing bunny");
