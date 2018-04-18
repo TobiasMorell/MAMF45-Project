@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571385, b: 0.30692253, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -338,7 +338,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 76643352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05, y: 0, z: 0}
+  m_LocalPosition: {x: 0.02, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.15, z: 0.08}
   m_Children:
   - {fileID: 504128842}
@@ -443,13 +443,13 @@ SpringJoint:
   m_ConnectedBody: {fileID: 947439270}
   m_Anchor: {x: 0, y: 0.49999994, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00000015646219, y: 0.07500008, z: 0}
+  m_ConnectedAnchor: {x: 0.07000008, y: 0.07500008, z: 0}
   serializedVersion: 2
   m_Spring: 300
   m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0
-  m_Tolerance: 0.025
+  m_Tolerance: 1.00000005e-20
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 1
@@ -1136,7 +1136,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 528814504}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05, y: 0, z: 0}
+  m_LocalPosition: {x: 0.02, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.15, z: 0.08}
   m_Children:
   - {fileID: 413942736}
@@ -1256,13 +1256,13 @@ SpringJoint:
   m_ConnectedBody: {fileID: 1359513492}
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.13400015, y: 0.07500002, z: 0}
+  m_ConnectedAnchor: {x: 0.20400009, y: 0.07500002, z: 0}
   serializedVersion: 2
   m_Spring: 300
   m_Damper: 10
-  m_MinDistance: 0.084
-  m_MaxDistance: 0.179
-  m_Tolerance: 0.025
+  m_MinDistance: 0
+  m_MaxDistance: 0
+  m_Tolerance: 1.00000005e-20
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 1
@@ -1456,7 +1456,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 884794019}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05, y: 0, z: 0}
+  m_LocalPosition: {x: 0.02, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.15, z: 0.08}
   m_Children:
   - {fileID: 699165589}
@@ -1561,13 +1561,13 @@ SpringJoint:
   m_ConnectedBody: {fileID: 1664998980}
   m_Anchor: {x: 0, y: 0.49999994, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00000015646219, y: 0.07500008, z: 0}
+  m_ConnectedAnchor: {x: 0.07000008, y: 0.07500008, z: 0}
   serializedVersion: 2
   m_Spring: 300
   m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0
-  m_Tolerance: 0.025
+  m_Tolerance: 1.00000005e-20
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 1

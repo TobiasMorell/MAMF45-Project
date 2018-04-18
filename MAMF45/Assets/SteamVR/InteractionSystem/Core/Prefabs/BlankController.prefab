@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 11450892}
   - component: {fileID: 11435852}
   - component: {fileID: 11467152}
-  - component: {fileID: 135623149421773050}
+  - component: {fileID: 65060340901417698}
   m_Layer: 8
   m_Name: BlankController
   m_TagString: Untagged
@@ -110,8 +110,8 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 168468}
   m_IsPrefabParent: 1
---- !u!135 &135623149421773050
-SphereCollider:
+--- !u!65 &65060340901417698
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -120,5 +120,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.1, y: 0.07, z: 0.2}
+  m_Center: {x: 0, y: -0.03, z: -0.06}
