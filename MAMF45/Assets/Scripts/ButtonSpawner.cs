@@ -14,25 +14,26 @@ public class ButtonSpawner : MonoBehaviour {
 	public UnityEvent OnSpawnRejected;
 	public UnityEvent OnCooldownEnded;
 
-	private float CooldownCounter = 0f;
-	private Coroutine ClickCoroutine;
+	private float _cooldownCounter = 0f;
+	private Coroutine _clickCoroutine;
+	private bool _hovered;
 
-	private Vector3 DefaultButtonPosition;
+	private Vector3 _defaultButtonPosition;
 
 	// Use this for initialization
 	void Start () {
-		DefaultButtonPosition = transform.localPosition;
+		_defaultButtonPosition = transform.localPosition;
 		SpawnLight.color = StartOnCooldown ? Color.red : Color.green;
-		CooldownCounter = StartOnCooldown ? SpawnCooldown : 0;
+		_cooldownCounter = StartOnCooldown ? SpawnCooldown : 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (CooldownCounter > 0) {
-			CooldownCounter -= Time.deltaTime;
-			if (CooldownCounter <= 0) {
+		if (_cooldownCounter > 0) {
+			_cooldownCounter -= Time.deltaTime;
+			if (_cooldownCounter <= 0) {
 				SpawnLight.color = Color.green;
-				CooldownCounter = 0;
+				_cooldownCounter = 0;
 				if (OnCooldownEnded != null)
 					OnCooldownEnded.Invoke ();
 			}
@@ -40,8 +41,7 @@ public class ButtonSpawner : MonoBehaviour {
 	}
 
 	public void Spawn() {
-		ResetClickAnimation ();
-		if (CooldownCounter > 0) {
+		if (_cooldownCounter > 0) {
 			if (OnSpawnRejected != null) {
 				OnSpawnRejected.Invoke ();
 			}
@@ -57,33 +57,6 @@ public class ButtonSpawner : MonoBehaviour {
 
 	private void TriggerCooldown() {
 		SpawnLight.color = Color.red;
-		CooldownCounter = SpawnCooldown;
-	}
-
-	private void ResetClickAnimation() {
-		if (ClickCoroutine != null)
-			StopCoroutine (ClickCoroutine);
-		transform.localPosition = DefaultButtonPosition;
-		ClickCoroutine = StartCoroutine (PlayClickAnimation());
-	}
-
-	IEnumerator PlayClickAnimation() {
-		while (transform.localPosition.x >= 0.52f) {
-			transform.localPosition -= new Vector3 (Time.deltaTime * AnimationSpeed, 0);
-			yield return null;
-		}
-		while (transform.localPosition.x <= 0.58f) {
-			transform.localPosition += new Vector3 (Time.deltaTime * AnimationSpeed, 0);
-			yield return null;
-		}
-		transform.localPosition = DefaultButtonPosition;
-	}
-
-	public void OnHoverBegin() {
-		GetComponentInChildren<MeshRenderer> ().material.color = CooldownCounter > 0 ? Color.red : Color.green;
-	}
-
-	public void OnHoverEnd() {
-		GetComponentInChildren<MeshRenderer> ().material.color = Color.white;
+		_cooldownCounter = SpawnCooldown;
 	}
 }
