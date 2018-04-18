@@ -5,7 +5,6 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
 	private int MAXIMUM_SNEEZE_INTERVAL = 20;
-	private float SNEEZE_RADIUS = 0.2f;
 
 	public bool StartInfected = false;
 
@@ -55,28 +54,12 @@ public class Health : MonoBehaviour
 
 	public void Sneeze() {
 		var nose = GetComponentInChildren<Nose> ();
-		if (!nose.IsCovered ()) {
-			var nosePosition = GetNosePosition ();
-			Instantiate (SneezeParticleEffect, nosePosition, transform.rotation);
-
-			var colliders = Physics.OverlapSphere (nosePosition + transform.forward * SNEEZE_RADIUS, SNEEZE_RADIUS);
-			foreach (var collider in colliders) {
-				var health = collider.GetComponent<Health> ();
-				if (collider.gameObject != gameObject && health != null) {
-					health.Infect ();
-				}
-			}
-		}
+		nose.Sneeze (SneezeParticleEffect);
 	}
 
 	public void SneezeEnd() {
 		movement.Restart ();
 		ResetSneezeTimer ();
-	}
-
-	private Vector3 GetNosePosition() {
-		var nose = GetComponentInChildren<Nose> ();
-		return nose.transform.position;
 	}
 
 
@@ -125,13 +108,5 @@ public class Health : MonoBehaviour
 	public bool IsHealthy ()
 	{
 		return !isSick;
-	}
-
-	void OnDrawGizmos ()
-	{
-		if (isSick) {
-			Gizmos.color = new Color (1, 0, 0, 0.5f);
-			Gizmos.DrawWireSphere (GetNosePosition() + transform.forward * SNEEZE_RADIUS, SNEEZE_RADIUS);
-		}
 	}
 }
