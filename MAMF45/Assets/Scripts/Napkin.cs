@@ -5,7 +5,7 @@ using UnityEngine;
 public class Napkin : MonoBehaviour {
 
 	public Color ColorClean = new Color(1f, 0.43f, 0);
-	public Color ColorDirty = new Color(0.16f, 0.47f, 0.16f);
+	public Color ColorDirty = new Color(0.52f, 0.47f, 0f);
 
 	private MaterialPropertyBlock propertyBlock;
 	new private Renderer renderer;
