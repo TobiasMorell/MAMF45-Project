@@ -63,6 +63,6 @@ public class Syringe : MonoBehaviour {
         Destroy(Piston.GetComponent<InteractableButtonEvents>());
         Destroy(Piston.GetComponent<Interactable>());
 
-		//Target.Cure ();
+		Target.Cure ();
 	}
 }
