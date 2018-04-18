@@ -37,9 +37,7 @@ public class Lust : MonoBehaviour {
             {
                 if (Vector3.Distance(target.transform.position, transform.position) < LOVE_RANGE * rangeScale)
                 {
-                    movement.ResetTarget();
                     target.GetComponent<Lust>().Love();
-                    target = null;
                     Love();
                 }
             }
@@ -58,7 +56,7 @@ public class Lust : MonoBehaviour {
                         target = objects[Random.Range(0, objects.Length)];
                     } while (target == gameObject);
 
-                    rangeScale = (transform.localScale.z + target.transform.localScale.z)/2;
+                    rangeScale = (transform.localScale.z * 1.1f + target.transform.localScale.z * 1.1f) /2;
                     movement.SetTarget(target);
                 }
             }
@@ -73,13 +71,16 @@ public class Lust : MonoBehaviour {
 	public void Love()
 	{
         isLoving = true;
+        movement.ResetTarget();
         movement.Stop();
 		drive = 0;
 		animator.SetTrigger("Love");
-	}
+        target = null;
+    }
 
 	void LoveDone()
     {
+        target = null;
         isLoving = false;
         movement.Restart();
         drive = Random.Range(45.0f, 60.0f);

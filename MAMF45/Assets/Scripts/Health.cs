@@ -18,7 +18,16 @@ public class Health : MonoBehaviour
 	private bool isSick;
 	private float sneezeTimer;
 
-	void Start ()
+    private Animator animator;
+    private BasicMovement movement;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        movement = GetComponent<BasicMovement>();
+    }
+
+    void Start ()
 	{
 		if (StartInfected) {
 			Infect ();
@@ -39,8 +48,6 @@ public class Health : MonoBehaviour
 
 	public void SneezeStart() {
 		sneezeTimer = 10000;
-		var movement = GetComponent<BasicMovement> ();
-		var animator = GetComponent<Animator> ();
 
 		movement.Stop ();
 		animator.SetTrigger ("Sneeze");
@@ -63,9 +70,7 @@ public class Health : MonoBehaviour
 	}
 
 	public void SneezeEnd() {
-		var movement = GetComponent<BasicMovement> ();
 		movement.Restart ();
-
 		ResetSneezeTimer ();
 	}
 
@@ -85,6 +90,8 @@ public class Health : MonoBehaviour
 			sicknessProperty.ToggleSickness (true);
 			sicknessCloudInstance = Instantiate(SicknessCloudEffect, transform);
 			Instantiate(SneezeHitParticleEffect, transform.position, transform.rotation);
+
+            animator.SetFloat("SicknessBlend", 1.0f);
 		}
 		isSick = true;
 	}
@@ -103,8 +110,9 @@ public class Health : MonoBehaviour
 			if (sicknessCloudInstance != null) { 
 				Destroy(sicknessCloudInstance);
 				sicknessCloudInstance = null;
-			}
-		}
+            }
+            animator.SetFloat("SicknessBlend", 0f);
+        }
 		isSick = false;
 	}
 
