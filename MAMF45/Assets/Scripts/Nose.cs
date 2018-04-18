@@ -15,6 +15,10 @@ public class Nose : MonoBehaviour {
 		var napkin = collider.gameObject.GetComponent<Napkin> ();
 		if (napkin) {
 			currentNapkins.Add (napkin);
+			if (napkin.SpreadsDisease()) {
+				var health = GetComponentInParent<Health> ();
+				health.Infect ();
+			}
 		}
 	}
 
