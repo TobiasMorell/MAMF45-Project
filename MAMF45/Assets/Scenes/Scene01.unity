@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571385, b: 0.30692253, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -323,6 +323,7 @@ GameObject:
   - component: {fileID: 76643354}
   - component: {fileID: 76643359}
   - component: {fileID: 76643358}
+  - component: {fileID: 76643360}
   m_Layer: 8
   m_Name: Cube
   m_TagString: Button
@@ -470,6 +471,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 124
   m_CollisionDetection: 0
+--- !u!114 &76643360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 76643352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0dff96a0a404b4c86f2687693de6a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoredColliders:
+  - {fileID: 2085310197}
 --- !u!1 &149316061
 GameObject:
   m_ObjectHideFlags: 0
@@ -1122,6 +1136,7 @@ GameObject:
   - component: {fileID: 528814506}
   - component: {fileID: 528814510}
   - component: {fileID: 528814511}
+  - component: {fileID: 528814512}
   m_Layer: 8
   m_Name: Cube
   m_TagString: Button
@@ -1269,6 +1284,19 @@ SpringJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &528814512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 528814504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0dff96a0a404b4c86f2687693de6a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoredColliders:
+  - {fileID: 2085310197}
 --- !u!1 &638973473
 GameObject:
   m_ObjectHideFlags: 0
@@ -1443,6 +1471,7 @@ GameObject:
   - component: {fileID: 884794021}
   - component: {fileID: 884794026}
   - component: {fileID: 884794025}
+  - component: {fileID: 884794027}
   m_Layer: 8
   m_Name: Cube
   m_TagString: Button
@@ -1590,6 +1619,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 124
   m_CollisionDetection: 0
+--- !u!114 &884794027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 884794019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0dff96a0a404b4c86f2687693de6a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoredColliders:
+  - {fileID: 2085310197}
 --- !u!1 &947439268
 GameObject:
   m_ObjectHideFlags: 0
@@ -2209,6 +2251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42d5afd9e623dc4ea4508000933c58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ColorClean: {r: 1, g: 0.43, b: 0, a: 1}
+  ColorDirty: {r: 0.16, g: 0.47, b: 0.16, a: 1}
 --- !u!54 &1630207377
 Rigidbody:
   m_ObjectHideFlags: 0
