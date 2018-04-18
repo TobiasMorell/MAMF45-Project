@@ -1388,6 +1388,7 @@ MonoBehaviour:
   heartEffect: {fileID: 1920788314715890, guid: 9313e5078de24654296b76cceb610498,
     type: 2}
   loveEffect: {fileID: 0}
+  drive: 0
 --- !u!136 &136896154789325028
 CapsuleCollider:
   m_ObjectHideFlags: 1

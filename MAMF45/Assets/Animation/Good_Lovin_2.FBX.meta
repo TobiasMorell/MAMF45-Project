@@ -1,0 +1,190 @@
+fileFormatVersion: 2
+guid: d4a5a5e4d4feb3e44b544c4294038ab7
+timeCreated: 1524036408
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Alien
+    100002: AlienHead
+    100004: AlienHead_lower_eye_right
+    100006: AlienHead_lower_eye_right001
+    100008: AlienHead_lower_lip
+    100010: AlienHead_upper_eye_left
+    100012: AlienHead_upper_eye_right
+    100014: AlienHead_upper_lip
+    100016: AlienLAntenae1
+    100018: AlienLAntenae2
+    100020: AlienLAntenae3
+    100022: AlienLArm11
+    100024: AlienLArm12
+    100026: AlienLArmCollarbone
+    100028: AlienLArmPalm
+    100030: AlienPelvis
+    100032: AlienRAntenae1
+    100034: AlienRAntenae2
+    100036: AlienRAntenae3
+    100038: AlienRArm11
+    100040: AlienRArm12
+    100042: AlienRArmCollarbone
+    100044: AlienRArmPalm
+    100046: AlienRibcage
+    100048: AlienSpine
+    100050: AlienSpine1
+    100052: AlienSpine2
+    100054: AlienSpine3
+    100056: AlienTail1
+    100058: Bunny
+    100060: //RootNode
+    100062: L_Foot
+    100064: Left_Eye
+    100066: Left_eye
+    100068: Left_eye_pupil
+    100070: Left_tooth
+    100072: Nose
+    100074: R_Foot
+    100076: Right_Eye
+    100078: Right_eye
+    100080: Right_eye_pupil
+    100082: Right_tooth
+    400000: Alien
+    400002: AlienHead
+    400004: AlienHead_lower_eye_right
+    400006: AlienHead_lower_eye_right001
+    400008: AlienHead_lower_lip
+    400010: AlienHead_upper_eye_left
+    400012: AlienHead_upper_eye_right
+    400014: AlienHead_upper_lip
+    400016: AlienLAntenae1
+    400018: AlienLAntenae2
+    400020: AlienLAntenae3
+    400022: AlienLArm11
+    400024: AlienLArm12
+    400026: AlienLArmCollarbone
+    400028: AlienLArmPalm
+    400030: AlienPelvis
+    400032: AlienRAntenae1
+    400034: AlienRAntenae2
+    400036: AlienRAntenae3
+    400038: AlienRArm11
+    400040: AlienRArm12
+    400042: AlienRArmCollarbone
+    400044: AlienRArmPalm
+    400046: AlienRibcage
+    400048: AlienSpine
+    400050: AlienSpine1
+    400052: AlienSpine2
+    400054: AlienSpine3
+    400056: AlienTail1
+    400058: Bunny
+    400060: //RootNode
+    400062: L_Foot
+    400064: Left_Eye
+    400066: Left_eye
+    400068: Left_eye_pupil
+    400070: Left_tooth
+    400072: Nose
+    400074: R_Foot
+    400076: Right_Eye
+    400078: Right_eye
+    400080: Right_eye_pupil
+    400082: Right_tooth
+    2100000: 'Material #4'
+    2100002: 'Material #2'
+    2100004: 'Material #3'
+    4300000: Bunny
+    4300002: Right_eye
+    4300004: Right_eye_pupil
+    4300006: Left_eye
+    4300008: Left_eye_pupil
+    4300010: Right_tooth
+    4300012: Left_tooth
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Bunny
+    13700002: Left_eye
+    13700004: Left_eye_pupil
+    13700006: Left_tooth
+    13700008: Right_eye
+    13700010: Right_eye_pupil
+    13700012: Right_tooth
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
