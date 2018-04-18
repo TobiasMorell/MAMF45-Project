@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 114792430660664712}
   - component: {fileID: 114697332821567612}
   - component: {fileID: 114762620271689864}
+  - component: {fileID: 114777476916271272}
   m_Layer: 0
   m_Name: Syringe
   m_TagString: Untagged
@@ -167,9 +168,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1497342477818982}
-  m_LocalRotation: {x: 0.53030676, y: -0.60055447, z: -0.47159868, w: 0.36838004}
-  m_LocalPosition: {x: -0.861, y: 0.51, z: 0.32378736}
-  m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
+  m_LocalRotation: {x: 0.53030676, y: -0.60055447, z: -0.47159865, w: 0.36838004}
+  m_LocalPosition: {x: -1.3610001, y: 1.2260001, z: -0.17621267}
+  m_LocalScale: {x: 0.08319766, y: 0.08000565, z: 0.0831924}
   m_Children:
   - {fileID: 4243956093097386}
   - {fileID: 4707442299441598}
@@ -559,6 +560,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114777476916271272
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1497342477818982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0cc6b7a30ec2324195ab34ceb53cd66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114792430660664712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -638,9 +650,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.005
-  m_Height: 0.14
+  m_Height: 0.1475709
   m_Direction: 2
-  m_Center: {x: 0, y: 0.000000058673322, z: -0.06}
+  m_Center: {x: -3.6382397e-10, y: 0.000000068093016, z: -0.063785456}
 --- !u!136 &136786376811760008
 CapsuleCollider:
   m_ObjectHideFlags: 1

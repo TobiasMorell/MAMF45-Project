@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Destroyer : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	void OnTriggerEnter(Collider collider) {
+		var destructible = collider.GetComponentInChildren<Destructible> ();
+		if (!destructible)
+			destructible = collider.GetComponentInParent<Destructible> ();
+		if (destructible && !destructible.IsHeld()) {
+			Destroy (destructible.gameObject);
+		}
 	}
 }
