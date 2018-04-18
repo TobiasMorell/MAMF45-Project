@@ -40,7 +40,10 @@ public class BasicMovement : MonoBehaviour {
 		if (targetObject)
 		{
 			target = targetObject.transform.position;
-		}
+            target.y = transform.position.y;
+            var delta = Vector3.SignedAngle(transform.forward, target - transform.position, Vector3.up);
+            direction = transform.rotation * Quaternion.Euler(0, delta, 0);
+        }
 		if (isRunning) {
 			Act ();
 			actionTime -= Time.fixedDeltaTime;
