@@ -46,9 +46,12 @@ public class Health : MonoBehaviour
 	{
 		foreach (var illness in illnesses) {
 			var details = Illnesses.GetDetails (illness.GetIllnessType());
+			var isAirborne = illness.GetType ().IsSubclassOf (typeof(SneezeIllness));
 
-			if (this.illnesses.Contains(illness)) {
+			if (this.illnesses.Contains (illness)) {
 				print ("Already has illness: " + illness);
+			} else if (isAirborne && contraceptive) {
+				print ("Prevented by contraceptive: " + illness);
 			} else {
 				this.illnesses.Add(illness.Infect(gameObject));
 				print ("New infection!");
