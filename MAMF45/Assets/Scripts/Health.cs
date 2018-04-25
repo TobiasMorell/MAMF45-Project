@@ -74,6 +74,7 @@ public class Health : MonoBehaviour
 				Destroy (illness);
 
 				UpdateIllnessAppearance ();
+				animator.SetTrigger ("happy");
 			} else {
 				print ("Uncurable illness!");
 			}
@@ -100,7 +101,10 @@ public class Health : MonoBehaviour
 		if (isIll) {
 			float r = 0, g = 0, b = 0;
 			foreach (var illness in illnesses) {
-				// Accumulate color
+				var details = Illnesses.GetDetails (illness.GetIllnessType());
+				r += details.color.r;
+				g += details.color.g;
+				b += details.color.b;
 			}
 			sicknessProperty.SicknessColor = new Color (r/illnesses.Count, g/illnesses.Count, b/illnesses.Count, 1);
 		}
