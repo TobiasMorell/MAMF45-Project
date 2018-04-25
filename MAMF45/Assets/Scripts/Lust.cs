@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Lust : MonoBehaviour {
 	private static float LOVE_RANGE = 0.15f;
+	private static float MAX_CHASE_TIME = 15;
 
     [SerializeField]
     private GameObject heartEffect;
@@ -13,6 +14,8 @@ public class Lust : MonoBehaviour {
 	public float drive;
     private bool isLoving;
     public float rangeScale;
+
+	private float overDrive;
 
 	private GameObject target = null;
 
@@ -27,6 +30,7 @@ public class Lust : MonoBehaviour {
 		movement = GetComponent<BasicMovement>();
 		animator = GetComponent<Animator>();
         isLoving = false;
+		overDrive = 0;
 	}
 	
 	// Update is called once per frame
@@ -35,11 +39,16 @@ public class Lust : MonoBehaviour {
         {
             if (target)
             {
-                if (Vector3.Distance(target.transform.position, transform.position) < LOVE_RANGE * rangeScale)
-                {
-                    target.GetComponent<Lust>().Love();
-                    Love();
-                }
+				overDrive += Time.deltaTime;
+				if (Vector3.Distance (target.transform.position, transform.position) < LOVE_RANGE * rangeScale) {
+					target.GetComponent<Lust>().Love();
+					Love();
+				} else if (overDrive > MAX_CHASE_TIME) {
+					target = null;
+					isLoving = false;
+					movement.ResetTarget();
+					drive = Random.Range(45.0f, 60.0f);
+				}
             }
             else
             {
