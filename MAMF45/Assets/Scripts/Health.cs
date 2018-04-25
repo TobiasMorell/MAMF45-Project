@@ -12,9 +12,8 @@ public class Health : MonoBehaviour
 
 	private GameObject sicknessCloudInstance = null;
 
-	private List<Illness> illnesses;
+	private HashSet<Illness> illnesses;
 	private bool isIll;
-	private float sneezeTimer;
 
 	private bool isProtected;
 	private GameObject contraceptive = null;
@@ -24,7 +23,7 @@ public class Health : MonoBehaviour
 
     private void Awake()
     {
-		illnesses = new List<Illness> ();
+		illnesses = new HashSet<Illness> ();
         animator = GetComponent<Animator>();
         movement = GetComponent<BasicMovement>();
     }
@@ -32,27 +31,26 @@ public class Health : MonoBehaviour
     void Start ()
 	{
 		if (StartInfected) {
+			//An instance is manually spawned here - all other illnesses are clones of this
 			Infect (new ColdIllness());
 		}
 	}
 
 	void Update ()
 	{
+		
 	}
 
 
-	public void Infect (Illness illness)
-	{
-		Infect(new Illness[]{ illness });
-	}
-
-	public void Infect (Illness[] illnesses)
+	public void Infect (params Illness[] illnesses)
 	{
 		foreach (var illness in illnesses) {
+			var details = Illnesses.GetDetails (illness.GetIllnessType());
+
 			if (this.illnesses.Contains(illness)) {
 				print ("Already has illness: " + illness);
 			} else {
-				this.illnesses.Add(illness.Infect (gameObject));
+				this.illnesses.Add(illness.Infect(gameObject));
 				print ("New infection!");
 
 				UpdateIllnessAppearance ();

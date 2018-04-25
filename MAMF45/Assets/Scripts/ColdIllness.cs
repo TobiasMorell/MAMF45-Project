@@ -21,11 +21,13 @@ public class ColdIllness : SneezeIllness {
 		return false;
 	}
 
-	public override Illness Infect (GameObject obj) {
+	public override Illness Infect (GameObject obj)
+	{
 		return obj.AddComponent<ColdIllness> ();
 	}
 
-	public override Color GetIllnessColor() {
-		return new Color (41/255f, 120/255f, 41/255f, 1f);
+	public override IllnessTypes GetIllnessType ()
+	{
+		return IllnessTypes.Cold;
 	}
 }

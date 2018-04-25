@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Illness : MonoBehaviour {
 	public abstract bool Cure();
 	public abstract Illness Infect (GameObject obj);
-	public abstract Color GetIllnessColor();
+	public abstract IllnessTypes GetIllnessType();
 
 	public override bool Equals (object other)
 	{
@@ -14,6 +14,6 @@ public abstract class Illness : MonoBehaviour {
 
 	public override int GetHashCode()
 	{
-		return GetType ().GetHashCode ();
+		return GetIllnessType ().GetHashCode ();
 	}
 }
