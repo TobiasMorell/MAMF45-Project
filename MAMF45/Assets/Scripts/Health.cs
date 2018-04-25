@@ -46,11 +46,10 @@ public class Health : MonoBehaviour
 	{
 		foreach (var illness in illnesses) {
 			var details = Illnesses.GetDetails (illness.GetIllnessType());
-			var isAirborne = illness.GetType ().IsSubclassOf (typeof(SneezeIllness));
 
 			if (this.illnesses.Contains (illness)) {
 				print ("Already has illness: " + illness);
-			} else if (isAirborne && contraceptive) {
+			} else if (contraceptive) {
 				print ("Prevented by contraceptive: " + illness);
 			} else {
 				this.illnesses.Add(illness.Infect(gameObject));
@@ -102,14 +101,12 @@ public class Health : MonoBehaviour
 		}
 
 		if (isIll) {
-			float r = 0, g = 0, b = 0;
+			Color color = Color.clear;
 			foreach (var illness in illnesses) {
 				var details = Illnesses.GetDetails (illness.GetIllnessType());
-				r += details.color.r;
-				g += details.color.g;
-				b += details.color.b;
+				color += details.color;
 			}
-			sicknessProperty.SicknessColor = new Color (r/illnesses.Count, g/illnesses.Count, b/illnesses.Count, 1);
+			sicknessProperty.SicknessColor = color/illnesses.Count;
 		}
 
 		this.isIll = isIll;
