@@ -7,7 +7,7 @@ using Valve.VR.InteractionSystem;
 public class ShakeMe : MonoBehaviour {
 
     [SerializeField]
-    private float scale = 10;
+    private float scale = 20;
     private bool isHeld = false;
     private Vector3 prevPos;
     private Vector3 prevVel;
