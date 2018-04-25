@@ -78,7 +78,6 @@ public class Nose : MonoBehaviour {
 			lower = Mathf.Min (lower, illness.GetSneezeIntervalMin ());
 		}
 
-		print (lower + " -> " + upper);
 		sneezeTimer = Random.Range (lower, upper);
 	}
 
