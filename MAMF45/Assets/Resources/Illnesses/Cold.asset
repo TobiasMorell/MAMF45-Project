@@ -11,8 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89fe95130fd33f41a89135cb73f01b4, type: 3}
   m_Name: Cold
   m_EditorClassIdentifier: 
-  Name: 
-  color: {r: 0, g: 0, b: 0, a: 0}
+  Name: Cold
+  color: {r: 0.019016204, g: 0.5514706, b: 0, a: 0}
   Type: 0
-  Icon: {fileID: 0}
-  Illness: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 99d3ddde4330555419ae9719d2478c49, type: 3}

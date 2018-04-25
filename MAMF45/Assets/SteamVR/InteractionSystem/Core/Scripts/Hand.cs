@@ -850,6 +850,24 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
+		// Is the standard interaction button being pressed? In VR, this is a trigger press. In 2D fallback, this is a mouse middle-click.
+		//-------------------------------------------------
+		public bool GetTouchPadButton()
+		{
+			if ( noSteamVRFallbackCamera )
+			{
+				return Input.GetMouseButton( 2 );
+			}
+			else if ( controller != null )
+			{
+				return controller.GetPress(EVRButtonId.k_EButton_SteamVR_Touchpad);
+			}
+
+			return false;
+		}
+
+
+		//-------------------------------------------------
 		private void InitController( int index )
 		{
 			if ( controller == null )
