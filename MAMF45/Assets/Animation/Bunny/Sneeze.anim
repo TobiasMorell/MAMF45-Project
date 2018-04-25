@@ -33845,16 +33845,14 @@ AnimationClip:
   - time: 1.6244228
     functionName: Sneeze
     data: 
-    objectReferenceParameter: {fileID: 1633040747158784, guid: 9540975283fbc044fae73bcb488bdfb4,
-      type: 2}
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 3.3259094
     functionName: SneezeEnd
     data: 
-    objectReferenceParameter: {fileID: 1633040747158784, guid: 9540975283fbc044fae73bcb488bdfb4,
-      type: 2}
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

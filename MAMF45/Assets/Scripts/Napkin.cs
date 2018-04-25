@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,25 +11,37 @@ public class Napkin : MonoBehaviour {
 	private MaterialPropertyBlock propertyBlock;
 	new private Renderer renderer;
 
-	private int useCount;
+	private Dictionary<Type, int> usedIllnesses;
 
 	void Start() {
 		propertyBlock = new MaterialPropertyBlock ();
 		renderer = GetComponent<Renderer> ();
+		usedIllnesses = new Dictionary<Type, int> ();
 	}
 
-	public void Use() {
-		useCount += 1;
+	public void Use(Illness[] illnesses) {
+		foreach (var illness in illnesses) {
+			int value;
+			usedIllnesses.TryGetValue (typeof(Illness), out value);
+			usedIllnesses.Add (typeof(Illness), value + 1);
+		}
 
 		renderer.GetPropertyBlock(propertyBlock);
 		propertyBlock.SetColor("_Color", ColorDirty);
 		renderer.SetPropertyBlock(propertyBlock);
 	}
 
-	public bool SpreadsDisease() {
-		if (useCount > 0 && Random.Range (0, 1f) > 0.5f) {
-			return true;
+	public Illness[] SpreadsDisease() {
+		List<Illness> illnesses = new List<Illness> ();
+		foreach (var entry in usedIllnesses) {
+			if (UnityEngine.Random.Range (0, 1f) <= GetChance (entry.Value)) {
+				illnesses.Add ((Illness)Activator.CreateInstance (entry.Key));
+			}
 		}
-		return false;
+		return illnesses.ToArray();
+	}
+
+	private float GetChance(int number) {
+		return 1 - 1 / (number + 1f);
 	}
 }

@@ -1331,6 +1331,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17533572c76f77641a61003a7609df21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SneezeEffect: {fileID: 1514666183957720, guid: 043e711746286ff458dcb3d55709e352,
+    type: 2}
 --- !u!114 &114319572431713412
 MonoBehaviour:
   m_ObjectHideFlags: 1

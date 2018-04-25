@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-	private int MAXIMUM_SNEEZE_INTERVAL = 20;
-
 	public bool StartInfected = false;
 
 	public GameObject SneezeParticleEffect;
@@ -14,17 +12,18 @@ public class Health : MonoBehaviour
 
 	private GameObject sicknessCloudInstance = null;
 
-    private bool isSick;
+	private List<Illness> illnesses;
 	private float sneezeTimer;
+
+	private bool isProtected;
+	private GameObject contraceptive = null;
 
     private Animator animator;
     private BasicMovement movement;
 
-    private bool isProtected;
-    private GameObject contraceptive = null;
-
     private void Awake()
     {
+		illnesses = new List<Illness> ();
         animator = GetComponent<Animator>();
         movement = GetComponent<BasicMovement>();
     }
@@ -32,106 +31,104 @@ public class Health : MonoBehaviour
     void Start ()
 	{
 		if (StartInfected) {
-			Infect ();
+			Infect (new ColdIllness());
 		}
 	}
 
 	void Update ()
 	{
-		if (isSick) {
-			sneezeTimer -= Time.deltaTime;
-			if (sneezeTimer < 0) {
-//				StartCoroutine ("Sneeze");
+	}
 
-				SneezeStart ();
+
+	public void Infect (Illness illness)
+	{
+		Infect(new Illness[]{illness});
+	}
+
+	public void Infect (Illness[] illnesses)
+	{
+		foreach (var illness in illnesses) {
+			if (this.illnesses.Contains(illness)) {
+				print ("Already has illness: " + illness);
+			} else {
+				this.illnesses.Add(illness.Infect (gameObject));
+				print ("New infection!");
+
+				// TODO Change color in some way?
+				var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty> ();
+				sicknessProperty.ToggleSickness (true);
+				sicknessCloudInstance = Instantiate (SicknessCloudEffect, transform);
+				Instantiate (SneezeHitParticleEffect, transform.position, transform.rotation);
+
+				animator.SetFloat ("SicknessBlend", 1.0f);
 			}
 		}
 	}
 
-	public void SneezeStart() {
-		sneezeTimer = 10000;
-
-		movement.Stop ();
-		animator.SetTrigger ("Sneeze");
-	}
-
-	public void Sneeze() {
-		var nose = GetComponentInChildren<Nose> ();
-		nose.Sneeze (SneezeParticleEffect);
-        if (contraceptive != null) {
-            contraceptive.GetComponent<Rigidbody>().AddExplosionForce(1000,transform.position,10);
-        }
-	}
-
-	public void SneezeEnd() {
-		movement.Restart ();
-		ResetSneezeTimer ();
-	}
-
-
-	public void Infect ()
-	{
-		if (!isSick) {
-			ResetSneezeTimer ();
-			print ("New rabbit infected!");
-
-			var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty> ();
-			sicknessProperty.ToggleSickness (true);
-			sicknessCloudInstance = Instantiate(SicknessCloudEffect, transform);
-			Instantiate(SneezeHitParticleEffect, transform.position, transform.rotation);
-
-            animator.SetFloat("SicknessBlend", 1.0f);
-		}
-		isSick = true;
-	}
-
-	private void ResetSneezeTimer ()
-	{
-		sneezeTimer = Random.Range (0f, MAXIMUM_SNEEZE_INTERVAL);
-	}
-
 	public void Cure ()
 	{
-		if (isSick)
+		foreach (var illness in illnesses)
 		{
-			var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty>();
-			sicknessProperty.ToggleSickness(false);
-			if (sicknessCloudInstance != null) { 
-				Destroy(sicknessCloudInstance);
-				sicknessCloudInstance = null;
-            }
-            animator.SetFloat("SicknessBlend", 0f);
+			if (illness.Cure ()) {
+				Destroy (illness);
+
+				// TODO Undo coloring?
+				var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty> ();
+				sicknessProperty.ToggleSickness (false);
+				if (sicknessCloudInstance != null) { 
+					Destroy (sicknessCloudInstance);
+					sicknessCloudInstance = null;
+				}
+				animator.SetFloat ("SicknessBlend", 0f);
+			} else {
+				print ("Uncurable illness!");
+			}
         }
-		isSick = false;
 	}
 
 
 	public bool IsSick ()
 	{
-		return isSick;
+		return illnesses.Count > 0;
 	}
 
 	public bool IsHealthy ()
 	{
-		return !isSick;
+		return !IsSick();
+	}
+
+	public GameObject GetContraceptive()
+	{
+		return contraceptive;
 	}
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("ContraceptiveTrigger"))
-        {
-            isProtected = true;
-            contraceptive = other.transform.parent.gameObject;
-        }
-    }
+	public void Sneeze() // Needed to broadcast to Nose
+	{
+		GetComponentInChildren<Nose> ().Sneeze ();
+	}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("ContraceptiveTrigger"))
-        {
-            isProtected = false;
-            contraceptive = null;
-        }
-    }
+	public void SneezeEnd()
+	{
+		GetComponentInChildren<Nose> ().SneezeEnd ();
+	}
+
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("ContraceptiveTrigger"))
+		{
+			isProtected = true;
+			contraceptive = other.transform.parent.gameObject;
+		}
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.CompareTag("ContraceptiveTrigger"))
+		{
+			isProtected = false;
+			contraceptive = null;
+		}
+	}
 }
