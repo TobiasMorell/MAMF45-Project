@@ -26,6 +26,16 @@ public class ColdIllness : SneezeIllness {
 		return obj.AddComponent<ColdIllness> ();
 	}
 
+	public override int GetSneezeIntervalMax ()
+	{
+		return 20;
+	}
+
+	public override int GetSneezeIntervalMin ()
+	{
+		return 10;
+	}
+
 	public override IllnessTypes GetIllnessType ()
 	{
 		return IllnessTypes.Cold;

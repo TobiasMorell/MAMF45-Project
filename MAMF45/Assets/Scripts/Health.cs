@@ -57,6 +57,10 @@ public class Health : MonoBehaviour
 
 				UpdateIllnessAppearance ();
 			}
+
+			if (illness.GetType ().IsSubclassOf (typeof(SneezeIllness))) {
+				GetComponentInChildren<Nose> ().ResetSneezeTimer ();
+			}
 		}
 	}
 

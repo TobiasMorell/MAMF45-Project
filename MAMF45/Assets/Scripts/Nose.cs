@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Nose : MonoBehaviour {
-	private const int MAXIMUM_SNEEZE_INTERVAL = 20;
 	private const float SNEEZE_RADIUS = 0.2f;
 	private const int SNEEZE_FORCE = 1000;
 
@@ -29,7 +28,7 @@ public class Nose : MonoBehaviour {
 				SneezeStart ();
 			}
 		} else {
-			ResetSneezeTimer ();
+			sneezeTimer = 10000;
 		}
 	}
 
@@ -70,15 +69,24 @@ public class Nose : MonoBehaviour {
 		ResetSneezeTimer ();
 	}
 
-	private void ResetSneezeTimer ()
+	public void ResetSneezeTimer ()
 	{
-		sneezeTimer = Random.Range (0f, MAXIMUM_SNEEZE_INTERVAL);
+		int upper = 100000;
+		int lower = 100000;
+		foreach (var illness in GetComponentsInParent<SneezeIllness> ()) {
+			upper = Mathf.Min (upper, illness.GetSneezeIntervalMax ());
+			lower = Mathf.Min (lower, illness.GetSneezeIntervalMin ());
+		}
+
+		print (lower + " -> " + upper);
+		sneezeTimer = Random.Range (lower, upper);
 	}
 
 
 	public bool IsCovered() {
 		return currentNapkins.Count > 0;
 	}
+
 
 	void OnTriggerEnter(Collider collider) {
 		var napkin = collider.gameObject.GetComponent<Napkin> ();
