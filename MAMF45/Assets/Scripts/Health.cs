@@ -74,6 +74,7 @@ public class Health : MonoBehaviour
 
 	public void Cure ()
 	{
+		
 		foreach (var illness in illnesses)
 		{
 			if (illness.Cure ()) {
@@ -85,6 +86,7 @@ public class Health : MonoBehaviour
 				print ("Uncurable illness!");
 			}
         }
+		print("Removed: " + illnesses.RemoveWhere(i=>!i));
 	}
 
 	private void UpdateIllnessAppearance() {
