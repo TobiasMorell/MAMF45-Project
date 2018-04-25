@@ -6,7 +6,6 @@ using UnityEngine;
 public class Napkin : MonoBehaviour {
 
 	public Color ColorClean = new Color(1f, 0.43f, 0);
-	public Color ColorDirty = new Color(0.52f, 0.47f, 0f);
 
 	private MaterialPropertyBlock propertyBlock;
 	new private Renderer renderer;
@@ -23,11 +22,19 @@ public class Napkin : MonoBehaviour {
 		foreach (var illness in illnesses) {
 			int value;
 			usedIllnesses.TryGetValue (illness, out value);
-			usedIllnesses.Add (illness, value + 1);
+			usedIllnesses[illness] = value + 1;
+		}
+
+		int count = 0;
+		Color color = Color.clear;
+		foreach (var entry in usedIllnesses) {
+			var details = Illnesses.GetDetails(entry.Key.GetIllnessType());
+			color += details.color * entry.Value;
+			count += entry.Value;
 		}
 
 		renderer.GetPropertyBlock(propertyBlock);
-		propertyBlock.SetColor("_Color", ColorDirty);
+		propertyBlock.SetColor("_Color", color / count);
 		renderer.SetPropertyBlock(propertyBlock);
 	}
 
