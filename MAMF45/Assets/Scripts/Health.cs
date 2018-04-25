@@ -63,7 +63,7 @@ public class Health : MonoBehaviour
 	public void Cure (Illness illness) {
 		if (illnesses.Remove (illness)) {
 			UpdateIllnessAppearance ();
-			animator.SetTrigger ("happy");
+			animator.SetTrigger ("Happy");
 			Destroy (illness);
 		}
 	}
@@ -76,7 +76,7 @@ public class Health : MonoBehaviour
 				Destroy (illness);
 
 				UpdateIllnessAppearance ();
-				animator.SetTrigger ("happy");
+				animator.SetTrigger ("Happy");
 			} else {
 				print ("Uncurable illness!");
 			}
