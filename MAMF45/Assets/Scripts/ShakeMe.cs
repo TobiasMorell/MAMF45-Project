@@ -24,14 +24,17 @@ public class ShakeMe : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (isHeld) {
-            var vel = (transform.position - prevPos);
-            var acc = (vel - prevVel).magnitude;
-            prevPos = transform.position;
-            prevVel = vel;
-            transform.localScale += new Vector3(1, 1, 1 * 0.75f) * acc * Time.deltaTime * scale;
-            transform.localScale = new Vector3(Mathf.Min(1, transform.localScale.x), Mathf.Min(1, transform.localScale.y), Mathf.Min(0.75f, transform.localScale.z));
-        }
+		if (isHeld) {
+			var vel = (transform.position - prevPos);
+			var acc = (vel - prevVel).magnitude;
+			prevPos = transform.position;
+			prevVel = vel;
+			transform.localScale += new Vector3 (1, 1, 1 * 0.75f) * acc * Time.deltaTime * scale;
+			transform.localScale = new Vector3 (Mathf.Min (1, transform.localScale.x), Mathf.Min (1, transform.localScale.y), Mathf.Min (0.75f, transform.localScale.z));
+		} else if (transform.position.y > 2) {
+			transform.localScale -= new Vector3 (1, 1, 1 * 0.75f) * Time.deltaTime * scale * 0.05f;
+			transform.localScale = new Vector3 (Mathf.Max (0.2f, transform.localScale.x), Mathf.Max (0.2f, transform.localScale.y), Mathf.Max (0.15f, transform.localScale.z));
+		}
 	}
 
 
