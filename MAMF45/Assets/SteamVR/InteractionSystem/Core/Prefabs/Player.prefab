@@ -1254,7 +1254,7 @@ GameObject:
   - component: {fileID: 4791217039001338}
   - component: {fileID: 114524548892051996}
   - component: {fileID: 135749164025550184}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1271,7 +1271,7 @@ GameObject:
   - component: {fileID: 4075916747692316}
   - component: {fileID: 114713740233106738}
   - component: {fileID: 135565596757587868}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}

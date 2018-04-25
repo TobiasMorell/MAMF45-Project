@@ -5,6 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
 	private int MAXIMUM_SNEEZE_INTERVAL = 20;
+	private int SNEEZE_FORCE = 1000;
 
 	public bool StartInfected = false;
 
@@ -59,7 +60,7 @@ public class Health : MonoBehaviour
 		var nose = GetComponentInChildren<Nose> ();
 		nose.Sneeze (SneezeParticleEffect);
         if (contraceptive != null) {
-            contraceptive.GetComponent<Rigidbody>().AddExplosionForce(1000,transform.position,10);
+			contraceptive.GetComponent<Rigidbody>().AddForce(Vector3.up * SNEEZE_FORCE);
         }
 	}
 
