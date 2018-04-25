@@ -11,19 +11,19 @@ public class Napkin : MonoBehaviour {
 	private MaterialPropertyBlock propertyBlock;
 	new private Renderer renderer;
 
-	private Dictionary<Type, int> usedIllnesses;
+	private Dictionary<Illness, int> usedIllnesses;
 
 	void Start() {
 		propertyBlock = new MaterialPropertyBlock ();
 		renderer = GetComponent<Renderer> ();
-		usedIllnesses = new Dictionary<Type, int> ();
+		usedIllnesses = new Dictionary<Illness, int> ();
 	}
 
 	public void Use(Illness[] illnesses) {
 		foreach (var illness in illnesses) {
 			int value;
-			usedIllnesses.TryGetValue (typeof(Illness), out value);
-			usedIllnesses.Add (typeof(Illness), value + 1);
+			usedIllnesses.TryGetValue (illness, out value);
+			usedIllnesses.Add (illness, value + 1);
 		}
 
 		renderer.GetPropertyBlock(propertyBlock);
@@ -35,7 +35,7 @@ public class Napkin : MonoBehaviour {
 		List<Illness> illnesses = new List<Illness> ();
 		foreach (var entry in usedIllnesses) {
 			if (UnityEngine.Random.Range (0, 1f) <= GetChance (entry.Value)) {
-				illnesses.Add ((Illness)Activator.CreateInstance (entry.Key));
+				illnesses.Add (entry.Key);
 			}
 		}
 		return illnesses.ToArray();
