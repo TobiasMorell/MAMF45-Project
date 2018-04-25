@@ -236,7 +236,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4563197179053502, guid: 9540975283fbc044fae73bcb488bdfb4, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1633040747158784, guid: 9540975283fbc044fae73bcb488bdfb4, type: 2}
       propertyPath: m_Name
@@ -914,7 +914,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4563197179053502, guid: 9540975283fbc044fae73bcb488bdfb4, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1633040747158784, guid: 9540975283fbc044fae73bcb488bdfb4, type: 2}
       propertyPath: m_Name
@@ -1320,18 +1320,6 @@ Prefab:
     - target: {fileID: 4932861939929734, guid: f74677bb5b1bd4c4aa21ce3b82f6b1f2, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4932861939929734, guid: f74677bb5b1bd4c4aa21ce3b82f6b1f2, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 86.245
-      objectReference: {fileID: 0}
-    - target: {fileID: 4932861939929734, guid: f74677bb5b1bd4c4aa21ce3b82f6b1f2, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4932861939929734, guid: f74677bb5b1bd4c4aa21ce3b82f6b1f2, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f74677bb5b1bd4c4aa21ce3b82f6b1f2, type: 2}
@@ -1778,7 +1766,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4563197179053502, guid: 9540975283fbc044fae73bcb488bdfb4, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9540975283fbc044fae73bcb488bdfb4, type: 2}
@@ -1848,7 +1836,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4662584436898962, guid: 9cb0df5c66606cd46b8dfd0d818392e1, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4662584436898962, guid: 9cb0df5c66606cd46b8dfd0d818392e1, type: 2}
       propertyPath: m_LocalScale.x
@@ -1918,7 +1906,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4195492015030072, guid: a66024740ed58f540b3c062fcc42601b, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114877820710339216, guid: a66024740ed58f540b3c062fcc42601b,
         type: 2}
@@ -2510,7 +2498,7 @@ Transform:
   - {fileID: 366837018}
   - {fileID: 1937683163}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1815553406
 Prefab:
@@ -2549,7 +2537,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4563197179053502, guid: 9540975283fbc044fae73bcb488bdfb4, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1633040747158784, guid: 9540975283fbc044fae73bcb488bdfb4, type: 2}
       propertyPath: m_Name
@@ -2686,7 +2674,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 447954, guid: dc06161b6d97feb419f45f03b62e14b9, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1897385386350478, guid: dc06161b6d97feb419f45f03b62e14b9, type: 2}
       propertyPath: m_Layer
@@ -2817,7 +2805,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4559524958457616, guid: 77bab362ccb31e242aae40f405eaaca9, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4559524958457616, guid: 77bab362ccb31e242aae40f405eaaca9, type: 2}
       propertyPath: m_LocalScale.x
