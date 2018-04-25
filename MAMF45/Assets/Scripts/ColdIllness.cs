@@ -3,6 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ColdIllness : SneezeIllness {
+
+	private float duration;
+
+	void Start() {
+		duration = Random.Range (25, 35);
+	}
+
+	void Update() {
+		duration -= Time.deltaTime;
+		if (duration < 0) {
+			GetComponent<Health> ().Cure (this);
+		}
+	}
 	
 	public override bool Cure() {
 		return false;

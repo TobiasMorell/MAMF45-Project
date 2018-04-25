@@ -1379,7 +1379,7 @@ MonoBehaviour:
   baseColor2: {r: 0.35294116, g: 0.23392195, b: 0.10640138, a: 0}
   baseColor3: {r: 0.7647059, g: 0.7647059, b: 0.7647059, a: 0}
   baseColor4: {r: 0.5735294, g: 0.4121734, b: 0.2656791, a: 0}
-  sicknessColor: {r: 0.15916955, g: 0.4705882, b: 0.16131724, a: 1}
+  SicknessColor: {r: 0.16078432, g: 0.47058824, b: 0.16078432, a: 1}
 --- !u!114 &114795276827725698
 MonoBehaviour:
   m_ObjectHideFlags: 1

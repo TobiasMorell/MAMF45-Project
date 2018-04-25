@@ -44,7 +44,7 @@ public class Nose : MonoBehaviour {
 		var nose = GetComponentInChildren<Nose> ();
 		var contraceptive = GetComponentInParent<Health> ().GetContraceptive ();
 
-		if (!IsCovered ()) {
+		if (!IsCovered () && GetComponentInParent<SneezeIllness> ()) {
 			Instantiate (SneezeEffect, transform.position, transform.rotation);
 
 			if (!contraceptive) {

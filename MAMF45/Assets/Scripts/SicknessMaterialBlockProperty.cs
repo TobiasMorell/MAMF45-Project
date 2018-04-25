@@ -5,7 +5,9 @@ using UnityEngine;
 public class SicknessMaterialBlockProperty : MonoBehaviour {
 
 	[SerializeField]
-	private Color baseColor1, baseColor2, baseColor3, baseColor4, sicknessColor;
+	private Color baseColor1, baseColor2, baseColor3, baseColor4;
+
+	public Color SicknessColor;
 
     private Color color;
 	private float sicknessFade = 0;
@@ -27,11 +29,11 @@ public class SicknessMaterialBlockProperty : MonoBehaviour {
 			sicknessFade = Mathf.Min(sicknessFade + Time.deltaTime, 0.7f);
 		}
 		else if (!isSick && sicknessFade > 0) {
-			sicknessFade = Mathf.Min(sicknessFade - Time.deltaTime, 0.0f);
+			sicknessFade = Mathf.Max(sicknessFade - Time.deltaTime, 0.0f);
 		}
 
 		renderer.GetPropertyBlock(propertyBlock);
-		propertyBlock.SetColor("_Color", Color.Lerp(color, sicknessColor, sicknessFade));
+		propertyBlock.SetColor("_Color", Color.Lerp(color, SicknessColor, sicknessFade));
 		renderer.SetPropertyBlock(propertyBlock);
 	}
 

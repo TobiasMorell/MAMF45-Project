@@ -13,6 +13,7 @@ public class Health : MonoBehaviour
 	private GameObject sicknessCloudInstance = null;
 
 	private List<Illness> illnesses;
+	private bool isIll;
 	private float sneezeTimer;
 
 	private bool isProtected;
@@ -42,7 +43,7 @@ public class Health : MonoBehaviour
 
 	public void Infect (Illness illness)
 	{
-		Infect(new Illness[]{illness});
+		Infect(new Illness[]{ illness });
 	}
 
 	public void Infect (Illness[] illnesses)
@@ -54,14 +55,16 @@ public class Health : MonoBehaviour
 				this.illnesses.Add(illness.Infect (gameObject));
 				print ("New infection!");
 
-				// TODO Change color in some way?
-				var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty> ();
-				sicknessProperty.ToggleSickness (true);
-				sicknessCloudInstance = Instantiate (SicknessCloudEffect, transform);
-				Instantiate (SneezeHitParticleEffect, transform.position, transform.rotation);
-
-				animator.SetFloat ("SicknessBlend", 1.0f);
+				UpdateIllnessAppearance ();
 			}
+		}
+	}
+
+	public void Cure (Illness illness) {
+		if (illnesses.Remove (illness)) {
+			UpdateIllnessAppearance ();
+			animator.SetTrigger ("happy");
+			Destroy (illness);
 		}
 	}
 
@@ -72,18 +75,39 @@ public class Health : MonoBehaviour
 			if (illness.Cure ()) {
 				Destroy (illness);
 
-				// TODO Undo coloring?
-				var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty> ();
-				sicknessProperty.ToggleSickness (false);
-				if (sicknessCloudInstance != null) { 
-					Destroy (sicknessCloudInstance);
-					sicknessCloudInstance = null;
-				}
-				animator.SetFloat ("SicknessBlend", 0f);
+				UpdateIllnessAppearance ();
 			} else {
 				print ("Uncurable illness!");
 			}
         }
+	}
+
+	private void UpdateIllnessAppearance() {
+		var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty> ();
+
+		bool isIll = illnesses.Count > 0;
+		if (isIll && !this.isIll) {
+			sicknessProperty.ToggleSickness (true);
+			sicknessCloudInstance = Instantiate (SicknessCloudEffect, transform);
+			Instantiate (SneezeHitParticleEffect, transform.position, transform.rotation);
+			animator.SetFloat ("SicknessBlend", 1.0f);
+		}
+
+		if (!isIll && this.isIll) {
+			sicknessProperty.ToggleSickness (false); 
+			Destroy (sicknessCloudInstance);
+			animator.SetFloat ("SicknessBlend", 0f);
+		}
+
+		if (isIll) {
+			float r = 0, g = 0, b = 0;
+			foreach (var illness in illnesses) {
+				// Accumulate color
+			}
+			sicknessProperty.SicknessColor = new Color (r/illnesses.Count, g/illnesses.Count, b/illnesses.Count, 1);
+		}
+
+		this.isIll = isIll;
 	}
 
 
