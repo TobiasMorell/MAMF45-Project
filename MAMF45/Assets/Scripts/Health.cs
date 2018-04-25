@@ -67,7 +67,7 @@ public class Health : MonoBehaviour
 	public void Cure (Illness illness) {
 		if (illnesses.Remove (illness)) {
 			UpdateIllnessAppearance ();
-			animator.SetTrigger ("happy");
+			animator.SetTrigger ("Happy");
 			Destroy (illness);
 		}
 	}
@@ -80,7 +80,7 @@ public class Health : MonoBehaviour
 				Destroy (illness);
 
 				UpdateIllnessAppearance ();
-				animator.SetTrigger ("happy");
+				animator.SetTrigger ("Happy");
 			} else {
 				print ("Uncurable illness!");
 			}
@@ -89,6 +89,8 @@ public class Health : MonoBehaviour
 
 	private void UpdateIllnessAppearance() {
 		var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty> ();
+		var billboard = GetComponentInChildren<Billboard> ();
+		billboard.ClearDiseases ();
 
 		bool isIll = illnesses.Count > 0;
 		if (isIll && !this.isIll) {
@@ -109,6 +111,8 @@ public class Health : MonoBehaviour
 			foreach (var illness in illnesses) {
 				var details = Illnesses.GetDetails (illness.GetIllnessType());
 				color += details.color;
+
+				billboard.AddDisease (details);
 			}
 			sicknessProperty.SicknessColor = color/illnesses.Count;
 		}

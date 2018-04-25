@@ -14,7 +14,7 @@ public class Napkin : MonoBehaviour {
 
 	void Start() {
 		propertyBlock = new MaterialPropertyBlock ();
-		renderer = GetComponent<Renderer> ();
+		renderer = GetComponentInChildren<Renderer> ();
 		usedIllnesses = new Dictionary<Illness, int> ();
 	}
 
