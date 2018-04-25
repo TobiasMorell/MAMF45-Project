@@ -5,6 +5,7 @@ using UnityEngine;
 public class Nose : MonoBehaviour {
 	private const int MAXIMUM_SNEEZE_INTERVAL = 20;
 	private const float SNEEZE_RADIUS = 0.2f;
+	private const int SNEEZE_FORCE = 1000;
 
 	private float sneezeTimer;
 	public GameObject SneezeEffect;
@@ -55,7 +56,7 @@ public class Nose : MonoBehaviour {
 					}
 				}
 			} else {
-				contraceptive.GetComponent<Rigidbody>().AddExplosionForce(1000, transform.position, 10);
+				contraceptive.GetComponent<Rigidbody>().AddForce(Vector3.up * SNEEZE_FORCE);
 			}
 		} else {
 			foreach (var napkin in currentNapkins) {
