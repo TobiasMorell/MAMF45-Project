@@ -83,6 +83,8 @@ public class Health : MonoBehaviour
 
 	private void UpdateIllnessAppearance() {
 		var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty> ();
+		var billboard = GetComponentInChildren<Billboard> ();
+		billboard.ClearDiseases ();
 
 		bool isIll = illnesses.Count > 0;
 		if (isIll && !this.isIll) {
@@ -105,6 +107,8 @@ public class Health : MonoBehaviour
 				r += details.color.r;
 				g += details.color.g;
 				b += details.color.b;
+
+				billboard.AddDisease (details);
 			}
 			sicknessProperty.SicknessColor = new Color (r/illnesses.Count, g/illnesses.Count, b/illnesses.Count, 1);
 		}
