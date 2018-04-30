@@ -3,9 +3,11 @@
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
-		_BendTex ("Bend Texture", 2D) = "white" {}
+		_BendTex ("Bend Texture", 2D) = "green" {}
 		_GrassWidth("Grass Width", Float) = 0.1
 		_GrassHeight("Grass Height", Float) = 0.2
+		_WindStrength("Wind Strength", Float) = 0.1 
+		_WindSpeed("Wind Speed", Float) = 1 
 		_FieldSize("Field Size", Float) = 10
 	}
 	SubShader
@@ -60,6 +62,8 @@
 			float _GrassWidth;
 			float _GrassHeight; 
 			float _FieldSize;
+			float _WindStrength;
+			float _WindSpeed;
 			
 			float rand(float2 co){
 				return frac(sin(dot(co.xy ,float2(12.9898,78.233))) * 43758.5453);
@@ -80,6 +84,7 @@
 			[maxvertexcount(7)]
 			void geom(point v2g IN[1], inout TriangleStream<g2f> output) {
 				float3 v0 = IN[0].vertex.xyz;
+				float3 wind = float3(sin(_Time.x * _WindSpeed + v0.x * 7), 0, cos(_Time.x * _WindSpeed + v0.z * 9)) * _WindStrength;
 
 				float3 camDir = UNITY_MATRIX_IT_MV[2].xyz;
 
@@ -88,7 +93,7 @@
 				
 				float3 color = IN[0].color;
 				
-				float4 bend = float4(0,1,0,0); //tex2Dlod(_BendTex, float4(v0.x/_FieldSize + 0.5, v0.z/_FieldSize + 0.5, 0, 0));
+				float4 bend = float4(0,1,0,0); //tex2Dlod(_BendTex, float4(v0.x/_FieldSize + 0.5, v0.z/_FieldSize + 0.5, 0, 0)); //
 
 				g2f OUT;
 				
@@ -108,35 +113,35 @@
 				OUT.uv = float2(0, 0);
 				output.Append(OUT);
 
-				OUT.position = UnityObjectToClipPos(v0 + bend.xyz * height/3 + perpendicular * _GrassWidth/2);
+				OUT.position = UnityObjectToClipPos(v0 + bend.xyz * height/3 + perpendicular * _GrassWidth/2 + wind/4);
 				OUT.normal = faceNormal;
 				OUT.color = color;
 				OUT.uv = float2(1, 0.3);
 				output.Append(OUT);
 				
 				//Lower left
-				OUT.position = UnityObjectToClipPos(v0 + bend.xyz * height/3 - perpendicular * _GrassWidth/2);
+				OUT.position = UnityObjectToClipPos(v0 + bend.xyz * height/3 - perpendicular * _GrassWidth/2 + wind/4);
 				OUT.normal = faceNormal;
 				OUT.color = color;
 				OUT.uv = float2(0, 0.3);
 				output.Append(OUT);
 						
 				//Middle right
-				OUT.position = UnityObjectToClipPos(v0 + bend.xyz * height*3/4 + perpendicular * _GrassWidth/3 + tip/2);
+				OUT.position = UnityObjectToClipPos(v0 + bend.xyz * height*3/4 + perpendicular * _GrassWidth/3 + tip/2 + wind/2);
 				OUT.normal = faceNormal;
 				OUT.color = color;
 				OUT.uv = float2(1, 0.7);
 				output.Append(OUT);
 
 				//Middle left
-				OUT.position = UnityObjectToClipPos(v0 + bend.xyz * height*3/4 - perpendicular * _GrassWidth/3 + tip/2);
+				OUT.position = UnityObjectToClipPos(v0 + bend.xyz * height*3/4 - perpendicular * _GrassWidth/3 + tip/2 + wind/2);
 				OUT.normal = faceNormal;
 				OUT.color = color;
 				OUT.uv = float2(0, 0.7);
 				output.Append(OUT);
 
 				//Top
-				OUT.position = UnityObjectToClipPos(v0 + bend.xyz * height + tip);
+				OUT.position = UnityObjectToClipPos(v0 + bend.xyz * height + tip + wind);
 				OUT.normal = float3(0,1,0);
 				OUT.color = color;
 				OUT.uv = float2(0.5, 1);

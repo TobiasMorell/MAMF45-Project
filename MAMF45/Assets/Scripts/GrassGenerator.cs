@@ -9,7 +9,7 @@ public class GrassGenerator : MonoBehaviour {
 	private Mesh grassMesh;
 	public MeshFilter grassMeshFilter;
 
-	[Range(0, 10000)]
+	[Range(0, 100000)]
 	public int grassCount = 10;
 	[Range(0, 100)]
 	public float size = 10;
@@ -35,6 +35,8 @@ public class GrassGenerator : MonoBehaviour {
 		for (var i = 0; i < BendTextureSize; i++)
 			for (var j = 0; j < BendTextureSize; j++)
 				bendTexture.SetPixel(i, j, Color.green);
+		bendTexture.Apply();
+		GetComponent<Renderer>().material.SetTexture("Bend Texture", bendTexture);
 	}
 	
 	void Update () {
@@ -67,6 +69,7 @@ public class GrassGenerator : MonoBehaviour {
 				for (var j = 0; j < BendTextureSize; j++)
 					bendTexture.SetPixel(i, j, Color.green);
 			bendTexture.Apply();
+			GetComponent<Renderer>().material.SetTexture("Bend Texture", bendTexture);
 		}
 
 		lastPos = transform.position;
@@ -91,21 +94,22 @@ public class GrassGenerator : MonoBehaviour {
 		var sqrRadius = BendSphereSize * BendSphereSize;
 		for (var i = 0; i < BendTextureSize; i++) {
 			for (var j = 0; j < BendTextureSize; j++) {
+				bendTexture.SetPixel(i, j, Color.green);
 				foreach (var body in bodies) {
 					var vec = (transform.position + new Vector3(i - BendTextureSize / 2, 0, j - BendTextureSize / 2) * delta - body.transform.position);
 					if (vec.sqrMagnitude < sqrRadius)
 					{
 						vec /= BendSphereSize;
 						bendTexture.SetPixel(i, j, new Color(vec.x, vec.y, vec.z));
-					} 
-					else {
-						//bendTexture.SetPixel(i, j, Color.green);
 					}
-
 				}
 			}
 		}
 		bendTexture.Apply();
-		GetComponent<Renderer>().material.SetTexture("Bend Texture", bendTexture);
+	}
+
+	private void OnDrawGizmos()
+	{
+		//Gizmos.DrawGUITexture(new Rect(0, 1, 1 , 1 ), bendTexture);
 	}
 }
