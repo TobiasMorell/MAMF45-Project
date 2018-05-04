@@ -23,7 +23,6 @@ public class Health : MonoBehaviour
     private Animator animator;
     private BasicMovement movement;
 
-	public float HealthyTimeToPoint = 60f;
 	private float _healthyTimer;
 	private Billboard _billboard;
 
@@ -49,7 +48,7 @@ public class Health : MonoBehaviour
 			_healthyTimer = 0;
 		else {
 			_healthyTimer += Time.deltaTime;
-			if (_healthyTimer >= HealthyTimeToPoint) {
+			if (_healthyTimer >= Timers.Instance.TriggerHealthyBunny) {
 				_billboard.DisplayHealthy ();
 			}
 		}
@@ -57,7 +56,7 @@ public class Health : MonoBehaviour
 
 	public bool GivesPoints {
 		get {
-			return _healthyTimer >= HealthyTimeToPoint;
+			return _healthyTimer >= Timers.Instance.TriggerHealthyBunny;
 		}
 	}
 
