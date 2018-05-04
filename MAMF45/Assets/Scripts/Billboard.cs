@@ -3,8 +3,10 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Linq;
 using System;
+using System.Collections.Generic;
 
 public class Billboard : MonoBehaviour {
+	public Sprite HealthyIcon;
 	public Image[] icons;
 
 	void Start() {
@@ -26,23 +28,39 @@ public class Billboard : MonoBehaviour {
 		Array.ForEach (icons, i => Clear (i));
 	}
 
-	public void Clear(Image image) {
+	private void Clear(Image image) {
 		image.enabled = false;
 	}
 
-	public void AddDisease(params IllnessAsset[] illnesses) {
+	public void DisplayHealthy() {
+		ClearDiseases ();
+		SetupForThreeImages ();
+		Display (icons [1], HealthyIcon);
+	}
+
+	private void RedrawIcons(IllnessAsset[] illnesses) {
+		var count = 0;
 		for (var i = 0; i < illnesses.Length; i++) {
-			Display (icons[i], illnesses[i]);
+			count++;
+			Display (icons[i], illnesses[i].Icon);
 		}
 
-		if (illnesses.Length == 2)
+		if (count == 2)
 			SetupForTwoImages ();
 		else
 			SetupForThreeImages ();
 	}
 
-	public void Display(Image image, IllnessAsset illness) {
-		image.sprite = illness.Icon;
+	public void DisplayDiseases(params IllnessAsset[] illnesses) {
+		ClearDiseases ();
+		RedrawIcons (illnesses);
+	}
+
+	private void Display(Image image, Sprite icon) {
+		if (icon == null)
+			return;
+
+		image.sprite = icon;
 		image.enabled = true;
 	}
 
