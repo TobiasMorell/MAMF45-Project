@@ -97,18 +97,19 @@ public class Health : MonoBehaviour
 
 	public void Cure ()
 	{
+		var removed = new List<Illness> ();
 		foreach (var illness in illnesses)
 		{
 			if (illness.Cure ()) {
 				Destroy (illness);
+				removed.Add (illness);
 			} else {
 				print ("Uncurable illness!");
 			}
         }
-		if (illnesses.RemoveWhere (i => !i) > 0) {
+		if (illnesses.RemoveWhere (i => removed.Contains (i)) > 0) {
 			UpdateIllnessAppearance ();
 			animator.SetTrigger ("Cured");
-			Debug.Log ("I HAS CURED!");
 		}
 	}
 
