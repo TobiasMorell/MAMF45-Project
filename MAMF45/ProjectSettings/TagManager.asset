@@ -9,6 +9,7 @@ TagManager:
   - Button
   - ContraceptiveTrigger
   - Fence
+  - Tombstone
   layers:
   - Default
   - TransparentFX

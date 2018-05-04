@@ -15,6 +15,7 @@ public class Death : MonoBehaviour {
 		GetComponentInChildren<Nose> ().enabled = false;
 		GetComponentInChildren<Rigidbody> ().isKinematic = true;
 		Destroy (GetComponent<Throwable>());
+		GameObject.Find("TombstoneSpawnPoint").GetComponent<TombstoneSpawner>().SpawnTombstone();
 	}
 
 	void Update () {
