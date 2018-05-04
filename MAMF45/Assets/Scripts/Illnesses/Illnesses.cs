@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 public enum IllnessTypes {
-	Cold, Pneumenia, Clamydia
+	Cold, Pneumenia, Clamydia, Death
 }
 public class Illnesses : MonoBehaviour {
 	private static Dictionary<IllnessTypes, IllnessAsset> _illnessDetails;

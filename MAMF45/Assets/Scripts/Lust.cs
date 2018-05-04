@@ -99,6 +99,13 @@ public class Lust : MonoBehaviour {
         Instantiate(loveEffect, transform.position, transform.rotation);
 	}
 
+	public void StopLove() {
+		target = null;
+		isLoving = false;
+		drive = 10000000;
+		heartEmissionModule.rateOverTime = 0;
+	}
+
     private void OnDrawGizmos()
     {
         if (target != null) {

@@ -39,6 +39,7 @@ public class Health : MonoBehaviour
 		if (StartInfected) {
 			//An instance is manually spawned here - all other illnesses are clones of this
 			Infect (new ColdIllness());
+			//Infect (new PneumoniaIllness());
 		}
 	}
 
@@ -60,8 +61,12 @@ public class Health : MonoBehaviour
 		}
 	}
 
+
 	public void Infect (params Illness[] illnesses)
 	{
+		if (GetComponent<Death> ())
+			return;
+		
 		foreach (var illness in illnesses) {
 			var details = Illnesses.GetDetails (illness.GetIllnessType());
 
@@ -114,14 +119,12 @@ public class Health : MonoBehaviour
 
 		bool isIll = illnesses.Count > 0;
 		if (isIll && !this.isIll) {
-			sicknessProperty.ToggleSickness (true);
 			sicknessCloudInstance = Instantiate (SicknessCloudEffect, transform);
 			Instantiate (SneezeHitParticleEffect, transform.position, transform.rotation);
 			animator.SetFloat ("SicknessBlend", 1.0f);
 		}
 
-		if (!isIll && this.isIll) {
-			sicknessProperty.ToggleSickness (false); 
+		if (!isIll && this.isIll) { 
 			Destroy (sicknessCloudInstance);
 			animator.SetFloat ("SicknessBlend", 0f);
 		}
@@ -131,12 +134,32 @@ public class Health : MonoBehaviour
 			foreach (var illness in illnessDetails) {
 				color += illness.color;
 			}
-			sicknessProperty.SicknessColor = color/illnesses.Count;
-
+			sicknessProperty.InterpolateTo (color / illnesses.Count);
 			_billboard.DisplayDiseases (illnessDetails);
+		} else {
+			sicknessProperty.InterpolateToDefault ();
 		}
+		if (illnesses.RemoveWhere (i => !i) > 0) {
+			UpdateIllnessAppearance ();
+			animator.SetTrigger ("Cured");
+		}
+	}
 
-		this.isIll = isIll;
+	public void Die()
+	{
+		GetComponentInChildren<SicknessMaterialBlockProperty> ().SetDefaultColorFraction (0.9f);
+
+		animator.SetTrigger ("Die");
+		foreach (var illness in illnesses) {
+			Destroy (illness);
+		}
+		illnesses.Clear ();
+
+		GetComponent<Lust> ().StopLove ();
+		GetComponent<Lust> ().enabled = false;
+
+		Infect (new DeathIllness());
+		gameObject.AddComponent<Death> ();
 	}
 
 
