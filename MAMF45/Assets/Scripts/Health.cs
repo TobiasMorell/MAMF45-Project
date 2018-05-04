@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System;
 
 public class Health : MonoBehaviour
 {
@@ -21,11 +23,16 @@ public class Health : MonoBehaviour
     private Animator animator;
     private BasicMovement movement;
 
+	public float HealthyTimeToPoint = 60f;
+	private float _healthyTimer;
+	private Billboard _billboard;
+
     private void Awake()
     {
 		illnesses = new HashSet<Illness> ();
         animator = GetComponent<Animator>();
         movement = GetComponent<BasicMovement>();
+		_billboard = GetComponentInChildren<Billboard> ();
     }
 
     void Start ()
@@ -33,13 +40,26 @@ public class Health : MonoBehaviour
 		if (StartInfected) {
 			//An instance is manually spawned here - all other illnesses are clones of this
 			//Infect (new ColdIllness());
-			Infect (new PneumoniaIllness());
+			Infect (new ColdIllness());
 		}
 	}
 
 	void Update ()
 	{
-		
+		if (isIll)
+			_healthyTimer = 0;
+		else {
+			_healthyTimer += Time.deltaTime;
+			if (_healthyTimer >= HealthyTimeToPoint) {
+				_billboard.DisplayHealthy ();
+			}
+		}
+	}
+
+	public bool GivesPoints {
+		get {
+			return _healthyTimer >= HealthyTimeToPoint;
+		}
 	}
 
 
@@ -89,13 +109,14 @@ public class Health : MonoBehaviour
 		if (illnesses.RemoveWhere (i => !i) > 0) {
 			UpdateIllnessAppearance ();
 			animator.SetTrigger ("Cured");
+			Debug.Log ("I HAS CURED!");
 		}
 	}
 
 	private void UpdateIllnessAppearance() {
 		var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty> ();
-		var billboard = GetComponentInChildren<Billboard> ();
-		billboard.ClearDiseases ();
+		_billboard.ClearDiseases ();
+		var illnessDetails = illnesses.Select(i => Illnesses.GetDetails(i.GetIllnessType())).ToArray();
 
 		bool isIll = illnesses.Count > 0;
 		if (isIll && !this.isIll) {
@@ -113,16 +134,16 @@ public class Health : MonoBehaviour
 
 		if (isIll) {
 			Color color = Color.clear;
-			foreach (var illness in illnesses) {
-				var details = Illnesses.GetDetails (illness.GetIllnessType());
-				color += details.color;
-
-				billboard.AddDisease (details);
+			foreach (var illness in illnessDetails) {
+				color += illness.color;
 			}
 			sicknessProperty.SicknessColor = color/illnesses.Count;
+			_billboard.DisplayDiseases (illnessDetails);
+        }
+		if (illnesses.RemoveWhere (i => !i) > 0) {
+			UpdateIllnessAppearance ();
+			animator.SetTrigger ("Cured");
 		}
-
-		this.isIll = isIll;
 	}
 
 	public void Die()
@@ -170,7 +191,7 @@ public class Health : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("ContraceptiveTrigger"))
+		if (other.CompareTag(Tags.CONTRACEPTIVE))
 		{
 			isProtected = true;
 			contraceptive = other.transform.parent.gameObject;
@@ -179,7 +200,7 @@ public class Health : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
 	{
-		if (other.CompareTag("ContraceptiveTrigger"))
+		if (other.CompareTag(Tags.CONTRACEPTIVE))
 		{
 			isProtected = false;
 			contraceptive = null;
