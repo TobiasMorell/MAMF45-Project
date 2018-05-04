@@ -143,6 +143,8 @@ public class Health : MonoBehaviour
 			UpdateIllnessAppearance ();
 			animator.SetTrigger ("Cured");
 		}
+
+		this.isIll = isIll;
 	}
 
 	public void Die()
