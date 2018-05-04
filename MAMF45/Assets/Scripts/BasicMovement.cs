@@ -142,8 +142,30 @@ public class BasicMovement : MonoBehaviour {
 		if (!_waitingForGroundCollision || collision.collider.name != "Ground")
 			return;
 
+		//If the bunny gives points, it means that it's healthy and should move towards the horizon
+		if (GetComponent<Health> ().GivesPoints) {
+			AssignClosestFinishPoint ();
+			Debug.Log ("The bunny is seeking a better life now :D");
+		}
+
 		animator.SetTrigger ("Dropped");
 		_waitingForGroundCollision = false;
 		actionState = ActionState.IDLE;
+	}
+
+	private void AssignClosestFinishPoint() {
+		var targets = GameObject.FindGameObjectsWithTag ("Finish");
+		var shortestDist = float.MaxValue;
+		GameObject closestTarget = null;
+
+		foreach (var tar in targets) {
+			var dist = Vector3.Distance (transform.position, tar.transform.position);
+			if (dist < shortestDist) {
+				shortestDist = dist;
+				closestTarget = tar;
+			}
+		}
+
+		SetTarget(closestTarget);
 	}
 }

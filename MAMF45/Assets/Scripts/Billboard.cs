@@ -57,6 +57,9 @@ public class Billboard : MonoBehaviour {
 	}
 
 	private void Display(Image image, Sprite icon) {
+		if (icon == null)
+			return;
+
 		image.sprite = icon;
 		image.enabled = true;
 	}
@@ -69,6 +72,6 @@ public class Billboard : MonoBehaviour {
 	private void SetupForThreeImages() {
 		icons [0].rectTransform.anchoredPosition = new Vector2 (0, 0);
 		icons [1].rectTransform.anchoredPosition = new Vector2 (128, 0);
-		icons [1].rectTransform.anchoredPosition = new Vector2 (-128, 0);
+		icons [2].rectTransform.anchoredPosition = new Vector2 (-128, 0);
 	}
 }
