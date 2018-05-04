@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Health : MonoBehaviour
 {
@@ -93,6 +94,7 @@ public class Health : MonoBehaviour
 		var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty> ();
 		var billboard = GetComponentInChildren<Billboard> ();
 		billboard.ClearDiseases ();
+		var illnessDetails = illnesses.Select(i => Illnesses.GetDetails(i.GetIllnessType())).ToArray();
 
 		bool isIll = illnesses.Count > 0;
 		if (isIll && !this.isIll) {
@@ -110,13 +112,12 @@ public class Health : MonoBehaviour
 
 		if (isIll) {
 			Color color = Color.clear;
-			foreach (var illness in illnesses) {
-				var details = Illnesses.GetDetails (illness.GetIllnessType());
-				color += details.color;
-
-				billboard.AddDisease (details);
+			foreach (var illness in illnessDetails) {
+				color += illness.color;
 			}
 			sicknessProperty.SicknessColor = color/illnesses.Count;
+
+			billboard.DisplayDiseases (illnessDetails);
 		}
 
 		this.isIll = isIll;
