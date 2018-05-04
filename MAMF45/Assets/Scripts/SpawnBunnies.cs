@@ -28,10 +28,13 @@ public class SpawnBunnies : MonoBehaviour {
         {
             transform.position = new Vector3(Random.Range(-0.8f, 0.8f), transform.position.y, Random.Range(-0.8f, 0.8f));
             var b = Instantiate(bunnyPrefab, transform.position, transform.rotation);
-			if (Random.Range(0f, 1f) > 0.5f)
+			var chance = Random.Range (0f, 1f);
+			if (chance > 0.66f)
 				b.GetComponent<Health>().Infect(new ColdIllness());
-			else
+			else if (chance > 0.33f)
 				b.GetComponent<Health>().Infect(new PneumoniaIllness());
+			else 
+				b.GetComponent<Health>().Infect(new ClamydiaIllness());
             if (swarm > 0)
             {
                 swarm -= 1;

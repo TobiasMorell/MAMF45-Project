@@ -35,7 +35,7 @@ public class Billboard : MonoBehaviour {
 	public void DisplayHealthy() {
 		ClearDiseases ();
 		SetupForThreeImages ();
-		Display (icons [1], HealthyIcon);
+		Display (icons [0], HealthyIcon);
 	}
 
 	private void RedrawIcons(IllnessAsset[] illnesses) {
@@ -57,9 +57,6 @@ public class Billboard : MonoBehaviour {
 	}
 
 	private void Display(Image image, Sprite icon) {
-		if (icon == null)
-			return;
-
 		image.sprite = icon;
 		image.enabled = true;
 	}
