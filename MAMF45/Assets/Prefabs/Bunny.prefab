@@ -717,6 +717,7 @@ GameObject:
   - component: {fileID: 4691725498787716}
   - component: {fileID: 137889065832302722}
   - component: {fileID: 114769011034810470}
+  - component: {fileID: 114782010363138998}
   m_Layer: 0
   m_Name: Bunny
   m_TagString: Untagged
@@ -1510,6 +1511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1c253ccc7156740ae7baf65e0a275a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HealthyIcon: {fileID: 0}
   icons:
   - {fileID: 114359133033188552}
   - {fileID: 114677395554156148}
@@ -1583,7 +1585,17 @@ MonoBehaviour:
   baseColor2: {r: 0.35294116, g: 0.23392195, b: 0.10640138, a: 0}
   baseColor3: {r: 0.7647059, g: 0.7647059, b: 0.7647059, a: 0}
   baseColor4: {r: 0.5735294, g: 0.4121734, b: 0.2656791, a: 0}
-  SicknessColor: {r: 0.16078432, g: 0.47058824, b: 0.16078432, a: 1}
+--- !u!114 &114782010363138998
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907875807075216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad74b49bcbe779143b906d4f2780ca68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114795276827725698
 MonoBehaviour:
   m_ObjectHideFlags: 1
