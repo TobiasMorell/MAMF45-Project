@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PneumoniaIllness : SneezeIllness {
-	private const float TIME_BEFORE_DEATH = 90;
-
 	private float sicknessTimer;
+
+	void Start()
+	{
+		sicknessTimer = Random.Range (Constants.Instance.TimerPneumoniaDeathMin, Constants.Instance.TimerPneumoniaDeathMax);
+	}
 
 	void Update()
 	{
-		sicknessTimer += Time.deltaTime;
-		if (sicknessTimer > TIME_BEFORE_DEATH) {
+		sicknessTimer -= Time.deltaTime;
+		if (sicknessTimer < 0) {
 			GetComponent<Health> ().Die ();
 		}
 	}
@@ -25,14 +28,14 @@ public class PneumoniaIllness : SneezeIllness {
 		return obj.AddComponent<PneumoniaIllness> ();
 	}
 
-	public override int GetSneezeIntervalMax ()
+	public override float GetSneezeIntervalMax ()
 	{
-		return 60;
+		return Constants.Instance.TimerPneumoniaSneezeMax;
 	}
 
-	public override int GetSneezeIntervalMin ()
+	public override float GetSneezeIntervalMin ()
 	{
-		return 40;
+		return Constants.Instance.TimerPneumoniaSneezeMin;
 	}
 
 	public override IllnessTypes GetIllnessType ()

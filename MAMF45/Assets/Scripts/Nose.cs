@@ -71,8 +71,8 @@ public class Nose : MonoBehaviour {
 
 	public void ResetSneezeTimer ()
 	{
-		int upper = 100000;
-		int lower = 100000;
+		float upper = 100000;
+		float lower = 100000;
 		foreach (var illness in GetComponentsInParent<SneezeIllness> ()) {
 			upper = Mathf.Min (upper, illness.GetSneezeIntervalMax ());
 			lower = Mathf.Min (lower, illness.GetSneezeIntervalMin ());

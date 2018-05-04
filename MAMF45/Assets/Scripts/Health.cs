@@ -49,7 +49,7 @@ public class Health : MonoBehaviour
 			_healthyTimer = 0;
 		else {
 			_healthyTimer += Time.deltaTime;
-			if (_healthyTimer >= Timers.Instance.TriggerHealthyBunny) {
+			if (_healthyTimer >= Constants.Instance.TimerTriggerHealthyBunny) {
 				_billboard.DisplayHealthy ();
 			}
 		}
@@ -57,7 +57,7 @@ public class Health : MonoBehaviour
 
 	public bool GivesPoints {
 		get {
-			return _healthyTimer >= Timers.Instance.TriggerHealthyBunny;
+			return _healthyTimer >= Constants.Instance.TimerTriggerHealthyBunny;
 		}
 	}
 
@@ -160,6 +160,8 @@ public class Health : MonoBehaviour
 
 		Infect (new DeathIllness());
 		gameObject.AddComponent<Death> ();
+
+		ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyDied);
 	}
 
 

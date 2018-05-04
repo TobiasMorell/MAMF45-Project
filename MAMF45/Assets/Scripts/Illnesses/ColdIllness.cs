@@ -7,7 +7,7 @@ public class ColdIllness : SneezeIllness {
 	private float duration;
 
 	void Start() {
-		duration = Random.Range (25, 35);
+		duration = Random.Range (Constants.Instance.TimerColdCureMin, Constants.Instance.TimerColdCureMax);
 	}
 
 	void Update() {
@@ -26,14 +26,14 @@ public class ColdIllness : SneezeIllness {
 		return obj.AddComponent<ColdIllness> ();
 	}
 
-	public override int GetSneezeIntervalMax ()
+	public override float GetSneezeIntervalMax ()
 	{
-		return 20;
+		return Constants.Instance.TimerColdSneezeMax;
 	}
 
-	public override int GetSneezeIntervalMin ()
+	public override float GetSneezeIntervalMin ()
 	{
-		return 10;
+		return Constants.Instance.TimerColdSneezeMin;
 	}
 
 	public override IllnessTypes GetIllnessType ()
