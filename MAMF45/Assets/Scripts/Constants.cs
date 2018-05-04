@@ -26,11 +26,15 @@ public class Constants : MonoBehaviour {
 	public float TimerPneumoniaDeathMax = 100f;
 	public float TimerPneumoniaDeathMin = 80f;
 
+	[Header("Love Timers")]
+	public float TimerLoveIntervals = 30f;
+	public float TimerLoveReactionTime = 15f;
+
 	[Header("Misc Timers")]
-	public float TimerMakeLove = 20f;
 	public float TimerTriggerHealthyBunny = 60f;
 
 	[Header("Scores")]
 	public int ScoreBunnyDied = -50;
 	public int ScoreBunnySaved = 10;
+	public int ScoreBonusHole = 20;
 }
