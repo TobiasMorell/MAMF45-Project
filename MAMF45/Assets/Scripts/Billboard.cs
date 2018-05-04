@@ -57,6 +57,9 @@ public class Billboard : MonoBehaviour {
 	}
 
 	private void Display(Image image, Sprite icon) {
+		if (icon == null)
+			return;
+
 		image.sprite = icon;
 		image.enabled = true;
 	}
