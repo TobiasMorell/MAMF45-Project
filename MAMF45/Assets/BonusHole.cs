@@ -6,7 +6,7 @@ public class BonusHole : MonoBehaviour {
 
 	private int score;
 
-	private void Awake() {
+	private void Start() {
 		score = Constants.Instance.ScoreBonusHole;
 	}
 
