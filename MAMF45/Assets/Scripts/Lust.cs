@@ -38,9 +38,9 @@ public class Lust : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!isLoving)
+		if (!isLoving && target)
         {
-            if (target)
+			if (drive == 0)
             {
 				overDrive += Time.deltaTime;
 				if (Vector3.Distance (target.transform.position, transform.position) < LOVE_RANGE * rangeScale) {
@@ -50,30 +50,21 @@ public class Lust : MonoBehaviour {
 					target = null;
 					isLoving = false;
 					movement.ResetTarget();
-					drive = Random.Range(45.0f, 60.0f);
+					drive = 10000;
 				}
             }
-            else
+			else
             {
-                if (GameObject.FindGameObjectsWithTag(gameObject.tag).Length > 1)
-                    drive -= Time.deltaTime;
-                else if (drive < 30)
-                    drive += 30;
+				drive -= Time.deltaTime;
                 if (drive <= 0)
                 {
                     drive = 0;
-                    var objects = GameObject.FindGameObjectsWithTag(gameObject.tag);
-                    do
-                    {
-                        target = objects[Random.Range(0, objects.Length)];
-                    } while (target == gameObject);
-
                     rangeScale = (transform.localScale.z * 1.1f + target.transform.localScale.z * 1.1f) /2;
                     movement.SetTarget(target);
                 }
             }
         }
-        if (drive < 30)
+        if (target)
             heartEmissionModule.rateOverTime = 5 / (drive / 5 + 1);
         else
             heartEmissionModule.rateOverTime = 0;
@@ -104,6 +95,16 @@ public class Lust : MonoBehaviour {
 		isLoving = false;
 		drive = 10000000;
 		heartEmissionModule.rateOverTime = 0;
+	}
+
+
+	public bool HasPartner() {
+		return target != null;
+	}
+
+	public void SetPartner(GameObject partner, float countdown) {
+		target = partner;
+		drive = countdown;
 	}
 
     private void OnDrawGizmos()
