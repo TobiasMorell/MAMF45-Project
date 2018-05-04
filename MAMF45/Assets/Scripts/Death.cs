@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class Death : MonoBehaviour {
 
@@ -13,6 +14,7 @@ public class Death : MonoBehaviour {
 		GetComponentInChildren<BasicMovement> ().enabled = false;
 		GetComponentInChildren<Nose> ().enabled = false;
 		GetComponentInChildren<Rigidbody> ().isKinematic = true;
+		Destroy (GetComponent<Throwable>);
 	}
 
 	void Update () {
