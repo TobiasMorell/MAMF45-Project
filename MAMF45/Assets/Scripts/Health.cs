@@ -32,7 +32,8 @@ public class Health : MonoBehaviour
 	{
 		if (StartInfected) {
 			//An instance is manually spawned here - all other illnesses are clones of this
-			Infect (new ColdIllness());
+			//Infect (new ColdIllness());
+			Infect (new PneumoniaIllness());
 		}
 	}
 
@@ -44,6 +45,9 @@ public class Health : MonoBehaviour
 
 	public void Infect (params Illness[] illnesses)
 	{
+		if (GetComponent<Death> ())
+			return;
+		
 		foreach (var illness in illnesses) {
 			var details = Illnesses.GetDetails (illness.GetIllnessType());
 
@@ -85,7 +89,6 @@ public class Health : MonoBehaviour
 		if (illnesses.RemoveWhere (i => !i) > 0) {
 			UpdateIllnessAppearance ();
 			animator.SetTrigger ("Cured");
-			Debug.Log ("I HAS CURED!");
 		}
 	}
 
@@ -120,6 +123,21 @@ public class Health : MonoBehaviour
 		}
 
 		this.isIll = isIll;
+	}
+
+	public void Die()
+	{
+		animator.SetTrigger ("Die");
+		foreach (var illness in illnesses) {
+			Destroy (illness);
+		}
+		illnesses.Clear ();
+
+		GetComponent<Lust> ().StopLove ();
+		GetComponent<Lust> ().enabled = false;
+
+		Infect (new DeathIllness());
+		gameObject.AddComponent<Death> ();
 	}
 
 

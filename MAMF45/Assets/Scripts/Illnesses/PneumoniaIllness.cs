@@ -3,7 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PneumoniaIllness : SneezeIllness {
-	public override bool Cure() {
+	private const float TIME_BEFORE_DEATH = 90;
+
+	private float sicknessTimer;
+
+	void Update()
+	{
+		sicknessTimer += Time.deltaTime;
+		if (sicknessTimer > TIME_BEFORE_DEATH) {
+			GetComponent<Health> ().Die ();
+		}
+	}
+
+	public override bool Cure() 
+	{
 		return true;
 	}
 
