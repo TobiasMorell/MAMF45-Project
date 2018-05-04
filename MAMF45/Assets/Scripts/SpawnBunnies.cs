@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnBunnies : MonoBehaviour {
-
+	#pragma warning disable 0649
     [SerializeField]
     private GameObject bunnyPrefab;
+	#pragma warning disable 0649
+
     private float cooldown = 5;
     private float swarm = 0;
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class Health : MonoBehaviour
 {
@@ -22,11 +23,16 @@ public class Health : MonoBehaviour
     private Animator animator;
     private BasicMovement movement;
 
+	public float HealthyTimeToPoint = 60f;
+	private float _healthyTimer;
+	private Billboard _billboard;
+
     private void Awake()
     {
 		illnesses = new HashSet<Illness> ();
         animator = GetComponent<Animator>();
         movement = GetComponent<BasicMovement>();
+		_billboard = GetComponentInChildren<Billboard> ();
     }
 
     void Start ()
@@ -39,9 +45,21 @@ public class Health : MonoBehaviour
 
 	void Update ()
 	{
-		
+		if (isIll)
+			_healthyTimer = 0;
+		else {
+			_healthyTimer += Time.deltaTime;
+			if (_healthyTimer >= HealthyTimeToPoint) {
+				_billboard.DisplayHealthy ();
+			}
+		}
 	}
 
+	public bool GivesPoints {
+		get {
+			return _healthyTimer >= HealthyTimeToPoint;
+		}
+	}
 
 	public void Infect (params Illness[] illnesses)
 	{
@@ -92,8 +110,7 @@ public class Health : MonoBehaviour
 
 	private void UpdateIllnessAppearance() {
 		var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty> ();
-		var billboard = GetComponentInChildren<Billboard> ();
-		billboard.ClearDiseases ();
+		_billboard.ClearDiseases ();
 		var illnessDetails = illnesses.Select(i => Illnesses.GetDetails(i.GetIllnessType())).ToArray();
 
 		bool isIll = illnesses.Count > 0;
@@ -117,7 +134,7 @@ public class Health : MonoBehaviour
 			}
 			sicknessProperty.SicknessColor = color/illnesses.Count;
 
-			billboard.DisplayDiseases (illnessDetails);
+			_billboard.DisplayDiseases (illnessDetails);
 		}
 
 		this.isIll = isIll;
@@ -153,7 +170,7 @@ public class Health : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("ContraceptiveTrigger"))
+		if (other.CompareTag(Tags.CONTRACEPTIVE))
 		{
 			isProtected = true;
 			contraceptive = other.transform.parent.gameObject;
@@ -162,7 +179,7 @@ public class Health : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
 	{
-		if (other.CompareTag("ContraceptiveTrigger"))
+		if (other.CompareTag(Tags.CONTRACEPTIVE))
 		{
 			isProtected = false;
 			contraceptive = null;

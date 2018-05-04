@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OrbitCam : MonoBehaviour {
-
+	#pragma warning disable 0649
 	[SerializeField]
 	private bool isPerspective = true;
 	[SerializeField]
 	private Vector3 target;
 	[SerializeField]
 	private GameObject spawn;
+	#pragma warning restore 0649
+
 	private Camera cam;
 	private Vector3 distance;
 	

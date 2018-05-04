@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SicknessMaterialBlockProperty : MonoBehaviour {
-
+	#pragma warning disable 0649
 	[SerializeField]
 	private Color baseColor1, baseColor2, baseColor3, baseColor4;
+	#pragma warning restore 0649
 
 	public Color SicknessColor;
 

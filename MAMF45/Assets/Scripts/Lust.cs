@@ -6,10 +6,13 @@ public class Lust : MonoBehaviour {
 	private static float LOVE_RANGE = 0.15f;
 	private static float MAX_CHASE_TIME = 15;
 
+	#pragma warning disable 0649
     [SerializeField]
     private GameObject heartEffect;
 	[SerializeField]
 	private GameObject loveEffect;
+	#pragma warning restore 0649
+
 	private ParticleSystem.EmissionModule heartEmissionModule;
 	public float drive;
     private bool isLoving;
