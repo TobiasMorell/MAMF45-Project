@@ -9,7 +9,7 @@ public class GrassGenerator : MonoBehaviour {
 	private Mesh grassMesh;
 	public MeshFilter grassMeshFilter;
 
-	[Range(0, 100000)]
+	[Range(0, 1000000)]
 	public int grassCount = 10;
 	[Range(0, 100)]
 	public float size = 10;
