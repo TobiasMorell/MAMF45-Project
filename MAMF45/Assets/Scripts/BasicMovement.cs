@@ -6,7 +6,8 @@ public class BasicMovement : MonoBehaviour {
 	private enum ActionState
 	{
 		IDLE,
-		MOVING
+		MOVING,
+		CARRIED
 	}
 
 
@@ -27,6 +28,8 @@ public class BasicMovement : MonoBehaviour {
 	private GameObject targetObject;
 
 	new private Rigidbody rigidbody;
+
+	private bool _waitingForGroundCollision = false;
 
 	void Start () {
 		rigidbody = GetComponent<Rigidbody>();
@@ -71,6 +74,8 @@ public class BasicMovement : MonoBehaviour {
 					}
 					rigidbody.MovePosition(transform.position + transform.forward * movementSpeed * Time.fixedDeltaTime);
 				}
+				break;
+			case ActionState.CARRIED:
 				break;
 		}
 	}
@@ -123,5 +128,22 @@ public class BasicMovement : MonoBehaviour {
 	{
 		Gizmos.color = Color.red;
 		Gizmos.DrawSphere(target, 0.01f);
+	}
+
+	public void BeginBunnyPickup() {
+		animator.SetTrigger ("PickedUp");
+		actionState = ActionState.CARRIED;
+	}
+	public void EndBunnyPickup() {
+		_waitingForGroundCollision = true;
+	}
+
+	void OnCollisionEnter(Collision collision) {
+		if (!_waitingForGroundCollision || collision.collider.name != "Ground")
+			return;
+
+		animator.SetTrigger ("Dropped");
+		_waitingForGroundCollision = false;
+		actionState = ActionState.IDLE;
 	}
 }
