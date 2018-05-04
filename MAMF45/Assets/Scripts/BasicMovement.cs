@@ -30,6 +30,7 @@ public class BasicMovement : MonoBehaviour {
 	new private Rigidbody rigidbody;
 
 	private bool _waitingForGroundCollision = false;
+	private bool _outsideFence = false;
 
 	void Start () {
 		rigidbody = GetComponent<Rigidbody>();
@@ -139,18 +140,35 @@ public class BasicMovement : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		if (!_waitingForGroundCollision || collision.collider.name != "Ground")
+		if (collision.collider.name != "Ground")
 			return;
 
 		//If the bunny gives points, it means that it's healthy and should move towards the horizon
-		if (GetComponent<Health> ().GivesPoints) {
-			AssignClosestFinishPoint ();
-			Debug.Log ("The bunny is seeking a better life now :D");
+		if (_outsideFence) {
+			var health = GetComponent<Health> ();
+			if (health.GivesPoints) {
+				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnySaved);
+				AssignClosestFinishPoint ();
+				Debug.Log ("The bunny is seeking a better life now :D");
+			}
+			else if (health.IsSick()) {
+				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyDied);
+				health.Die ();
+			}
 		}
 
-		animator.SetTrigger ("Dropped");
-		_waitingForGroundCollision = false;
-		actionState = ActionState.IDLE;
+		if (_waitingForGroundCollision) {
+			animator.SetTrigger ("Dropped");
+			_waitingForGroundCollision = false;
+			actionState = ActionState.IDLE;
+		}
+	}
+
+	void OnTriggerExit(Collider other) {
+		if (!other.CompareTag (Tags.FENCE))
+			return;
+
+		_outsideFence = true;
 	}
 
 	private void AssignClosestFinishPoint() {
