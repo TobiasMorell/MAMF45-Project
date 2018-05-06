@@ -44,6 +44,7 @@ public class GrassGenerator : MonoBehaviour {
 		{
 			List<Vector3> positions = new List<Vector3>(grassCount);
 			List<Vector3> normals = new List<Vector3>(grassCount);
+			List<Vector2> uv2s = new List<Vector2>(grassCount);
 			List<Color> colors = new List<Color>(grassCount);
 			int[] indices = new int[grassCount];
 			for (int i = 0; i < grassCount; i++)
@@ -55,14 +56,17 @@ public class GrassGenerator : MonoBehaviour {
 				Vector3 bladePosition = hit.point;
 				positions.Add(bladePosition);
 				normals.Add(Vector3.up);
-				colors.Add(new Color(0, 1, 0));
+				var v = 0.25f * Random.value;
+				colors.Add(new Color(v, 1, 0));
 				indices[i] = i;
+				uv2s.Add(new Vector2(bladePosition.x/size / 2 + 0.5f,bladePosition.z/size / 2 + 0.5f));
 			}
 			grassMesh = new Mesh();
 			grassMesh.SetVertices(positions);
 			grassMesh.SetIndices(indices, MeshTopology.Points, 0);
 			grassMesh.SetNormals(normals);
 			grassMesh.SetColors(colors);
+			grassMesh.SetUVs(1, uv2s);
 			grassMeshFilter.mesh = grassMesh;
 		}
 
@@ -115,5 +119,6 @@ public class GrassGenerator : MonoBehaviour {
 	private void OnDrawGizmos()
 	{
 		//Gizmos.DrawGUITexture(new Rect(0, 1, 1 , 1 ), bendTexture);
+		//Gizmos.DrawWireSphere(transform.position, size);
 	}
 }
