@@ -43,14 +43,14 @@ public class Lust : MonoBehaviour {
 			if (drive == 0)
             {
 				overDrive += Time.deltaTime;
-				if (Vector3.Distance (target.transform.position, transform.position) < LOVE_RANGE * rangeScale) {
-					target.GetComponent<Lust>().Love();
-					Love();
-				} else if (overDrive > MAX_CHASE_TIME) {
+				if (overDrive > MAX_CHASE_TIME || target.GetComponent<Death> ()) {
 					target = null;
 					isLoving = false;
 					movement.ResetTarget();
 					drive = 10000;
+				} else if (Vector3.Distance (target.transform.position, transform.position) < LOVE_RANGE * rangeScale) {
+					target.GetComponent<Lust>().Love();
+					Love();
 				}
             }
 			else
@@ -68,7 +68,6 @@ public class Lust : MonoBehaviour {
             heartEmissionModule.rateOverTime = 5 / (drive / 5 + 1);
         else
             heartEmissionModule.rateOverTime = 0;
-
     }
 
 	public void Love()
@@ -78,11 +77,15 @@ public class Lust : MonoBehaviour {
         movement.Stop();
 		drive = 0;
 		animator.SetTrigger("Love");
-        target = null;
     }
 
 	void LoveDone()
-    {
+	{
+		var disease = GetComponent<ClamydiaIllness> ();
+		if (disease) {
+			target.GetComponent<Health> ().Infect (disease);
+		}
+
         target = null;
         isLoving = false;
         movement.Restart();
@@ -113,6 +116,5 @@ public class Lust : MonoBehaviour {
             Gizmos.DrawCube(target.transform.position, Vector3.one/10);
             Gizmos.DrawLine(transform.position, Vector3.MoveTowards(transform.position, target.transform.position, LOVE_RANGE * rangeScale));
         }
-
     }
 }
