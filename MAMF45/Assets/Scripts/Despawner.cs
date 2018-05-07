@@ -5,7 +5,7 @@ using Valve.VR.InteractionSystem;
 
 public class Despawner : MonoBehaviour {
 
-	private const float TIME_BEFORE_SINKING = 5;
+	private const float TIME_BEFORE_SINKING = 10;
 	private const float SINKING_SPEED = 0.1f;
 
 	private float timer;

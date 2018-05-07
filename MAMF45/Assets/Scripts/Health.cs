@@ -69,14 +69,14 @@ public class Health : MonoBehaviour
 		
 		foreach (var illness in illnesses) {
 			if (this.illnesses.Contains (illness)) {
-				print ("Already has illness: " + illness);
+				//print ("Already has illness: " + illness);
 			} else if (contraceptive) {
-				print ("Prevented by contraceptive: " + illness);
+				//print ("Prevented by contraceptive: " + illness);
 			} else {
 				var i = illness.Infect (gameObject);
 				this.illnesses.Add(i);
 				_billboard.AddIllness(i, i.GetUITimerMax());
-				print ("New infection!");
+				//print ("New infection!");
 
 				UpdateIllnessAppearance ();
 			}
@@ -103,6 +103,7 @@ public class Health : MonoBehaviour
 		foreach (var illness in illnesses)
 		{
 			if (illness.Cure ()) {
+				_billboard.RemoveIllness (illness);
 				Destroy (illness);
 				removed.Add (illness);
 			} else {
@@ -117,7 +118,6 @@ public class Health : MonoBehaviour
 
 	private void UpdateIllnessAppearance() {
 		var sicknessProperty = GetComponentInChildren<SicknessMaterialBlockProperty> ();
-		_billboard.ClearDiseases ();
 		var illnessDetails = illnesses.Select(i => Illnesses.GetDetails(i.GetIllnessType())).ToArray();
 
 		bool isIll = illnesses.Count > 0;
@@ -155,6 +155,7 @@ public class Health : MonoBehaviour
 
 		animator.SetTrigger ("Die");
 		foreach (var illness in illnesses) {
+			_billboard.RemoveIllness (illness);
 			Destroy (illness);
 		}
 		illnesses.Clear ();

@@ -23,6 +23,7 @@ public class Billboard : MonoBehaviour {
 	public Slider[] sliders;
 
 	private List<IllnessCooldown> _illnesses;
+	private bool _isHealthy;
 
 	void Awake() {
 		_illnesses = new List<IllnessCooldown> ();
@@ -36,10 +37,20 @@ public class Billboard : MonoBehaviour {
 
 	void Update()
 	{
-		DisplayDiseases ();
+		DisplayIcons ();
 	}
 
-	public void ClearDiseases() {
+	private void DisplayIcons() {
+		ClearIcons ();
+		RedrawIcons ();
+	}
+
+	public void RemoveIcons() {
+		ClearIcons ();
+		_isHealthy = false;
+	}
+
+	private void ClearIcons() {
 		Array.ForEach (icons, i => Clear (i));
 		Array.ForEach (sliders, s => s.value = 0);
 	}
@@ -49,29 +60,32 @@ public class Billboard : MonoBehaviour {
 	}
 
 	public void DisplayHealthy() {
-		ClearDiseases ();
+		_isHealthy = true;
 		SetupForThreeImages ();
-		Display (icons [0], HealthyIcon);
 	}
 
 	private void RedrawIcons() {
-		var count = 0;
-		for (var i = 0; i < _illnesses.Count; i++) {
-			_illnesses [i].Timer += Time.deltaTime;
+		if (_isHealthy) {
+			Display (icons [0], HealthyIcon);
+		} else {
+			var count = 0;
+			for (var i = 0; i < _illnesses.Count; i++) {
+				_illnesses [i].Timer += Time.deltaTime;
 
-			count++;
-			Display (icons[i], _illnesses[i].Illness.Icon);
-			if (_illnesses [i].Cooldown != -1) {
-				RedrawSlider (sliders[i], _illnesses [i]);
-			} else {
-				sliders [i].enabled = false;
+				count++;
+				Display (icons [i], _illnesses [i].Illness.Icon);
+				if (_illnesses [i].Cooldown != -1) {
+					RedrawSlider (sliders [i], _illnesses [i]);
+				} else {
+					sliders [i].enabled = false;
+				}
 			}
-		}
 
-		if (count == 2)
-			SetupForTwoImages ();
-		else
-			SetupForThreeImages ();
+			if (count == 2)
+				SetupForTwoImages ();
+			else
+				SetupForThreeImages ();
+		}
 	}
 
 	private void RedrawSlider(Slider slider, IllnessCooldown ic) {
@@ -80,15 +94,10 @@ public class Billboard : MonoBehaviour {
 		slider.enabled = true;
 	}
 
-	private void DisplayDiseases() {
-		ClearDiseases ();
-		RedrawIcons ();
-	}
-
 	public void AddIllness(Illness illness, float cooldown) {
 		var ia = Illnesses.GetDetails (illness.GetIllnessType());
-		Debug.Log ("Got cooldown: " + cooldown);
 		_illnesses.Add (new IllnessCooldown(ia, cooldown));
+		_isHealthy = false;
 	}
 	public void AddIllness(Illness illness) {
 		AddIllness (illness, -1);

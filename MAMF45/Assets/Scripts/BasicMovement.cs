@@ -72,10 +72,9 @@ public class BasicMovement : MonoBehaviour {
 				break;
 			case ActionState.MOVING:
 			case ActionState.MOVING_DONT_STOP:
-				if (transform.rotation != direction)
-					rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, direction, rotationSpeed));
-				else
-				{
+				if (transform.rotation != direction) {
+					rigidbody.MoveRotation (Quaternion.RotateTowards (transform.rotation, direction, rotationSpeed));
+				} else {
 					if (!doneTurning)
 					{
 						animator.SetTrigger("Move");
@@ -163,7 +162,7 @@ public class BasicMovement : MonoBehaviour {
 			var scoreText = GetComponentInChildren<Text> ();
 			var health = GetComponent<Health> ();
 			var billboard = GetComponentInChildren<Billboard> ();
-			billboard.ClearDiseases ();
+			billboard.RemoveIcons ();
 
 			if (health.GivesPoints) {
 				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyHeartSaved, scoreText);
@@ -187,9 +186,7 @@ public class BasicMovement : MonoBehaviour {
 	private void ToggleSavedBehaviour() {
 		AssignClosestFinishPoint ();
 		StartCoroutine (DespawnAfterDelay ());
-		GetComponentInChildren<Billboard> ().ClearDiseases ();
 		GetComponent<Health> ().enabled = false;
-		print ("Clear");
 		IsSaved = true;
 	}
 
