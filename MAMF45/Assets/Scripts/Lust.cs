@@ -8,9 +8,11 @@ public class Lust : MonoBehaviour {
 
 	#pragma warning disable 0649
     [SerializeField]
-    private GameObject heartEffect;
+	private GameObject heartEffect;
 	[SerializeField]
 	private GameObject loveEffect;
+	[SerializeField]
+	private GameObject loveProgressEffect;
 	#pragma warning restore 0649
 
 	private ParticleSystem.EmissionModule heartEmissionModule;
@@ -38,32 +40,30 @@ public class Lust : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!isLoving && target)
-        {
-			if (drive == 0)
-            {
+		if (!isLoving && target) {
+			if (drive == 0) {
 				overDrive += Time.deltaTime;
 				if (overDrive > MAX_CHASE_TIME || target.GetComponent<Despawner> ()) {
 					target = null;
 					isLoving = false;
-					movement.ResetTarget();
+					movement.ResetTarget ();
 					drive = 10000;
 				} else if (Vector3.Distance (target.transform.position, transform.position) < LOVE_RANGE * rangeScale) {
-					target.GetComponent<Lust>().Love();
-					Love();
+					target.GetComponent<Lust> ().Love ();
+					Love ();
 				}
-            }
-			else
-            {
+			} else {
 				drive -= Time.deltaTime;
-                if (drive <= 0)
-                {
-                    drive = 0;
-                    rangeScale = (transform.localScale.z * 1.1f + target.transform.localScale.z * 1.1f) /2;
-                    movement.SetTarget(target);
-                }
-            }
-        }
+				if (drive <= 0) {
+					drive = 0;
+					overDrive = 0;
+					rangeScale = (transform.localScale.z * 1.1f + target.transform.localScale.z * 1.1f) / 2;
+					movement.SetTarget (target);
+				}
+			}
+		} else if (isLoving && Random.value < Time.deltaTime) {
+			Instantiate(loveProgressEffect, transform.position + Vector3.up/2 + new Vector3(Random.Range(-1f,1f),Random.Range(-1f,1f),Random.Range(-1f,1f))/5, Quaternion.identity);
+		}
         if (target)
             heartEmissionModule.rateOverTime = 5 / (drive / 5 + 1);
         else
@@ -90,7 +90,7 @@ public class Lust : MonoBehaviour {
         isLoving = false;
         movement.Restart();
         drive = Random.Range(45.0f, 60.0f);
-        Instantiate(loveEffect, transform.position, transform.rotation);
+		Instantiate(loveEffect, transform.position + Vector3.up/2, Quaternion.identity);
 	}
 
 	public void StopLove() {
