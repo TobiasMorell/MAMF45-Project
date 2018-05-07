@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BasicMovement : MonoBehaviour {
 	private enum ActionState
@@ -152,15 +153,19 @@ public class BasicMovement : MonoBehaviour {
 		if (_outsideFence) {
 			GetComponent<Lust> ().StopLove ();
 
+			var scoreText = GetComponentInChildren<Text> ();
 			var health = GetComponent<Health> ();
+			var billboard = GetComponentInChildren<Billboard> ();
+			billboard.ClearDiseases ();
+
 			if (health.GivesPoints) {
-				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyHeartSaved);
+				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyHeartSaved, scoreText);
 				ToggleSavedBehaviuor ();
 			} else if (health.IsSick ()) {
-				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyDied);
+				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyDied, scoreText);
 				health.Die ();
 			} else {
-				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyNoHeartSaved);
+				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyNoHeartSaved, scoreText);
 				ToggleSavedBehaviuor ();
 			}
 		}
