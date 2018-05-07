@@ -17,7 +17,6 @@ public class Health : MonoBehaviour
 	private HashSet<Illness> illnesses;
 	private bool isIll;
 
-	private bool isProtected;
 	private GameObject contraceptive = null;
 
     private Animator animator;
@@ -197,7 +196,6 @@ public class Health : MonoBehaviour
 	{
 		if (other.CompareTag(Tags.CONTRACEPTIVE))
 		{
-			isProtected = true;
 			contraceptive = other.transform.parent.gameObject;
 		}
 	}
@@ -206,7 +204,6 @@ public class Health : MonoBehaviour
 	{
 		if (other.CompareTag(Tags.CONTRACEPTIVE))
 		{
-			isProtected = false;
 			contraceptive = null;
 		}
 	}
