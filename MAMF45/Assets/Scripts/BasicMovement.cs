@@ -7,6 +7,7 @@ public class BasicMovement : MonoBehaviour {
 	{
 		IDLE,
 		MOVING,
+		MOVING_DONT_STOP,
 		CARRIED
 	}
 
@@ -52,7 +53,7 @@ public class BasicMovement : MonoBehaviour {
             target.y = transform.position.y;
             var delta = Vector3.SignedAngle(transform.forward, target - transform.position, Vector3.up);
             direction = transform.rotation * Quaternion.Euler(0, delta, 0);
-        }
+		}
 		if (isRunning) {
 			Act ();
 			actionTime -= Time.fixedDeltaTime;
@@ -69,6 +70,7 @@ public class BasicMovement : MonoBehaviour {
 			case ActionState.IDLE:
 				break;
 			case ActionState.MOVING:
+			case ActionState.MOVING_DONT_STOP:
 				if (transform.rotation != direction)
 					rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, direction, rotationSpeed));
 				else
@@ -90,8 +92,13 @@ public class BasicMovement : MonoBehaviour {
 	{
 		if (actionState == ActionState.IDLE)
 		{
-			actionState = ActionState.MOVING;
-			actionTime = Random.Range(0.5f, 3.5f);
+			if (IsSaved) {
+				actionState = ActionState.MOVING_DONT_STOP;
+				actionTime = 1000000;
+			} else {
+				actionState = ActionState.MOVING;
+				actionTime = Random.Range (0.5f, 3.5f);
+			}
 
 			target = new Vector3(Random.Range(-1f, 1f), transform.position.y, Random.Range(-1f, 1f));
 			var delta = Vector3.SignedAngle(transform.forward, target - transform.position, Vector3.up);
@@ -155,13 +162,13 @@ public class BasicMovement : MonoBehaviour {
 			var health = GetComponent<Health> ();
 			if (health.GivesPoints) {
 				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyHeartSaved);
-				ToggleSavedBehaviuor ();
+				ToggleSavedBehaviour ();
 			} else if (health.IsSick ()) {
 				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyDied);
 				health.Die ();
 			} else {
 				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyNoHeartSaved);
-				ToggleSavedBehaviuor ();
+				ToggleSavedBehaviour ();
 			}
 		}
 
@@ -172,7 +179,7 @@ public class BasicMovement : MonoBehaviour {
 		}
 	}
 
-	private void ToggleSavedBehaviuor() {
+	private void ToggleSavedBehaviour() {
 		AssignClosestFinishPoint ();
 		StartCoroutine (DespawnAfterDelay ());
 		IsSaved = true;
@@ -192,7 +199,6 @@ public class BasicMovement : MonoBehaviour {
 
 		foreach (var tar in targets) {
 			var dist = Vector3.Distance (transform.position, tar.transform.position);
-			Debug.Log(tar.name + ": " + dist);
 
 			if (dist < shortestDist) {
 				shortestDist = dist;
@@ -206,5 +212,6 @@ public class BasicMovement : MonoBehaviour {
 	IEnumerator DespawnAfterDelay() {
 		yield return new WaitForSeconds(Constants.Instance.BunnyDespawnDelay);
 		gameObject.AddComponent<Despawner> ();
+		animator.SetTrigger ("Idle");
 	}
 }

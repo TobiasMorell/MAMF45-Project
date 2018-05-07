@@ -32,7 +32,7 @@ public class Constants : MonoBehaviour {
 
 	[Header("Misc Timers")]
 	public float TimerTriggerHealthyBunny = 60f;
-	public float BunnyDespawnDelay = 15f;
+	public float BunnyDespawnDelay = 45f;
 
 	[Header("Scores")]
 	public int ScoreBunnyDied = -50;
