@@ -10,6 +10,8 @@ public class ScoreBoard : MonoBehaviour {
 	}
 	public Text PointText;
 	private int _points = 0;
+	public Text PointPopup;
+	private Coroutine _disablePopupCoroutine;
 
 	// Use this for initialization
 	void Awake () {
@@ -19,8 +21,21 @@ public class ScoreBoard : MonoBehaviour {
 	}
 
 	public void GivePoints(int points) {
+		if (_disablePopupCoroutine != null)
+			StopCoroutine (_disablePopupCoroutine);
 		_points += points;
 		PointText.text = _points.ToString();
+		if (points > 0)
+			PointPopup.text = "+" + points.ToString ();
+		else
+			PointPopup.text = points.ToString ();
+		PointPopup.enabled = true;
+		_disablePopupCoroutine = StartCoroutine (DisablePointPopup ());
+	}
+
+	private IEnumerator DisablePointPopup() {
+		yield return new WaitForSeconds (1.5f);
+		PointPopup.enabled = false;
 	}
 
 	public void ResetPoints() {
