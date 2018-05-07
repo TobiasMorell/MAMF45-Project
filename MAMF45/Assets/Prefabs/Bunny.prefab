@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 224059055929369456}
   - component: {fileID: 114856155623077570}
   m_Layer: 5
-  m_Name: Timer
+  m_Name: Timer (left)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 224067176821321864}
   - component: {fileID: 114787566324163352}
   m_Layer: 5
-  m_Name: Timer
+  m_Name: Timer (right)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -910,7 +910,7 @@ GameObject:
   - component: {fileID: 224646286434878028}
   - component: {fileID: 114646414416848630}
   m_Layer: 5
-  m_Name: Timer
+  m_Name: Timer (middle)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

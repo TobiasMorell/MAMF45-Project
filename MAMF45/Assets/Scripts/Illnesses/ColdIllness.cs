@@ -42,6 +42,6 @@ public class ColdIllness : SneezeIllness {
 	}
 
 	public override float GetUITimerMax () {
-		return duration;
+		return -1;
 	}
 }
