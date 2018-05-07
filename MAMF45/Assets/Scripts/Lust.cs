@@ -98,6 +98,7 @@ public class Lust : MonoBehaviour {
 		isLoving = false;
 		drive = 10000000;
 		heartEmissionModule.rateOverTime = 0;
+		movement.ResetTarget ();
 	}
 
 
