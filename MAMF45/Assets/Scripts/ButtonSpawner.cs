@@ -18,11 +18,8 @@ public class ButtonSpawner : MonoBehaviour {
 	private Coroutine _clickCoroutine;
 	private bool _hovered;
 
-	private Vector3 _defaultButtonPosition;
-
 	// Use this for initialization
 	void Start () {
-		_defaultButtonPosition = transform.localPosition;
 		SpawnLight.color = StartOnCooldown ? Color.red : Color.green;
 		_cooldownCounter = StartOnCooldown ? SpawnCooldown : 0;
 	}

@@ -40,7 +40,6 @@ public class Nose : MonoBehaviour {
 	}
 
 	public void Sneeze() {
-		var nose = GetComponentInChildren<Nose> ();
 		var contraceptive = GetComponentInParent<Health> ().GetContraceptive ();
 
 		if (!IsCovered () && GetComponentInParent<SneezeIllness> ()) {

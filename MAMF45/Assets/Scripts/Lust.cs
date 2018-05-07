@@ -113,6 +113,5 @@ public class Lust : MonoBehaviour {
             Gizmos.DrawCube(target.transform.position, Vector3.one/10);
             Gizmos.DrawLine(transform.position, Vector3.MoveTowards(transform.position, target.transform.position, LOVE_RANGE * rangeScale));
         }
-
     }
 }

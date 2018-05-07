@@ -32,6 +32,11 @@ public class BasicMovement : MonoBehaviour {
 	private bool _waitingForGroundCollision = false;
 	private bool _outsideFence = false;
 
+	public bool IsSaved {
+		get;
+		private set;
+	} 
+
 	void Start () {
 		rigidbody = GetComponent<Rigidbody>();
 		laziness = Random.Range(0f, 4f);
@@ -147,9 +152,10 @@ public class BasicMovement : MonoBehaviour {
 		if (_outsideFence) {
 			var health = GetComponent<Health> ();
 			if (health.GivesPoints) {
+				IsSaved = true;
 				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnySaved);
+				GetComponent<Lust> ().StopLove ();
 				AssignClosestFinishPoint ();
-				Debug.Log ("The bunny is seeking a better life now :D");
 			}
 			else if (health.IsSick()) {
 				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyDied);
@@ -178,6 +184,8 @@ public class BasicMovement : MonoBehaviour {
 
 		foreach (var tar in targets) {
 			var dist = Vector3.Distance (transform.position, tar.transform.position);
+			Debug.Log(tar.name + ": " + dist);
+
 			if (dist < shortestDist) {
 				shortestDist = dist;
 				closestTarget = tar;

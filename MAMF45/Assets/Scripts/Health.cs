@@ -68,8 +68,6 @@ public class Health : MonoBehaviour
 			return;
 		
 		foreach (var illness in illnesses) {
-			var details = Illnesses.GetDetails (illness.GetIllnessType());
-
 			if (this.illnesses.Contains (illness)) {
 				print ("Already has illness: " + illness);
 			} else if (contraceptive) {
