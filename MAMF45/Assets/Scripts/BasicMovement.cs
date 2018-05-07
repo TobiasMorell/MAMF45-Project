@@ -152,9 +152,6 @@ public class BasicMovement : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		if (collision.collider.name != "Ground")
-			return;
-
 		//If the bunny gives points, it means that it's healthy and should move towards the horizon
 		if (_outsideFence) {
 			GetComponent<Lust> ().StopLove ();
