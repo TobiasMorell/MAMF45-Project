@@ -5,8 +5,7 @@ using UnityEngine;
 public class PneumoniaIllness : SneezeIllness {
 	private float sicknessTimer;
 
-	void Start()
-	{
+	void Awake() {
 		sicknessTimer = Random.Range (Constants.Instance.TimerPneumoniaDeathMin, Constants.Instance.TimerPneumoniaDeathMax);
 	}
 
@@ -41,5 +40,10 @@ public class PneumoniaIllness : SneezeIllness {
 	public override IllnessTypes GetIllnessType ()
 	{
 		return IllnessTypes.Pneumenia;
+	}
+
+	public override float GetUITimerMax ()
+	{
+		return sicknessTimer;
 	}
 }

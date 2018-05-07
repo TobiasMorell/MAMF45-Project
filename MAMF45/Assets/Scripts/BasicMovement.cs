@@ -32,6 +32,11 @@ public class BasicMovement : MonoBehaviour {
 	private bool _waitingForGroundCollision = false;
 	private bool _outsideFence = false;
 
+	public bool IsSaved {
+		get;
+		private set;
+	} 
+
 	void Start () {
 		rigidbody = GetComponent<Rigidbody>();
 		laziness = Random.Range(0f, 4f);
@@ -145,15 +150,18 @@ public class BasicMovement : MonoBehaviour {
 
 		//If the bunny gives points, it means that it's healthy and should move towards the horizon
 		if (_outsideFence) {
+			GetComponent<Lust> ().StopLove ();
+
 			var health = GetComponent<Health> ();
 			if (health.GivesPoints) {
-				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnySaved);
-				AssignClosestFinishPoint ();
-				Debug.Log ("The bunny is seeking a better life now :D");
-			}
-			else if (health.IsSick()) {
+				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyHeartSaved);
+				ToggleSavedBehaviuor ();
+			} else if (health.IsSick ()) {
 				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyDied);
 				health.Die ();
+			} else {
+				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyNoHeartSaved);
+				ToggleSavedBehaviuor ();
 			}
 		}
 
@@ -162,6 +170,12 @@ public class BasicMovement : MonoBehaviour {
 			_waitingForGroundCollision = false;
 			actionState = ActionState.IDLE;
 		}
+	}
+
+	private void ToggleSavedBehaviuor() {
+		AssignClosestFinishPoint ();
+		StartCoroutine (DespawnAfterDelay ());
+		IsSaved = true;
 	}
 
 	void OnTriggerExit(Collider other) {
@@ -178,6 +192,8 @@ public class BasicMovement : MonoBehaviour {
 
 		foreach (var tar in targets) {
 			var dist = Vector3.Distance (transform.position, tar.transform.position);
+			Debug.Log(tar.name + ": " + dist);
+
 			if (dist < shortestDist) {
 				shortestDist = dist;
 				closestTarget = tar;
@@ -185,5 +201,10 @@ public class BasicMovement : MonoBehaviour {
 		}
 
 		SetTarget(closestTarget);
+	}
+
+	IEnumerator DespawnAfterDelay() {
+		yield return new WaitForSeconds(Constants.Instance.BunnyDespawnDelay);
+		gameObject.AddComponent<Despawner> ();
 	}
 }

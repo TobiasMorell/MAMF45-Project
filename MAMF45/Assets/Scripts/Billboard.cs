@@ -6,10 +6,27 @@ using System;
 using System.Collections.Generic;
 
 public class Billboard : MonoBehaviour {
+	private class IllnessCooldown {
+		public IllnessAsset Illness;
+		public float Cooldown;
+		public float Timer = 0f;
+
+		public IllnessCooldown (IllnessAsset illness, float cooldown)
+		{
+			Illness = illness;
+			Cooldown = cooldown;
+		}
+	}
+
 	public Sprite HealthyIcon;
 	public Image[] icons;
+	public Slider[] sliders;
 
-	void Start() {
+	private List<IllnessCooldown> _illnesses;
+
+	void Awake() {
+		_illnesses = new List<IllnessCooldown> ();
+
 		Vector3 scaleTmp = transform.localScale;
 		scaleTmp.x /= transform.parent.localScale.x;
 		scaleTmp.y /= transform.parent.localScale.y;
@@ -22,10 +39,12 @@ public class Billboard : MonoBehaviour {
 		Camera cam = Camera.main;
 		transform.LookAt(transform.position + cam.transform.rotation * Vector3.forward,
 			cam.transform.rotation * Vector3.up);
+		DisplayDiseases ();
 	}
 
 	public void ClearDiseases() {
 		Array.ForEach (icons, i => Clear (i));
+		Array.ForEach (sliders, s => s.value = 0);
 	}
 
 	private void Clear(Image image) {
@@ -38,11 +57,18 @@ public class Billboard : MonoBehaviour {
 		Display (icons [0], HealthyIcon);
 	}
 
-	private void RedrawIcons(IllnessAsset[] illnesses) {
+	private void RedrawIcons() {
 		var count = 0;
-		for (var i = 0; i < illnesses.Length; i++) {
+		for (var i = 0; i < _illnesses.Count; i++) {
+			_illnesses [i].Timer += Time.deltaTime;
+
 			count++;
-			Display (icons[i], illnesses[i].Icon);
+			Display (icons[i], _illnesses[i].Illness.Icon);
+			if (_illnesses [i].Cooldown != -1) {
+				RedrawSlider (sliders[i], _illnesses [i]);
+			} else {
+				sliders [i].enabled = false;
+			}
 		}
 
 		if (count == 2)
@@ -51,9 +77,29 @@ public class Billboard : MonoBehaviour {
 			SetupForThreeImages ();
 	}
 
-	public void DisplayDiseases(params IllnessAsset[] illnesses) {
+	private void RedrawSlider(Slider slider, IllnessCooldown ic) {
+		slider.maxValue = ic.Cooldown;
+		slider.value = ic.Timer;
+		slider.enabled = true;
+	}
+
+	private void DisplayDiseases() {
 		ClearDiseases ();
-		RedrawIcons (illnesses);
+		RedrawIcons ();
+	}
+
+	public void AddIllness(Illness illness, float cooldown) {
+		var ia = Illnesses.GetDetails (illness.GetIllnessType());
+		Debug.Log ("Got cooldown: " + cooldown);
+		_illnesses.Add (new IllnessCooldown(ia, cooldown));
+	}
+	public void AddIllness(Illness illness) {
+		AddIllness (illness, -1);
+	}
+
+	public void RemoveIllness(Illness illness) {
+		var ia = Illnesses.GetDetails (illness.GetIllnessType());
+		_illnesses.RemoveAll (ic => ic.Illness == ia);
 	}
 
 	private void Display(Image image, Sprite icon) {
