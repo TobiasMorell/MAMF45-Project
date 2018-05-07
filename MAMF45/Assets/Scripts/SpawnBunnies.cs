@@ -12,29 +12,31 @@ public class SpawnBunnies : MonoBehaviour {
     private float swarm = 0;
 
     private float swarmCooldown = 60;
+	private bool _isStarted = false;
 
-    // Use this for initialization
-    void Start () {
-		
+	public void StartGame() {
+		_isStarted = true;
+		SpawnBunny (new ColdIllness ());
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
+		if (!_isStarted)
+			return;
+
         cooldown -= Time.deltaTime;
         swarmCooldown -= Time.deltaTime;
 
         if (cooldown <= 0)
         {
-            transform.position = new Vector3(Random.Range(-0.8f, 0.8f), transform.position.y, Random.Range(-0.8f, 0.8f));
-            var b = Instantiate(bunnyPrefab, transform.position, transform.rotation);
 			var chance = Random.Range (0f, 1f);
 			if (chance > 0.66f)
-				b.GetComponent<Health>().Infect(new ColdIllness());
+				SpawnBunny (new ColdIllness ());
 			else if (chance > 0.33f)
-				b.GetComponent<Health>().Infect(new PneumoniaIllness());
+				SpawnBunny(new PneumoniaIllness());
 			else 
-				b.GetComponent<Health>().Infect(new ClamydiaIllness());
+				SpawnBunny(new ClamydiaIllness());
             if (swarm > 0)
             {
                 swarm -= 1;
@@ -51,4 +53,10 @@ public class SpawnBunnies : MonoBehaviour {
             swarmCooldown += 150;
         }
     }
+
+	private void SpawnBunny(Illness illness) {
+		transform.position = new Vector3(Random.Range(-0.8f, 0.8f), transform.position.y, Random.Range(-0.8f, 0.8f));
+		var b = Instantiate(bunnyPrefab, transform.position, transform.rotation);
+		b.GetComponent<Health>().Infect(illness);
+	}
 }
