@@ -36,7 +36,8 @@ public class Constants : MonoBehaviour {
 
 	[Header("Scores")]
 	public int ScoreBunnyDied = -50;
-	public int ScoreBunnySaved = 10;
+	public int ScoreBunnyHeartSaved = 10;
 	public int ScoreBonusHole = 20;
 	public int ScoreRecycle = 1;
+	public int ScoreBunnyNoHeartSaved = 1;
 }

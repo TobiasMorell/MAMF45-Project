@@ -154,14 +154,14 @@ public class BasicMovement : MonoBehaviour {
 
 			var health = GetComponent<Health> ();
 			if (health.GivesPoints) {
-				IsSaved = true;
-				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnySaved);
-				AssignClosestFinishPoint ();
-				StartCoroutine (DespawnAfterDelay());
-			}
-			else if (health.IsSick()) {
+				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyHeartSaved);
+				ToggleSavedBehaviuor ();
+			} else if (health.IsSick ()) {
 				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyDied);
 				health.Die ();
+			} else {
+				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyNoHeartSaved);
+				ToggleSavedBehaviuor ();
 			}
 		}
 
@@ -170,6 +170,12 @@ public class BasicMovement : MonoBehaviour {
 			_waitingForGroundCollision = false;
 			actionState = ActionState.IDLE;
 		}
+	}
+
+	private void ToggleSavedBehaviuor() {
+		AssignClosestFinishPoint ();
+		StartCoroutine (DespawnAfterDelay ());
+		IsSaved = true;
 	}
 
 	void OnTriggerExit(Collider other) {
