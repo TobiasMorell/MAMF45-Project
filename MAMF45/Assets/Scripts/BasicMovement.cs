@@ -150,12 +150,14 @@ public class BasicMovement : MonoBehaviour {
 
 		//If the bunny gives points, it means that it's healthy and should move towards the horizon
 		if (_outsideFence) {
+			GetComponent<Lust> ().StopLove ();
+
 			var health = GetComponent<Health> ();
 			if (health.GivesPoints) {
 				IsSaved = true;
 				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnySaved);
-				GetComponent<Lust> ().StopLove ();
 				AssignClosestFinishPoint ();
+				StartCoroutine (DespawnAfterDelay());
 			}
 			else if (health.IsSick()) {
 				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyDied);
@@ -193,5 +195,10 @@ public class BasicMovement : MonoBehaviour {
 		}
 
 		SetTarget(closestTarget);
+	}
+
+	IEnumerator DespawnAfterDelay() {
+		yield return new WaitForSeconds(Constants.Instance.BunnyDespawnDelay);
+		gameObject.AddComponent<Despawner> ();
 	}
 }

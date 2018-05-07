@@ -43,7 +43,7 @@ public class Lust : MonoBehaviour {
 			if (drive == 0)
             {
 				overDrive += Time.deltaTime;
-				if (overDrive > MAX_CHASE_TIME || target.GetComponent<Death> ()) {
+				if (overDrive > MAX_CHASE_TIME || target.GetComponent<Despawner> ()) {
 					target = null;
 					isLoving = false;
 					movement.ResetTarget();
