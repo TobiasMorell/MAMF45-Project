@@ -6,7 +6,7 @@ public class ColdIllness : SneezeIllness {
 
 	private float duration;
 
-	void Start() {
+	void Awake() {
 		duration = Random.Range (Constants.Instance.TimerColdCureMin, Constants.Instance.TimerColdCureMax);
 	}
 
@@ -39,5 +39,9 @@ public class ColdIllness : SneezeIllness {
 	public override IllnessTypes GetIllnessType ()
 	{
 		return IllnessTypes.Cold;
+	}
+
+	public override float GetUITimerMax () {
+		return duration;
 	}
 }
