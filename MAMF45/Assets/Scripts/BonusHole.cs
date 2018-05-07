@@ -1,16 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BonusHole : MonoBehaviour {
-
-	private int score;
-
-	private void Start() {
-		score = Constants.Instance.ScoreBonusHole;
-	}
+	public Text scoreText;
 
 	private void OnTriggerEnter(Collider other) {
-		GameObject.Find("ScoreBoard").GetComponent<ScoreBoard>().GivePoints(score);
+		GameObject.Find("ScoreBoard").GetComponent<ScoreBoard>().GivePoints(Constants.Instance.ScoreBonusHole, scoreText);
 	}
 }
