@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
@@ -165,7 +166,7 @@ public class Health : MonoBehaviour
 		var d = gameObject.AddComponent<Despawner> ();
 		d.ToggleDeath ();
 
-		ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyDied);
+		ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyDied, GetComponentInChildren<Text>());
 	}
 
 

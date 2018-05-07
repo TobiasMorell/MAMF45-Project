@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SpawnBunnies : MonoBehaviour {
 	#pragma warning disable 0649
@@ -14,9 +15,20 @@ public class SpawnBunnies : MonoBehaviour {
     private float swarmCooldown = 60;
 	private bool _isStarted = false;
 
+	public UnityEvent OnGameEnded;
+
 	public void StartGame() {
 		_isStarted = true;
 		SpawnBunny (new ColdIllness ());
+		StartCoroutine (CountdownToGameover ());
+	}
+
+	private IEnumerator CountdownToGameover() {
+		yield return new WaitForSeconds (Constants.Instance.GameTime);
+		_isStarted = false;
+
+		if (OnGameEnded != null)
+			OnGameEnded.Invoke ();
 	}
 	
 	// Update is called once per frame
