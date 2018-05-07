@@ -17,4 +17,9 @@ public class ClamydiaIllness : Illness {
 	{
 		return IllnessTypes.Clamydia;
 	}
+
+	public override float GetUITimerMax ()
+	{
+		return -1;
+	}
 }

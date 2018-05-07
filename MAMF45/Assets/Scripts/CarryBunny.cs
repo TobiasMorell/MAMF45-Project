@@ -22,7 +22,6 @@ public class CarryBunny : MonoBehaviour {
 		GetComponent<Animator>().SetTrigger("PickedUp");
 		var grabPoint = transform.Find ("GrabPoint");
 		transform.position = hand.transform.position - grabPoint.position;
-		Debug.Log("Picked up!");
 	}
 
 	public void OnDetachedFromHandDelegate(Hand hand) {

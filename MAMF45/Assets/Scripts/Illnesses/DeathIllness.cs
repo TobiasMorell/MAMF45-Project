@@ -17,4 +17,9 @@ public class DeathIllness : Illness {
 	{
 		return IllnessTypes.Death;
 	}
+
+	public override float GetUITimerMax ()
+	{
+		return -1;
+	}
 }

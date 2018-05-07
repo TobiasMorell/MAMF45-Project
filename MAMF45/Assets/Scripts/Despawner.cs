@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class Death : MonoBehaviour {
+public class Despawner : MonoBehaviour {
 
 	private const float TIME_BEFORE_SINKING = 10;
 	private const float SINKING_SPEED = 0.1f;
@@ -15,6 +15,9 @@ public class Death : MonoBehaviour {
 		GetComponentInChildren<Nose> ().enabled = false;
 		GetComponentInChildren<Rigidbody> ().isKinematic = true;
 		Destroy (GetComponent<Throwable>());
+	}
+
+	public void ToggleDeath() {
 		GameObject.Find("TombstoneSpawnPoint").GetComponent<TombstoneSpawner>().SpawnTombstone();
 	}
 

@@ -63,7 +63,7 @@ public class Health : MonoBehaviour
 
 	public void Infect (params Illness[] illnesses)
 	{
-		if (GetComponent<Death> ())
+		if (GetComponent<Despawner> ())
 			return;
 		
 		foreach (var illness in illnesses) {
@@ -72,7 +72,9 @@ public class Health : MonoBehaviour
 			} else if (contraceptive) {
 				print ("Prevented by contraceptive: " + illness);
 			} else {
-				this.illnesses.Add(illness.Infect(gameObject));
+				var i = illness.Infect (gameObject);
+				this.illnesses.Add(i);
+				_billboard.AddIllness(i, i.GetUITimerMax());
 				print ("New infection!");
 
 				UpdateIllnessAppearance ();
@@ -87,6 +89,8 @@ public class Health : MonoBehaviour
 	public void Cure (Illness illness) {
 		if (illnesses.Remove (illness)) {
 			UpdateIllnessAppearance ();
+			_billboard.RemoveIllness (illness);
+
 			animator.SetTrigger ("Cured");
 			Destroy (illness);
 		}
@@ -133,7 +137,6 @@ public class Health : MonoBehaviour
 				color += illness.color;
 			}
 			sicknessProperty.InterpolateTo (color / illnesses.Count);
-			_billboard.DisplayDiseases (illnessDetails);
 		} else {
 			sicknessProperty.InterpolateToDefault ();
 		}
@@ -159,7 +162,8 @@ public class Health : MonoBehaviour
 		GetComponent<Lust> ().enabled = false;
 
 		Infect (new DeathIllness());
-		gameObject.AddComponent<Death> ();
+		var d = gameObject.AddComponent<Despawner> ();
+		d.ToggleDeath ();
 
 		ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyDied);
 	}

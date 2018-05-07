@@ -25,7 +25,7 @@ public class LoveManager : MonoBehaviour {
 			for (var i = 0; i < 100; ++i) {
 				int n = Random.Range (0, bunnies.Length);
 				if (!bunnies [n].GetComponent<Lust> ().HasPartner() &&
-						!bunnies [n].GetComponent<Death> () &&
+						!bunnies [n].GetComponent<Despawner> () &&
 						!bunnies [n].GetComponent<BasicMovement>().IsSaved) {
 					if (b1 == -1)
 						b1 = n;
