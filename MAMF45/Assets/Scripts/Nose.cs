@@ -37,6 +37,9 @@ public class Nose : MonoBehaviour {
 
 		movement.Stop ();
 		animator.SetTrigger ("Sneeze");
+
+		var camera = GameObject.FindGameObjectWithTag (Tags.MAIN_CAMERA);
+		camera.GetComponent<SlowMotion> ().StartSlowMotion (transform.parent.gameObject);
 	}
 
 	public void Sneeze() {
@@ -61,6 +64,9 @@ public class Nose : MonoBehaviour {
 				napkin.Use (GetComponentsInParent<SneezeIllness>());
 			}
 		}
+
+		var camera = GameObject.FindGameObjectWithTag (Tags.MAIN_CAMERA);
+		camera.GetComponent<SlowMotion> ().StopSlowMotion (transform.parent.gameObject);
 	}
 
 	public void SneezeEnd() {
