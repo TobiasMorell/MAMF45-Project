@@ -1,0 +1,233 @@
+fileFormatVersion: 2
+guid: b49adcb41cc66fd478e009375755572e
+timeCreated: 1525688603
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Box001
+    100004: Box002
+    100006: Box003
+    100008: Box004
+    100010: Drawer_Left
+    100012: Drawer_Middle
+    100014: Drawer_Right
+    100016: Leg001
+    100018: Leg002
+    100020: Leg003
+    100022: Leg004
+    100024: Plane001
+    100026: Plane002
+    100028: Plane003
+    100030: Sphere001
+    100032: Sphere002
+    100034: Sphere003
+    100036: Tabletop
+    400000: //RootNode
+    400002: Box001
+    400004: Box002
+    400006: Box003
+    400008: Box004
+    400010: Drawer_Left
+    400012: Drawer_Middle
+    400014: Drawer_Right
+    400016: Leg001
+    400018: Leg002
+    400020: Leg003
+    400022: Leg004
+    400024: Plane001
+    400026: Plane002
+    400028: Plane003
+    400030: Sphere001
+    400032: Sphere002
+    400034: Sphere003
+    400036: Tabletop
+    2100000: Table_Wood
+    2100002: Table_Brass
+    2100004: 'Material #30'
+    2100006: 'Material #31'
+    2100008: Table_paper
+    2300000: //RootNode
+    2300002: Box001
+    2300004: Box002
+    2300006: Box003
+    2300008: Box004
+    2300010: Drawer_Left
+    2300012: Drawer_Middle
+    2300014: Drawer_Right
+    2300016: Leg001
+    2300018: Leg002
+    2300020: Leg003
+    2300022: Leg004
+    2300024: Plane001
+    2300026: Plane002
+    2300028: Plane003
+    2300030: Sphere001
+    2300032: Sphere002
+    2300034: Sphere003
+    2300036: Tabletop
+    3300000: //RootNode
+    3300002: Box001
+    3300004: Box002
+    3300006: Box003
+    3300008: Box004
+    3300010: Drawer_Left
+    3300012: Drawer_Middle
+    3300014: Drawer_Right
+    3300016: Leg001
+    3300018: Leg002
+    3300020: Leg003
+    3300022: Leg004
+    3300024: Plane001
+    3300026: Plane002
+    3300028: Plane003
+    3300030: Sphere001
+    3300032: Sphere002
+    3300034: Sphere003
+    3300036: Tabletop
+    4300000: Table_Body
+    4300002: Tabletop
+    4300004: Box002
+    4300006: Leg002
+    4300008: Leg003
+    4300010: Leg004
+    4300012: Leg001
+    4300014: Drawer_Middle
+    4300016: Sphere001
+    4300018: Box001
+    4300020: Plane001
+    4300022: Drawer_Left
+    4300024: Box003
+    4300026: Plane002
+    4300028: Sphere002
+    4300030: Drawer_Right
+    4300032: Box004
+    4300034: Plane003
+    4300036: Sphere003
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #30'
+    second: {fileID: 2100000, guid: b134226fb0984604a9ecafa6a5038023, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #31'
+    second: {fileID: 2100000, guid: 1949008fc9dfbb0449d5778934fc8d37, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Table_Brass
+    second: {fileID: 2100000, guid: 05d4d9c813143ba4294914746f3e0fc7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Table_Wood
+    second: {fileID: 2100000, guid: 81e866548c12e9c4d952e470f3405566, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Table_paper
+    second: {fileID: 2100000, guid: 5ffd19848aace5f42b2db3aebef44670, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: condom
+    second: {fileID: 2800000, guid: 005abdde81d6bbe40acad34bebe5c903, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: napkin
+    second: {fileID: 2800000, guid: 89b573418b7c7124db657c43056f6572, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: syringe
+    second: {fileID: 2800000, guid: c91bf985770165741a9d0ad63ecd073e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: wood_old
+    second: {fileID: 2800000, guid: 4d8ad32af3962fc4e836d06fc348d04c, type: 3}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

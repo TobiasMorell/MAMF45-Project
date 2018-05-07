@@ -21,7 +21,7 @@ TagManager:
   - 
   - ControllerCollidable
   - Ground
-  - 
+  - GrassCollider
   - 
   - 
   - 

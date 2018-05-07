@@ -11,8 +11,8 @@ Shader "Unlit/GrassShader"
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
-		//_BendTex ("Bend Texture", 2D) = "green" {}
 		_LightTex ("Light Texture", 2D) = "white" {}
+		_BendTex ("Bend Texture", 2D) = "green" {}
 		_GrassWidth("Grass Width", Float) = 0.1
 		_GrassHeight("Grass Height", Float) = 0.2
 		_WindStrength("Wind Strength", Float) = 0.1 
@@ -40,7 +40,7 @@ Shader "Unlit/GrassShader"
 			
 			sampler2D _MainTex;
 			sampler2D _LightTex;
-			//sampler2D _BendTex;
+			sampler2D _BendTex;
 			float4 _MainTex_ST;
 
 			// sampler2D unity_Lightmap;
@@ -110,8 +110,9 @@ Shader "Unlit/GrassShader"
 				float3 perpendicular = cross(faceNormal, IN[0].normal);
 				
 				float4 color = IN[0].color;
-				
-				float4 bend = float4(0,1,0,0); //tex2Dlod(_BendTex, float4(v0.x/_FieldSize + 0.5, v0.z/_FieldSize + 0.5, 0, 0)); //
+
+				float2 xz = IN[0].uv2 * 25 - 12;
+				float4 bend = float4(normalize(tex2Dlod(_BendTex, float4(xz, 0, 0)).xyz*2-1),0); //float4(0,1,0,0); //
 
 				g2f OUT;
 				
