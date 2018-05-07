@@ -2349,7 +2349,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heartEffect: {fileID: 1920788314715890, guid: 9313e5078de24654296b76cceb610498,
     type: 2}
-  loveEffect: {fileID: 186482, guid: 9d2dddaae5c812841accc43e4da1fccd, type: 2}
+  loveEffect: {fileID: 1061040730067088, guid: b713989e4adc4314082db3b40e7057f8, type: 2}
+  loveProgressEffect: {fileID: 1522340456001292, guid: 3db67962811b02643b3cd5234b03ba52,
+    type: 2}
   drive: 0
   rangeScale: 0
 --- !u!114 &114810482384431988
