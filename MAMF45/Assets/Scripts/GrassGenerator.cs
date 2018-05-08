@@ -49,10 +49,11 @@ public class GrassGenerator : MonoBehaviour {
 			int[] indices = new int[grassCount];
 			for (int i = 0; i < grassCount; i++)
 			{
-				//var dir = Random.Range(0, Mathf.PI * 2);
-				//var spawnpoint = transform.position + Vector3.up * 5 + new Vector3(Mathf.Cos(dir), 0, Mathf.Sin(dir)) * Random.Range(0, size) * Random.value;
+				var dir = Random.Range(0, Mathf.PI * 2);
+				var spawnpoint = transform.position + Vector3.up * 5 + new Vector3(Mathf.Cos(dir), 0, Mathf.Sin(dir)) * Random.Range(0, size-2) * Random.value;
+				spawnpoint += new Vector3(Random.Range(-2f,2f), 0, Random.Range(-2f, 2f));
 				var hit = new RaycastHit();
-				//var hitAnything = Physics.Raycast(spawnpoint, -Vector3.up, out hit, 10, 1 << 9);
+				var hitAnything = Physics.Raycast(spawnpoint, -Vector3.up, out hit, 10, 1 << 9);
 				Vector3 bladePosition = hit.point;
 				positions.Add(bladePosition);
 				normals.Add(Vector3.up);
