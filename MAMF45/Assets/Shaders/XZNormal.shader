@@ -41,7 +41,7 @@
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				//o.uv = v.uv;
-				o.normals = v.normals;
+				o.normals = UnityObjectToWorldNormal(v.normals);
 				UNITY_TRANSFER_FOG(o,o.vertex);
 				return o;
 			}
@@ -49,7 +49,7 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float3 n = i.normals * 0.5 + 0.5;
-				float3 n2 = float3(n.x, 0.5, n.z)*n.y + (1-n.y) * float3(0.5, 1, 0.5);
+				float3 n2 = float3(n.x, 0.6, n.z)*n.y + (1-n.y) * float3(0.5, 1, 0.5);
 				return float4(n2, 1);
 				//float2 p = i.vertex.xy - _Origin.xy + float2(1,1))/2;
 				//return float4(p.x, 0, p.y, 0);
