@@ -82,8 +82,16 @@ Shader "Unlit/GrassShader"
 			
 			fixed4 _Color;
 
-			float rand(float2 co){
+			float rand(float2 co) {
 				return frac(sin(dot(co.xy ,float2(12.9898,78.233))) * 43758.5453);
+			}
+
+			float when_gt(float a, float b) {
+				return max(sign(a - b), 0.0);
+			}
+
+			float or(float a, float b) {
+				return min(a + b, 1.0);
 			}
 
 			v2g vert (appdata v)
@@ -112,8 +120,9 @@ Shader "Unlit/GrassShader"
 				float4 color = IN[0].color;
 
 				float2 xz = IN[0].uv2 * 25 - 12;
-				float4 bend = float4(normalize(tex2Dlod(_BendTex, float4(xz, 0, 0)).xyz*2-1),0); //float4(0,1,0,0); //
-
+				float outside_range = or(when_gt(abs(xz.x - 0.5), 0.5), when_gt(abs(xz.y - 0.5), 0.5));
+				float4 bend = float4(normalize(tex2Dlod(_BendTex, float4(xz, 0, 0)).xyz*2-1),0) * (1-outside_range) + outside_range * float4(0,1,0,0);
+				
 				g2f OUT;
 				
 				float3 height = (rand(IN[0].vertex.xy) * 0.5 + 0.75 ) * _GrassHeight;
