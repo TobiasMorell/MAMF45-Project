@@ -25,18 +25,11 @@ public class Billboard : MonoBehaviour {
 	private List<IllnessCooldown> _illnesses;
 	private bool _isHealthy;
 
-	void Awake() {
-		_illnesses = new List<IllnessCooldown> ();
+    void Awake() {
+        _illnesses = new List<IllnessCooldown>();
+    }
 
-		Vector3 scaleTmp = transform.localScale;
-		scaleTmp.x /= transform.parent.localScale.x;
-		scaleTmp.y /= transform.parent.localScale.y;
-		scaleTmp.z /= transform.parent.localScale.z;
-		transform.localScale = scaleTmp;
-	}
-
-	void Update()
-	{
+    void Update() {
 		DisplayIcons ();
 	}
 
