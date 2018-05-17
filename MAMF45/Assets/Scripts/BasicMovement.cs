@@ -67,6 +67,8 @@ public class BasicMovement : MonoBehaviour {
 
 	private void Act()
 	{
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("NoMove"))
+            return;
 		switch (actionState)
 		{
 			case ActionState.IDLE:
