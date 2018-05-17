@@ -69,9 +69,14 @@ public class ScoreBoard : MonoBehaviour {
 	}
 
 	public void ResetPoints() {
-		_points = 0;
+        _amountBunnyHealthySaved = 0;
+        _amountBunnySaved = 0;
+        _amountBunnyDied = 0;
+        _amountMaterialRecycled = 0;
+        _amountBonusHole = 0;
+        _points = 0;
 		PointText.text = _points.ToString();
-	}
+}
 
     public int getAmountBunnyHealthySaved() {
         return _amountBunnyHealthySaved;
