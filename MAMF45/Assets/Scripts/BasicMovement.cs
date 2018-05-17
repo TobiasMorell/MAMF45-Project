@@ -33,8 +33,9 @@ public class BasicMovement : MonoBehaviour {
 
 	private bool _waitingForGroundCollision = false;
 	private bool _outsideFence = false;
+    private bool _hasGivenPoints = false;
 
-	public bool IsSaved {
+    public bool IsSaved {
 		get;
 		private set;
 	} 
@@ -153,7 +154,7 @@ public class BasicMovement : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision) {
 		//If the bunny gives points, it means that it's healthy and should move towards the horizon
-		if (_outsideFence) {
+		if (_outsideFence && !_hasGivenPoints) {
 			GetComponent<Lust> ().StopLove ();
 
 			var scoreText = GetComponentInChildren<Text> ();
@@ -171,7 +172,9 @@ public class BasicMovement : MonoBehaviour {
 				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyNoHeartSaved, scoreText);
 				ToggleSavedBehaviour ();
 			}
-		}
+
+            _hasGivenPoints = true;
+        }
 
 		if (_waitingForGroundCollision) {
 			animator.SetTrigger ("Dropped");
