@@ -588,6 +588,7 @@ GameObject:
   - component: {fileID: 114357099633758266}
   - component: {fileID: 114245852697730454}
   - component: {fileID: 114417737634536410}
+  - component: {fileID: 114074280248494410}
   m_Layer: 0
   m_Name: Bunny
   m_TagString: Bunny
@@ -1649,6 +1650,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SneezeEffect: {fileID: 1514666183957720, guid: 043e711746286ff458dcb3d55709e352,
     type: 2}
+--- !u!114 &114074280248494410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1633040747158784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f864e04d638cb748a7b24a48eba827b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114084323498259098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2360,7 +2372,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1880867964728300}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2c4849d6a61ccc4eb940afbafd238fe, type: 3}
   m_Name: 
