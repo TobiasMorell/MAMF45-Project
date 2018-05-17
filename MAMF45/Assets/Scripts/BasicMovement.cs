@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Valve.VR.InteractionSystem;
 
 public class BasicMovement : MonoBehaviour {
 	private enum ActionState
@@ -172,6 +173,10 @@ public class BasicMovement : MonoBehaviour {
 				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyNoHeartSaved, scoreText);
 				ToggleSavedBehaviour ();
 			}
+            
+            Destroy(GetComponent<Throwable>());
+            Destroy(GetComponent<VelocityEstimator>());
+            Destroy(GetComponent<Interactable>());
 
             _hasGivenPoints = true;
         }
@@ -188,16 +193,24 @@ public class BasicMovement : MonoBehaviour {
 		StartCoroutine (DespawnAfterDelay ());
 		GetComponent<Health> ().enabled = false;
 		IsSaved = true;
-	}
+    }
 
-	void OnTriggerExit(Collider other) {
-		if (!other.CompareTag (Tags.FENCE))
-			return;
+    void OnTriggerExit(Collider other) {
+        if (!other.CompareTag(Tags.FENCE))
+            return;
 
-		_outsideFence = true;
-	}
+        _outsideFence = true;
+    }
 
-	private void AssignClosestFinishPoint() {
+    void OnTriggerEnter(Collider other) {
+        if (!other.CompareTag(Tags.FENCE))
+            return;
+
+        if (!_hasGivenPoints)
+            _outsideFence = false;
+    }
+
+    private void AssignClosestFinishPoint() {
 		var targets = GameObject.FindGameObjectsWithTag ("Finish");
 		var shortestDist = float.MaxValue;
 		GameObject closestTarget = null;
