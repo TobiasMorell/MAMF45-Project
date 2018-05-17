@@ -24,6 +24,6 @@ public class GameStarter : MonoBehaviour {
     private IEnumerator CountdownToGameover()
     {
         yield return new WaitForSeconds(Constants.Instance.GameTime);
-        // Fade to black
+        Camera.main.GetComponent<SceneFader>().FadeOut();
     }
 }
