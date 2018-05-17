@@ -1,39 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class SpawnBunnies : MonoBehaviour {
 	#pragma warning disable 0649
     [SerializeField]
     private GameObject bunnyPrefab;
-	#pragma warning disable 0649
+    [SerializeField]
+    private GameObject[] startingBunnies;
+#pragma warning disable 0649
 
     private float cooldown = 5;
     private float swarm = 0;
 
     private float swarmCooldown = 60;
 	private bool _isStarted = false;
-
-	public UnityEvent OnGameEnded;
-
-	public void StartGame() {
-		_isStarted = true;
-		SpawnBunny (new ColdIllness ());
-		StartCoroutine (CountdownToGameover ());
-	}
-
-	private IEnumerator CountdownToGameover() {
-		yield return new WaitForSeconds (Constants.Instance.GameTime);
-		_isStarted = false;
-
-		if (OnGameEnded != null)
-			OnGameEnded.Invoke ();
-	}
 	
 	// Update is called once per frame
 	void Update ()
     {
+        if (Constants.Instance.HasGameBegun && !_isStarted)
+        {
+            _isStarted = true;
+            foreach (GameObject bunny in startingBunnies)
+                bunny.SetActive(true);
+        }
 		if (!_isStarted)
 			return;
 

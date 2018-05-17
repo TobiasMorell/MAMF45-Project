@@ -14,7 +14,10 @@ public class Constants : MonoBehaviour {
 		Instance = this;
 	}
 
-	[Header("Cold Timers")]
+    [Header("General")]
+    public bool HasGameBegun = false;
+
+    [Header("Cold Timers")]
 	public float TimerColdSneezeMax = 20f;
 	public float TimerColdSneezeMin = 10f;
 	public float TimerColdCureMax = 35f;

@@ -26,16 +26,20 @@ public class ButtonSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (_cooldownCounter > 0) {
-			_cooldownCounter -= Time.deltaTime;
-			if (_cooldownCounter <= 0) {
-				SpawnLight.color = Color.green;
-				_cooldownCounter = 0;
-				if (OnCooldownEnded != null)
-					OnCooldownEnded.Invoke ();
-			}
-		}
-	}
+        if (Constants.Instance.HasGameBegun) {
+            if (_cooldownCounter > 0) {
+                _cooldownCounter -= Time.deltaTime;
+                if (_cooldownCounter <= 0) {
+                    SpawnLight.color = Color.green;
+                    _cooldownCounter = 0;
+                    if (OnCooldownEnded != null)
+                        OnCooldownEnded.Invoke();
+                }
+            }
+        }
+        else
+            SpawnLight.color = Color.red;
+    }
 
 	public void Spawn() {
 		if (_cooldownCounter > 0) {

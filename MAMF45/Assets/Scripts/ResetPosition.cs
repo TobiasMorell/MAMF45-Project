@@ -10,6 +10,7 @@ public class ResetPosition : MonoBehaviour {
 	private float held;
 	private Hand h1, h2;
 	private Player player;
+
 	// Use this for initialization
 	void Start () {
 		h1 = GetComponentsInChildren<Hand>()[0];
@@ -28,6 +29,8 @@ public class ResetPosition : MonoBehaviour {
 			Vector3 playerFeetOffset = player.trackingOriginTransform.position - player.feetPositionGuess;
 			player.trackingOriginTransform.position = playerFeetOffset;
 			Debug.Log ("Position reset");
+
+            GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<GameStarter>().StartGame();
 		}
 	}
 }

@@ -7,5 +7,6 @@ public static class Tags
 	public const string CONTRACEPTIVE = "ContraceptiveTrigger";
 	public const string FINISH = "Finish";
 	public const string FENCE = "Fence";
-	public const string MAIN_CAMERA = "MainCamera";
+    public const string MAIN_CAMERA = "MainCamera";
+    public const string GAME_CONTROLLER = "GameMaster";    
 }
