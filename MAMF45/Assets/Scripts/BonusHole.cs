@@ -7,6 +7,6 @@ public class BonusHole : MonoBehaviour {
 	public Text scoreText;
 
 	private void OnTriggerEnter(Collider other) {
-		GameObject.Find("ScoreBoard").GetComponent<ScoreBoard>().GivePoints(Constants.Instance.ScoreBonusHole, scoreText);
+        ScoreBoard.Instance.BonusHole(scoreText);
 	}
 }

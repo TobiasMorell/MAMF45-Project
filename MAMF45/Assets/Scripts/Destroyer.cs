@@ -24,7 +24,7 @@ public class Destroyer : MonoBehaviour {
 			Destroy (destructible.gameObject, 5.0f);
 
 			if (!recycled.Contains (destructible)) {
-				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreRecycle, ScoreText);
+				ScoreBoard.Instance.MaterialRecycled (ScoreText);
 				recycled.Add(destructible);
 			}
 		}

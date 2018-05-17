@@ -166,13 +166,13 @@ public class BasicMovement : MonoBehaviour {
 			billboard.RemoveIcons ();
 
 			if (health.GivesPoints) {
-				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyHeartSaved, scoreText);
+				ScoreBoard.Instance.BunnyHealthySaved (scoreText);
 				ToggleSavedBehaviour ();
 			} else if (health.IsSick ()) {
-				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyDied, scoreText);
+				ScoreBoard.Instance.BunnyDied (scoreText);
 				health.Die ();
 			} else {
-				ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyNoHeartSaved, scoreText);
+				ScoreBoard.Instance.BunnySaved (scoreText);
 				ToggleSavedBehaviour ();
 			}
             

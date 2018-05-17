@@ -167,7 +167,7 @@ public class Health : MonoBehaviour
 		var d = gameObject.AddComponent<Despawner> ();
 		d.ToggleDeath ();
 
-		ScoreBoard.Instance.GivePoints (Constants.Instance.ScoreBunnyDied, GetComponentInChildren<Text>());
+		ScoreBoard.Instance.BunnyDied (GetComponentInChildren<Text>());
 	}
 
 
