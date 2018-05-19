@@ -32,6 +32,7 @@ public class Health : MonoBehaviour
         animator = GetComponent<Animator>();
         movement = GetComponent<BasicMovement>();
 		_billboard = GetComponentInChildren<Billboard> ();
+		Debug.Log(illnesses + " @ awake");
     }
 
     void Start ()
@@ -64,6 +65,7 @@ public class Health : MonoBehaviour
 
 	public void Infect (params Illness[] illnesses)
 	{
+		Debug.Log(this.illnesses + " @ infect");
 		if (GetComponent<Despawner> ())
 			return;
 		
@@ -162,6 +164,8 @@ public class Health : MonoBehaviour
 
 		GetComponent<Lust> ().StopLove ();
 		GetComponent<Lust> ().enabled = false;
+
+		GetComponent<AudioSource>().Stop();
 
 		Infect (new DeathIllness());
 		var d = gameObject.AddComponent<Despawner> ();
