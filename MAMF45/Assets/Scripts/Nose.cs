@@ -30,6 +30,9 @@ public class Nose : MonoBehaviour {
 			}
 		} else {
 			sneezeTimer = 10000;
+
+			var camera = Camera.main;
+			camera.GetComponent<SlowMotion>().StopSlowMotion(transform.parent.gameObject);
 		}
 	}
 
@@ -67,7 +70,7 @@ public class Nose : MonoBehaviour {
 			}
 		}
 
-		var camera = GameObject.FindGameObjectWithTag (Tags.MAIN_CAMERA);
+		var camera = Camera.main;
 		camera.GetComponent<SlowMotion> ().StopSlowMotion (transform.parent.gameObject);
 	}
 
@@ -86,6 +89,12 @@ public class Nose : MonoBehaviour {
 		}
 
 		sneezeTimer = Random.Range (lower, upper);
+	}
+
+	public void Disable() {
+		var camera = Camera.main;
+		camera.GetComponent<SlowMotion>().StopSlowMotion(transform.parent.gameObject);
+		enabled = false;
 	}
 
 
