@@ -13,31 +13,31 @@ public class Constants : MonoBehaviour {
 			Debug.LogError ("More than one 'Timers' exists in the scene. Please make sure only to place one at a time!");
 		Instance = this;
 
-        if (DifficultyLevel > 1)
-        {
-            MaxBunnyCount += DifficultyLevel;
-            SpawnRate -= DifficultyLevel;
-            SwarmRate -= DifficultyLevel * 10;
-            TimerColdSneezeMin -= DifficultyLevel;
-            TimerColdSneezeMax -= DifficultyLevel;
-            TimerPneumoniaSneezeMin -= DifficultyLevel;
-            TimerPneumoniaSneezeMax -= DifficultyLevel;
-            TimerPneumoniaDeathMin -= DifficultyLevel;
-            TimerLoveIntervals -= DifficultyLevel*2;
-            TimerLoveReactionTime -= DifficultyLevel;
-        }
+		if (DifficultyLevel > 1)
+		{
+			MaxBunnyCount += DifficultyLevel;
+			SpawnRate -= DifficultyLevel;
+			SwarmRate -= DifficultyLevel * 10;
+			TimerColdSneezeMin -= DifficultyLevel;
+			TimerColdSneezeMax -= DifficultyLevel;
+			TimerPneumoniaSneezeMin -= DifficultyLevel;
+			TimerPneumoniaSneezeMax -= DifficultyLevel;
+			TimerPneumoniaDeathMin -= DifficultyLevel;
+			TimerLoveIntervals -= DifficultyLevel*2;
+			TimerLoveReactionTime -= DifficultyLevel;
+		}
 	}
 
-    [Header("General")]
-    public bool HasGameBegun = false;
-    public int DifficultyLevel = 1;
+	[Header("General")]
+	public bool HasGameBegun = false;
+	public int DifficultyLevel = 1;
 
-    [Header("Bunny spawn")]
-    public int MaxBunnyCount = 8;
-    public int SpawnRate = 10;
-    public int SwarmRate = 120;
+	[Header("Bunny spawn")]
+	public int MaxBunnyCount = 8;
+	public int SpawnRate = 10;
+	public int SwarmRate = 120;
 
-    [Header("Cold Timers")]
+	[Header("Cold Timers")]
 	public float TimerColdSneezeMax = 20f;
 	public float TimerColdSneezeMin = 10f;
 	public float TimerColdCureMax = 35f;
@@ -57,6 +57,7 @@ public class Constants : MonoBehaviour {
 	public float TimerTriggerHealthyBunny = 20f;
 	public float BunnyDespawnDelay = 75f;
 	public float GameTime = 150f;
+	public float GameEndFadeTime = 20f;
 
 	[Header("Scores")]
 	public int ScoreBunnyDied = -50;
