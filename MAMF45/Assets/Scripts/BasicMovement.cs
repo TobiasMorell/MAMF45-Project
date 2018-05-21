@@ -169,7 +169,6 @@ public class BasicMovement : MonoBehaviour {
 				ScoreBoard.Instance.BunnyHealthySaved (scoreText);
 				ToggleSavedBehaviour ();
 			} else if (health.IsSick ()) {
-				ScoreBoard.Instance.BunnyDied (scoreText);
 				health.Die ();
 			} else {
 				ScoreBoard.Instance.BunnySaved (scoreText);
