@@ -181,6 +181,8 @@ public class BasicMovement : MonoBehaviour {
             Destroy(GetComponent<Interactable>());
 
             _hasGivenPoints = true;
+
+            gameObject.tag = Tags.DEFAULT;
         }
 
 		if (_waitingForGroundCollision) {

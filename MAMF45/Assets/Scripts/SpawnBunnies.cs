@@ -28,7 +28,7 @@ public class SpawnBunnies : MonoBehaviour {
 		if (!_isStarted)
 			return;
 
-        cooldown -= Time.deltaTime;
+        cooldown -= Time.deltaTime * (Constants.Instance.MaxBunnyCount - GameObject.FindGameObjectsWithTag(Tags.BUNNY).Length);
         swarmCooldown -= Time.deltaTime;
 
         if (cooldown <= 0)
@@ -46,14 +46,14 @@ public class SpawnBunnies : MonoBehaviour {
                 cooldown += 1;
             }
             else
-                cooldown += 30;
+                cooldown += Constants.Instance.SpawnRate;
 
         }
 
         if (swarmCooldown <= 0)
         {
             swarm = 5;
-            swarmCooldown += 150;
+            swarmCooldown += Constants.Instance.SwarmRate;
         }
     }
 
