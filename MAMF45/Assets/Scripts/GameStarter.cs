@@ -23,7 +23,7 @@ public class GameStarter : MonoBehaviour {
 
     private IEnumerator CountdownToGameover()
     {
-        yield return new WaitForSeconds(Constants.Instance.GameTime);
-        Camera.main.GetComponent<SceneFader>().FadeOut();
+        yield return new WaitForSeconds(Constants.Instance.GameTime - Constants.Instance.GameEndFadeTime);
+        Camera.main.GetComponent<SceneFader>().FadeOut(Constants.Instance.GameEndFadeTime);
     }
 }
