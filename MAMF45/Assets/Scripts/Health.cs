@@ -192,9 +192,14 @@ public class Health : MonoBehaviour
 	}
 
 
-	public void Sneeze() // Needed to broadcast to Nose
+	public void SneezeStart() // Needed to broadcast to Nose
 	{
-		GetComponentInChildren<Nose> ().Sneeze ();
+		GetComponentInChildren<Nose>().SneezeStart();
+	}
+
+	public void Sneeze()
+	{
+		GetComponentInChildren<Nose>().Sneeze();
 	}
 
 	public void SneezeEnd()

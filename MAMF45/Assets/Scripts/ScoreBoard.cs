@@ -109,13 +109,17 @@ public class ScoreBoard : MonoBehaviour {
 
     public int getAmountMaterialRecycled() {
         return _amountMaterialRecycled;
-    }
+	}
 
-    public int getAmountBonusHole() {
-        return _amountBonusHole;
-    }
+	public int getAmountBonusHole() {
+		return _amountBonusHole;
+	}
 
-    public int getPoints() {
+	public int getAmountSneezePrevented() {
+		return _amountSneezePrevented;
+	}
+
+	public int getPoints() {
         return _points;
     }
 }

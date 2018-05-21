@@ -26,7 +26,7 @@ public class Nose : MonoBehaviour {
 		if (GetComponentInParent<SneezeIllness> ()) {
 			sneezeTimer -= Time.deltaTime;
 			if (sneezeTimer < 0) {
-				SneezeStart ();
+				SneezeInitiate ();
 			}
 		} else {
 			sneezeTimer = 10000;
@@ -36,12 +36,14 @@ public class Nose : MonoBehaviour {
 		}
 	}
 
-	public void SneezeStart() {
+	private void SneezeInitiate() {
 		sneezeTimer = 10000;
 
-		movement.Stop ();
-		animator.SetTrigger ("Sneeze");
+		movement.Stop();
+		animator.SetTrigger("Sneeze");
+	}
 
+	public void SneezeStart() {
 		var camera = GameObject.FindGameObjectWithTag (Tags.MAIN_CAMERA);
 		camera.GetComponent<SlowMotion> ().StartSlowMotion (transform.parent.gameObject);
 	}

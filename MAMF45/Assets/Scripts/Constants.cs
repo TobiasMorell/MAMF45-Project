@@ -66,7 +66,7 @@ public class Constants : MonoBehaviour {
 	public int ScoreRecycle = 5;
 	public int ScoreBunnyNoHeartSaved = 10;
 	public int ScoreBunnyKilledByPlayer = -100;
-	public int ScoreSneezePrevented = 15;
+	public int ScoreSneezePrevented = 10;
 
 	[Header("Diease Changes")]
 	public float ChanceCold = 0.50f;
