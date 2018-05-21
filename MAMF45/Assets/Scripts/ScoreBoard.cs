@@ -10,6 +10,7 @@ public class ScoreBoard : MonoBehaviour {
 		private set;
 	}
 	public Text PointText;
+	public Text ScoreBoardText;
 	private int _points = 0;
 
     private int _amountBunnyHealthySaved;
@@ -33,22 +34,24 @@ public class ScoreBoard : MonoBehaviour {
 			ResetPoints();
     }
 
-    public void BunnyHealthySaved(Text scoreText) {
-        GivePoints(Constants.Instance.ScoreBunnyHeartSaved, scoreText);
+    public void BunnyHealthySaved() {
+        GivePoints(Constants.Instance.ScoreBunnyHeartSaved, ScoreBoardText);
         _amountBunnyHealthySaved += Constants.Instance.ScoreBunnyHeartSaved;
     }
 
-    public void BunnySaved(Text scoreText) {
-        GivePoints(Constants.Instance.ScoreBunnyNoHeartSaved, scoreText);
+    public void BunnySaved() {
+        GivePoints(Constants.Instance.ScoreBunnyNoHeartSaved, ScoreBoardText);
         _amountBunnySaved += Constants.Instance.ScoreBunnyNoHeartSaved;
     }
 
 	public void BunnyDied(Text scoreText, bool killedByPlayer = false) {
-		if (!killedByPlayer)
+		if (!killedByPlayer) {
 			GivePoints (Constants.Instance.ScoreBunnyDied, scoreText);
-		else
-			GivePoints (Constants.Instance.ScoreBunnyKilledByPlayer, scoreText);
-        _amountBunnyDied += Constants.Instance.ScoreBunnyDied;
+			_amountBunnyDied += Constants.Instance.ScoreBunnyDied;
+		} else {
+			GivePoints (Constants.Instance.ScoreBunnyKilledByPlayer, ScoreBoardText);
+			_amountBunnyDied += Constants.Instance.ScoreBunnyKilledByPlayer;
+		}
     }
 
     public void MaterialRecycled(Text scoreText) {

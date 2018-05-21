@@ -36,8 +36,6 @@ public class BasicMovement : MonoBehaviour {
 	private bool _outsideFence = false;
     private bool _hasGivenPoints = false;
 
-	private Vector3 exitPoint;
-
     public bool IsSaved {
 		get;
 		private set;
@@ -162,23 +160,18 @@ public class BasicMovement : MonoBehaviour {
 		if (_outsideFence && !_hasGivenPoints) {
 			GetComponent<Lust> ().StopLove ();
 
-			var canvas = GetComponentInChildren<Canvas> ();
-			canvas.transform.parent = null;
-			canvas.transform.position = exitPoint;
-			StartCoroutine (DestroyAfterDelay (canvas.gameObject, 2f));
-
-			var scoreText = canvas.GetComponentInChildren<Text> ();
+			var scoreText = GetComponentInChildren<Text> ();
 			var health = GetComponent<Health> ();
 			var billboard = GetComponentInChildren<Billboard> ();
 			billboard.RemoveIcons ();
 
 			if (health.GivesPoints) {
-				ScoreBoard.Instance.BunnyHealthySaved (scoreText);
+				ScoreBoard.Instance.BunnyHealthySaved ();
 				ToggleSavedBehaviour ();
 			} else if (health.IsSick ()) {
-				health.Die ();
+				health.Die (true);
 			} else {
-				ScoreBoard.Instance.BunnySaved (scoreText);
+				ScoreBoard.Instance.BunnySaved ();
 				ToggleSavedBehaviour ();
 			}
             
@@ -210,7 +203,6 @@ public class BasicMovement : MonoBehaviour {
             return;
 
         _outsideFence = true;
-		exitPoint = GetComponentInChildren<Canvas> ().transform.position;
     }
 
     void OnTriggerEnter(Collider other) {

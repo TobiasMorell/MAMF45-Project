@@ -152,7 +152,7 @@ public class Health : MonoBehaviour
 		this.isIll = isIll;
 	}
 
-	public void Die()
+	public void Die(bool wasKilled = false)
 	{
 		GetComponentInChildren<SicknessMaterialBlockProperty> ().SetDefaultColorFraction (0.9f);
 
@@ -172,7 +172,7 @@ public class Health : MonoBehaviour
 		var d = gameObject.AddComponent<Despawner> ();
 		d.ToggleDeath ();
 
-		ScoreBoard.Instance.BunnyDied (GetComponentInChildren<Text>());
+		ScoreBoard.Instance.BunnyDied (GetComponentInChildren<Text>(), wasKilled);
 	}
 
 
