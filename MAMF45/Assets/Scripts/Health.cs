@@ -32,7 +32,6 @@ public class Health : MonoBehaviour
 		animator = GetComponent<Animator>();
 		movement = GetComponent<BasicMovement>();
 		_billboard = GetComponentInChildren<Billboard> ();
-		Debug.Log(illnesses + " @ awake");
 	}
 
 	public HashSet<Illness> GetIllnesses() {
@@ -68,7 +67,6 @@ public class Health : MonoBehaviour
 
 	public void Infect (params Illness[] illnesses)
 	{
-		Debug.Log(this.illnesses + " @ infect");
 		if (GetComponent<Despawner> ())
 			return;
 		

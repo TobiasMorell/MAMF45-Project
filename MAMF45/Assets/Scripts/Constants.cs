@@ -69,8 +69,8 @@ public class Constants : MonoBehaviour {
 	public int ScoreSneezePrevented = 15;
 
 	[Header("Diease Changes")]
-	public float ChanceCold = 0.60f;
-	public float ChancePneunemia = 0.30f;
-	public float ChanceChlamydia = 0.30f;
+	public float ChanceCold = 0.50f;
+	public float ChancePneunemia = 0.15f;
+	public float ChanceChlamydia = 0.20f;
 	public float RareDiseaseScalingFactor = 0.05f;
 }
