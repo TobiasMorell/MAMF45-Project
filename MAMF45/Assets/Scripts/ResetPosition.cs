@@ -26,8 +26,9 @@ public class ResetPosition : MonoBehaviour {
 			held = 0;
 		if (held >= HOLD_LIMIT) {
 			held = float.NegativeInfinity;
-			Vector3 playerFeetOffset = player.trackingOriginTransform.position - player.feetPositionGuess;
-			player.trackingOriginTransform.position = playerFeetOffset;
+			Vector3 playerFeetOffset = player.trackingOriginTransform.position - player.feetPositionGuess - Vector3.up * (Camera.main.transform.position.y - 1.65f);
+
+            player.trackingOriginTransform.position = playerFeetOffset;
 			Debug.Log ("Position reset");
 
             GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<GameStarter>().StartGame();
