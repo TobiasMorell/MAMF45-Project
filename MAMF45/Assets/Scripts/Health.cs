@@ -35,6 +35,10 @@ public class Health : MonoBehaviour
 		Debug.Log(illnesses + " @ awake");
     }
 
+	public HashSet<Illness> GetIllnesses() {
+		return new HashSet<Illness> (illnesses);
+	}
+
     void Start ()
 	{
 		if (StartInfected) {

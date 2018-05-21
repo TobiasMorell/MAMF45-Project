@@ -16,6 +16,7 @@ public class ScoreBoard : MonoBehaviour {
     private int _amountBunnyDied;
     private int _amountMaterialRecycled;
     private int _amountBonusHole;
+	private int _amountSneezePrevented;
 
     // Use this for initialization
     void Awake () {
@@ -37,8 +38,11 @@ public class ScoreBoard : MonoBehaviour {
         _amountBunnySaved += Constants.Instance.ScoreBunnyNoHeartSaved;
     }
 
-    public void BunnyDied(Text scoreText) {
-        GivePoints(Constants.Instance.ScoreBunnyDied, scoreText);
+	public void BunnyDied(Text scoreText, bool killedByPlayer = false) {
+		if (!killedByPlayer)
+			GivePoints (Constants.Instance.ScoreBunnyDied, scoreText);
+		else
+			GivePoints (Constants.Instance.ScoreBunnyKilledByPlayer, scoreText);
         _amountBunnyDied += Constants.Instance.ScoreBunnyDied;
     }
 
@@ -51,6 +55,11 @@ public class ScoreBoard : MonoBehaviour {
         GivePoints(Constants.Instance.ScoreBonusHole, scoreText);
         _amountBonusHole += Constants.Instance.ScoreBonusHole;
     }
+
+	public void SneezePrevented(Text scoreText) {
+		GivePoints (Constants.Instance.ScoreSneezePrevented, scoreText);
+		_amountSneezePrevented += Constants.Instance.ScoreSneezePrevented;
+	}
 
     private void GivePoints(int points, Text scoreText) {
 		_points += points;

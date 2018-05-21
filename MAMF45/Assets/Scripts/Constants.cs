@@ -64,4 +64,12 @@ public class Constants : MonoBehaviour {
 	public int ScoreBonusHole = 20;
 	public int ScoreRecycle = 5;
 	public int ScoreBunnyNoHeartSaved = 10;
+	public int ScoreBunnyKilledByPlayer = -100;
+	public int ScoreSneezePrevented = 15;
+
+	[Header("Diease Changes")]
+	public float ChanceCold = 0.60f;
+	public float ChancePneunemia = 0.30f;
+	public float ChanceChlamydia = 0.30f;
+	public float RareDiseaseScalingFactor = 0.05f;
 }

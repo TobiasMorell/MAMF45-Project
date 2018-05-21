@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Nose : MonoBehaviour {
 	private const float SNEEZE_RADIUS = 0.2f;
@@ -60,6 +61,7 @@ public class Nose : MonoBehaviour {
 				contraceptive.GetComponent<Rigidbody>().AddForce(Vector3.up * SNEEZE_FORCE);
 			}
 		} else {
+			ScoreBoard.Instance.SneezePrevented (GetComponentInChildren<Text>());
 			foreach (var napkin in currentNapkins) {
 				napkin.Use (GetComponentsInParent<SneezeIllness>());
 			}
