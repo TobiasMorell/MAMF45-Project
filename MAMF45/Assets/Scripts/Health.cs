@@ -20,27 +20,26 @@ public class Health : MonoBehaviour
 
 	private GameObject contraceptive = null;
 
-    private Animator animator;
-    private BasicMovement movement;
+	private Animator animator;
+	private BasicMovement movement;
 
 	private float _healthyTimer;
 	private Billboard _billboard;
 
-    private void Awake()
-    {
+	private void Awake()
+	{
 		illnesses = new HashSet<Illness> ();
-        animator = GetComponent<Animator>();
-        movement = GetComponent<BasicMovement>();
+		animator = GetComponent<Animator>();
+		movement = GetComponent<BasicMovement>();
 		_billboard = GetComponentInChildren<Billboard> ();
 		Debug.Log(illnesses + " @ awake");
-    }
+	}
 
 	public HashSet<Illness> GetIllnesses() {
 		return new HashSet<Illness> (illnesses);
 	}
 
-    void Start ()
-	{
+	void Start () {
 		if (StartInfected) {
 			//An instance is manually spawned here - all other illnesses are clones of this
 			Infect (new ColdIllness());
@@ -115,7 +114,7 @@ public class Health : MonoBehaviour
 			} else {
 				print ("Uncurable illness!");
 			}
-        }
+		}
 		if (illnesses.RemoveWhere (i => removed.Contains (i)) > 0) {
 			UpdateIllnessAppearance ();
 			animator.SetTrigger ("Cured");

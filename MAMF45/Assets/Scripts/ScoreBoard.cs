@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ScoreBoard : MonoBehaviour {
 	public static ScoreBoard Instance {
@@ -18,7 +19,6 @@ public class ScoreBoard : MonoBehaviour {
     private int _amountBonusHole;
 	private int _amountSneezePrevented;
 
-    // Use this for initialization
     void Awake () {
         if (Instance != null) {
             Debug.LogError("More than one score board exists in the scene. Please make sure only to place one at a time!");
@@ -26,7 +26,12 @@ public class ScoreBoard : MonoBehaviour {
             Instance = this;
             DontDestroyOnLoad(this);
         }
-	}
+    }
+
+    private void OnLevelWasLoaded(int level) {
+		if (level == 0)
+			ResetPoints();
+    }
 
     public void BunnyHealthySaved(Text scoreText) {
         GivePoints(Constants.Instance.ScoreBunnyHeartSaved, scoreText);

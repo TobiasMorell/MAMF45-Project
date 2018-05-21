@@ -21,7 +21,7 @@ public class Destroyer : MonoBehaviour {
 		if (!destructible)
 			destructible = collider.GetComponentInParent<Destructible> ();
 		if (destructible && !destructible.IsHeld()) {
-			Destroy (destructible.gameObject, 5.0f);
+            StartCoroutine("DestroyObject", destructible);
 
 			if (!recycled.Contains (destructible)) {
 				ScoreBoard.Instance.MaterialRecycled (ScoreText);
@@ -29,4 +29,10 @@ public class Destroyer : MonoBehaviour {
 			}
 		}
 	}
+
+    IEnumerator DestroyObject(Destructible destructible) {
+        yield return new WaitForSeconds(5f);
+        destructible.OnDestroyed.Invoke();
+        Destroy(destructible.gameObject);
+    }
 }

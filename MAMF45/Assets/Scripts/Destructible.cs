@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 using Valve.VR.InteractionSystem;
 
 public class Destructible : MonoBehaviour {
 
-	private bool isHeld;
+    public UnityEvent OnDestroyed;
 
-	// Use this for initialization
+	private bool isHeld;
+    
 	void Start () {
 		var interactible = GetComponentInChildren<Interactable> ();
 		interactible.onAttachedToHand += OnAttachedToHandDelegate;
