@@ -44,7 +44,7 @@ public class SlowMotion : MonoBehaviour {
 			timer = Mathf.Max (timer - 2*Time.deltaTime / Time.timeScale, 0f);
 		}
 
-		Time.timeScale = Mathf.Lerp (1f, 0.2f, timer);
+		Time.timeScale = Mathf.Lerp (1f, 0.33f, timer);
 		ShaderMaterial.SetFloat ("_Saturation", Mathf.Lerp(1f, 0.2f, timer));
 	}
 

@@ -601,6 +601,7 @@ GameObject:
   - component: {fileID: 114074280248494410}
   - component: {fileID: 82342686680675490}
   - component: {fileID: 114746963753807816}
+  - component: {fileID: 114587008365662670}
   m_Layer: 0
   m_Name: Bunny
   m_TagString: Bunny
@@ -1994,6 +1995,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7991712897690c49bf15d4da113bf06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114587008365662670
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1633040747158784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d28762d70aafa74abed8155f77da5d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114594513688037436

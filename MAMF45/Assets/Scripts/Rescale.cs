@@ -20,6 +20,7 @@ public class Rescale : MonoBehaviour {
     }
 
     void Update() {
-        billboard.transform.localPosition = uiPosition;
+		if (billboard)
+			billboard.transform.localPosition = uiPosition;
     }
 }
