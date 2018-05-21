@@ -602,6 +602,7 @@ GameObject:
   - component: {fileID: 82342686680675490}
   - component: {fileID: 114746963753807816}
   - component: {fileID: 114587008365662670}
+  - component: {fileID: 82637303352891386}
   m_Layer: 0
   m_Name: Bunny
   m_TagString: Bunny
@@ -1727,6 +1728,86 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!82 &82637303352891386
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1633040747158784}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 0.1
+  MaxDistance: 3
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95922266987972764
 Animator:
   serializedVersion: 3
@@ -2146,6 +2227,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 961b9d898ead59e41bbfe57fa0b826e8, type: 3}
   - {fileID: 8300000, guid: 75c635c0623627b488f1cf3fb5db7373, type: 3}
   - {fileID: 8300000, guid: f718e3110afe03c449125a9bfc004dfc, type: 3}
+  sneezeBeginAudio: {fileID: 8300000, guid: 2959c4f921962fa45b7dd43ef618ce04, type: 3}
+  sneezeAudio:
+  - {fileID: 8300000, guid: f09887a024e79fc4994fa43965b596a4, type: 3}
+  - {fileID: 8300000, guid: dfd5fb6b1782ecb4090693ad924e4291, type: 3}
+  deathAudio: {fileID: 8300000, guid: 51280efc3aea48a46a409fb6f253aa42, type: 3}
 --- !u!114 &114749750968930536
 MonoBehaviour:
   m_ObjectHideFlags: 1

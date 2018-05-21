@@ -172,6 +172,8 @@ public class Health : MonoBehaviour
 		var d = gameObject.AddComponent<Despawner> ();
 		d.ToggleDeath ();
 
+		GetComponent<BunnySound>().PlayDeathSound();
+
 		ScoreBoard.Instance.BunnyDied (GetComponentInChildren<Text>(), wasKilled);
 	}
 
