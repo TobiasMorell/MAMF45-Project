@@ -32,11 +32,13 @@ public class Health : MonoBehaviour
 		animator = GetComponent<Animator>();
 		movement = GetComponent<BasicMovement>();
 		_billboard = GetComponentInChildren<Billboard> ();
-		Debug.Log(illnesses + " @ awake");
 	}
 
-	void Start ()
-	{
+	public HashSet<Illness> GetIllnesses() {
+		return new HashSet<Illness> (illnesses);
+	}
+
+	void Start () {
 		if (StartInfected) {
 			//An instance is manually spawned here - all other illnesses are clones of this
 			Infect (new ColdIllness());
@@ -65,7 +67,6 @@ public class Health : MonoBehaviour
 
 	public void Infect (params Illness[] illnesses)
 	{
-		Debug.Log(this.illnesses + " @ infect");
 		if (GetComponent<Despawner> ())
 			return;
 		
