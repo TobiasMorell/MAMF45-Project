@@ -36,6 +36,8 @@ public class BasicMovement : MonoBehaviour {
 	private bool _outsideFence = false;
     private bool _hasGivenPoints = false;
 
+	private Vector3 exitPoint;
+
     public bool IsSaved {
 		get;
 		private set;
@@ -160,7 +162,12 @@ public class BasicMovement : MonoBehaviour {
 		if (_outsideFence && !_hasGivenPoints) {
 			GetComponent<Lust> ().StopLove ();
 
-			var scoreText = GetComponentInChildren<Text> ();
+			var canvas = GetComponentInChildren<Canvas> ();
+			canvas.transform.parent = null;
+			canvas.transform.position = exitPoint;
+			StartCoroutine (DestroyAfterDelay (canvas.gameObject, 2f));
+
+			var scoreText = canvas.GetComponentInChildren<Text> ();
 			var health = GetComponent<Health> ();
 			var billboard = GetComponentInChildren<Billboard> ();
 			billboard.RemoveIcons ();
@@ -197,12 +204,13 @@ public class BasicMovement : MonoBehaviour {
 		GetComponent<Health> ().enabled = false;
 		IsSaved = true;
     }
-
+		
     void OnTriggerExit(Collider other) {
         if (!other.CompareTag(Tags.FENCE))
             return;
 
         _outsideFence = true;
+		exitPoint = GetComponentInChildren<Canvas> ().transform.position;
     }
 
     void OnTriggerEnter(Collider other) {
@@ -228,6 +236,11 @@ public class BasicMovement : MonoBehaviour {
 		}
 
 		SetTarget(closestTarget);
+	}
+
+	IEnumerator DestroyAfterDelay(GameObject go, float delaySeconds) {
+		yield return new WaitForSeconds (delaySeconds);
+		Destroy (go);
 	}
 
 	IEnumerator DespawnAfterDelay() {

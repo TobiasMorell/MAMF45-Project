@@ -56,10 +56,14 @@ public class SpawnBunnies : MonoBehaviour {
 	private Dictionary<IllnessTypes, float> BuildStackedChanceStructure(Dictionary<IllnessTypes, float> chances) {
 		var nd = new Dictionary<IllnessTypes, float> ();
 		float sum = 0;
+		var dictLog = "";
 		foreach (var c in chances) {
 			nd [c.Key] = c.Value + sum;
 			sum += c.Value;
+
+			dictLog += c.Key + ": " + c.Value + "   ";
 		}
+		Debug.Log (dictLog);
 		return nd;
 	}
 
@@ -72,18 +76,30 @@ public class SpawnBunnies : MonoBehaviour {
 		};
 
 		if (ic.Count > 0) {
-			var totalBunnies = ic.Sum (i => i.Value);
-			var maxDiseases = ic.Max (i => i.Value);
-			var share = maxDiseases / (float)totalBunnies;
+			var totalBunnies = ic.Count;
+			var mostCommon = IllnessTypes.Death;
+			var count = -1;
+
+			foreach (var c in ic) {
+				Debug.Log (c.Key + ": " + c.Value);
+				if (c.Value > count) {
+					mostCommon = c.Key;
+					count = c.Value;
+				}
+			}
+			var share = count / (float)totalBunnies;
 			var scaling = share * Constants.Instance.RareDiseaseScalingFactor;
+			Debug.Log ("share: " + share + ", scaling: " + scaling);
 
 			var scaledChances = new Dictionary<IllnessTypes, float> ();
 			foreach (var chance in chances) {
-				if (chance.Value == maxDiseases)
+				if (chance.Key == mostCommon)
 					scaledChances [chance.Key] = chance.Value - scaling;
 				else
 					scaledChances [chance.Key] = chance.Value + scaling;
 			}
+
+			return scaledChances;
 		}
 		return chances;
 	}
