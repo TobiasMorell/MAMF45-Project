@@ -28,7 +28,8 @@ public class ScoreBoard : MonoBehaviour {
     }
 
     private void OnLevelWasLoaded(int level) {
-        ResetPoints();
+		if (level == 0)
+			ResetPoints();
     }
 
     public void BunnyHealthySaved(Text scoreText) {
