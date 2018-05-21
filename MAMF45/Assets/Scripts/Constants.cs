@@ -46,8 +46,8 @@ public class Constants : MonoBehaviour {
 	[Header("Pneumonia Timers")]
 	public float TimerPneumoniaSneezeMax = 30f;
 	public float TimerPneumoniaSneezeMin = 15;
-	public float TimerPneumoniaDeathMax = 60f;
-	public float TimerPneumoniaDeathMin = 50f;
+	public float TimerPneumoniaDeathMax = 70f;
+	public float TimerPneumoniaDeathMin = 60f;
 
 	[Header("Love Timers")]
 	public float TimerLoveIntervals = 20f;
