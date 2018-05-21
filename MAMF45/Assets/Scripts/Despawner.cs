@@ -12,7 +12,7 @@ public class Despawner : MonoBehaviour {
 	
 	void Start () {
 		GetComponentInChildren<BasicMovement> ().enabled = false;
-		GetComponentInChildren<Nose> ().enabled = false;
+		GetComponentInChildren<Nose>().Disable();
 		GetComponentInChildren<Rigidbody> ().isKinematic = true;
 		Destroy (GetComponent<Throwable>());
 	}

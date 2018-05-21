@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class GameStarter : MonoBehaviour {
     public GameObject[] ToBeDestroyedOnStart;
 
+	public Clock clock;
+
     public void StartGame()
     {
         if (!Constants.Instance.HasGameBegun)
@@ -23,7 +25,9 @@ public class GameStarter : MonoBehaviour {
 
     private IEnumerator CountdownToGameover()
     {
-        yield return new WaitForSeconds(Constants.Instance.GameTime - Constants.Instance.GameEndFadeTime);
+		var gameTime = Constants.Instance.GameTime;
+		clock.Run(gameTime);
+		yield return new WaitForSeconds(gameTime - Constants.Instance.GameEndFadeTime);
         Camera.main.GetComponent<SceneFader>().FadeOut(Constants.Instance.GameEndFadeTime);
     }
 }
