@@ -65,7 +65,7 @@ public class Nose : MonoBehaviour {
 			} else {
 				contraceptive.GetComponent<Rigidbody>().AddForce(Vector3.up * SNEEZE_FORCE);
 			}
-		} else {
+		} else if (IsCovered()) {
 			ScoreBoard.Instance.SneezePrevented (transform.parent.GetComponentInChildren<Text>());
 			foreach (var napkin in currentNapkins) {
 				napkin.Use (GetComponentsInParent<SneezeIllness>());
