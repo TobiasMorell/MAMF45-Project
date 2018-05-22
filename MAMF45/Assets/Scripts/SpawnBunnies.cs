@@ -76,7 +76,7 @@ public class SpawnBunnies : MonoBehaviour {
 		};
 
 		if (ic.Count > 0) {
-			var totalBunnies = ic.Count;
+			var totalBunnies = ic.Count; // TODO totalBunnies == amount of different diseases! This is wrong.
 			var mostCommon = IllnessTypes.Death;
 			var count = -1;
 
