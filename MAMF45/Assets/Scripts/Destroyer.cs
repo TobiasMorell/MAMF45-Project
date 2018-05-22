@@ -26,6 +26,9 @@ public class Destroyer : MonoBehaviour {
 			if (!recycled.Contains (destructible)) {
 				ScoreBoard.Instance.MaterialRecycled (ScoreText);
 				recycled.Add(destructible);
+				var audioSource = GetComponent<AudioSource>();
+				if (audioSource)
+					audioSource.PlayOneShot(audioSource.clip);
 			}
 		}
 	}
