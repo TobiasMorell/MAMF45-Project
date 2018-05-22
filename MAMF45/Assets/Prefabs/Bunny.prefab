@@ -2317,6 +2317,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9a04278986cc3e645955ca25dee0bfb7, type: 3}
   - {fileID: 8300000, guid: 4614a037dc38e6c479646ad2f5cc21c4, type: 3}
   loveAudio: {fileID: 8300000, guid: 116a2f947ddb6b04abfc11aa58fa3244, type: 3}
+  happyAudio: {fileID: 8300000, guid: 2d78cc7cc7f99ac40a99ca29f8da40b6, type: 3}
 --- !u!114 &114749750968930536
 MonoBehaviour:
   m_ObjectHideFlags: 1

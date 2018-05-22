@@ -2,9 +2,6 @@ Mystikuum - walk
 djouppi10 - drop stuff
 loljames - background
 loothi - bunny sounds
-/erikschenkel - sneeze
-/dshogan - sneeze
-/sjnewton - sneeze
 ertfelda - points
 timgormly - cowbell
 willc_45220 - descrete point
@@ -12,3 +9,4 @@ wjoojoo - baby sneeze
 pfly - baby cough
 pel2na - fanfare
 InspectorJ - fireworks
+HerbetBoland - happy cat sound

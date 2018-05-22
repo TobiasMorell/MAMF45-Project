@@ -11,6 +11,7 @@ public class BunnySound : MonoBehaviour {
 	public AudioClip deathAudio;
 	public AudioClip[] moveAudio;
 	public AudioClip loveAudio;
+	public AudioClip happyAudio;
 
 	private AudioSource idleAudioSource;
 	private AudioSource loudEffectAudioSource;
@@ -41,8 +42,11 @@ public class BunnySound : MonoBehaviour {
 		silentEffectAudioSource.PlayOneShot(moveAudio[Random.Range(0, moveAudio.Length)]);
 	}
 
-	public void PlayLoveSound()
-	{
+	public void PlayLoveSound()	{
 		silentEffectAudioSource.PlayOneShot(loveAudio);
+	}
+
+	public void PlayHappySound()	{
+		silentEffectAudioSource.PlayOneShot(happyAudio);
 	}
 }
