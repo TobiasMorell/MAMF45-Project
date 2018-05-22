@@ -25,7 +25,7 @@ public class LoveManager : MonoBehaviour {
 	}
 
 	void CreateLove() {
-		var bunniesWithoutPartners = new List<GameObject>(GameObject.FindGameObjectsWithTag("Bunny")).Where(b => !b.GetComponent<Lust>().HasPartner()).ToList();
+		var bunniesWithoutPartners = new List<GameObject>(GameObject.FindGameObjectsWithTag(Tags.BUNNY)).Where(b => !b.GetComponent<Lust>().HasPartner() && !b.GetComponent<DeathIllness>()).ToList();
 		if (bunniesWithoutPartners.Count < 2)
 			return;
 
